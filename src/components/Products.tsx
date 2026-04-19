@@ -7,18 +7,15 @@ import { useGSAP } from "@gsap/react";
 // Registro do Plugin
 gsap.registerPlugin(ScrollTrigger);
 
-// --- COMPONENTE DE GEOMETRIA ---
-function SectionGeometry({
-  triggerRef,
-}: {
-  triggerRef: React.RefObject<HTMLElement>;
-}) {
+// --- COMPONENTE DE GEOMETRIA (Autônomo para Produção) ---
+function SectionGeometry() {
+  const containerRef = useRef<HTMLDivElement>(null);
   const shapeRef = useRef<HTMLDivElement>(null);
 
   useGSAP(
     () => {
-      if (!triggerRef.current || !shapeRef.current) return;
-      ScrollTrigger.refresh();
+      // Agora ele verifica suas próprias refs, sem depender do pai
+      if (!containerRef.current || !shapeRef.current) return;
 
       gsap.fromTo(
         shapeRef.current,
@@ -29,7 +26,7 @@ function SectionGeometry({
           duration: 1.5,
           ease: "power4.out",
           scrollTrigger: {
-            trigger: triggerRef.current,
+            trigger: containerRef.current, // Gatilho independente
             start: "top 80%",
             toggleActions: "play none none reverse",
           },
@@ -40,18 +37,19 @@ function SectionGeometry({
         y: -200,
         ease: "none",
         scrollTrigger: {
-          trigger: triggerRef.current,
+          trigger: containerRef.current, // Gatilho independente
           start: "top bottom",
           end: "bottom top",
           scrub: 1,
         },
       });
     },
-    { scope: triggerRef },
+    { scope: containerRef },
   );
 
   return (
     <div
+      ref={containerRef}
       className="absolute inset-0 pointer-events-none overflow-hidden"
       style={{ zIndex: 1 }}
       aria-hidden="true"
@@ -86,7 +84,8 @@ export default function Products() {
       className="relative py-12 md:py-20 lg:py-24 bg-white overflow-hidden border-t border-slate-200"
       style={{ isolation: "isolate" }}
     >
-      <SectionGeometry triggerRef={sectionRef} />
+      {/* Chamada sem prop para evitar bugs de lifecycle na Vercel */}
+      <SectionGeometry />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-8 md:mb-12 lg:mb-16">
@@ -114,7 +113,6 @@ export default function Products() {
           ))}
         </div>
 
-        {/* items-start impede que os cards vizinhos estiquem */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6 lg:gap-8 items-start">
           {filteredProducts.map((product) => (
             <ProductCard key={product.id} product={product} />
@@ -130,7 +128,6 @@ function ProductCard({ product }: { product: Product }) {
 
   return (
     <div
-      // duration-500 e ease-in-out deixam o movimento suave e sem trancos
       className={`group bg-white/90 backdrop-blur-sm rounded-2xl shadow-lg border-2 transition-all duration-500 ease-in-out cursor-pointer ${
         isExpanded
           ? "border-cyan-500 shadow-2xl ring-4 ring-cyan-500/10"
@@ -200,7 +197,6 @@ function ProductCard({ product }: { product: Product }) {
           {product.description}
         </p>
 
-        {/* Animação do grid sincronizada */}
         <div
           className={`grid transition-all duration-500 ease-in-out overflow-hidden ${
             isExpanded
