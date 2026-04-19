@@ -2,6 +2,7 @@ import { useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
+import { Beaker, ShieldCheck } from "lucide-react";
 
 // Registro seguro para o deploy (SSR safe)
 if (typeof window !== "undefined") {
@@ -73,7 +74,11 @@ function SectionGeometry() {
   );
 }
 
-export default function About() {
+interface AboutProps {
+  scrollToSection: (id: string) => void;
+}
+
+export default function About({ scrollToSection }: AboutProps) {
   const sectionRef = useRef<HTMLElement>(null);
 
   const features = [
@@ -113,19 +118,33 @@ export default function About() {
     <section
       ref={sectionRef}
       id="sobre"
-      className="relative py-24 bg-white overflow-hidden border-t border-slate-200"
+      className="relative py-24 md:py-32 lg:py-44 bg-white overflow-hidden border-t border-slate-200"
       style={{ isolation: "isolate" }}
     >
-      {/* Chamada do componente geométrico sem props (autônomo) */}
       <SectionGeometry />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-5xl lg:text-6xl font-extrabold text-slate-900 mb-4 tracking-tight">
-            Sobre a <span className="text-cyan-600">Kuality</span>
-          </h2>
-          <div className="w-24 h-1.5 bg-cyan-500 rounded-full mx-auto" />
-        </div>
+      <div className="relative z-10 max-w-7xl mx-auto px-6">
+        {/* CABEÇALHO REFEITO: Identidade idêntica ao Products */}
+        <header className="mb-16 md:mb-24 flex flex-col md:flex-row md:items-end justify-between gap-10">
+          <div className="max-w-2xl">
+            <div className="flex items-center gap-3 text-cyan-600 mb-4">
+              <Beaker className="w-6 h-6 animate-pulse" />
+              <span className="text-[10px] font-black uppercase tracking-[0.4em]">
+                História e Compromisso
+              </span>
+            </div>
+            <h2 className="text-5xl md:text-7xl font-black text-slate-900 tracking-tighter uppercase italic leading-[0.85]">
+              Sobre a <br /> <span className="text-cyan-600">Kuality.</span>
+            </h2>
+          </div>
+          <div className="hidden md:block h-[2px] flex-1 bg-gradient-to-r from-slate-100 via-cyan-100 to-slate-100 mx-10 mb-4" />
+          <div className="flex items-center gap-4 bg-slate-50 p-4 rounded-2xl border border-slate-100">
+            <ShieldCheck className="w-8 h-8 text-cyan-600" />
+            <p className="text-slate-500 font-bold italic text-[11px] max-w-[150px] leading-tight uppercase">
+              Excelência Química há mais de 35 anos.
+            </p>
+          </div>
+        </header>
 
         <div className="max-w-4xl mx-auto mb-20">
           <div className="bg-white/80 backdrop-blur-xl rounded-[2.5rem] p-8 md:p-14 shadow-2xl border border-white">
@@ -193,8 +212,8 @@ export default function About() {
           <h3 className="text-2xl md:text-4xl font-bold text-white mb-6">
             Pronto para transformar sua produção?
           </h3>
-          <a
-            href="#contato"
+          <button
+            onClick={() => scrollToSection("contato")}
             className="inline-flex items-center gap-3 px-10 py-5 bg-cyan-600 text-white font-bold rounded-xl hover:bg-cyan-500 transition-all shadow-lg hover:-translate-y-1"
           >
             Solicitar Orçamento
@@ -211,7 +230,7 @@ export default function About() {
                 d="M14 5l7 7m0 0l-7 7m7-7H3"
               />
             </svg>
-          </a>
+          </button>
         </div>
       </div>
     </section>

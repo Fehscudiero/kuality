@@ -76,7 +76,7 @@ export default function Footer({ scrollToSection }: FooterProps) {
           {/* Coluna 2: Links Rápidos */}
           <div className="md:col-span-3 flex flex-col items-center md:items-start text-center md:text-left">
             <h4 className="text-white font-black uppercase text-[10px] tracking-[0.3em] mb-6">
-              Explore
+              Links Rápidos
             </h4>
             <ul className="space-y-4">
               {["Início", "Produtos", "Qualidade", "Sobre"].map((item) => (
