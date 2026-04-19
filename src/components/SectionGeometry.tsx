@@ -5,12 +5,6 @@ import { useGSAP } from '@gsap/react'
 
 gsap.registerPlugin(ScrollTrigger)
 
-interface SectionGeometryProps {
-  // Removi o 'variant' temporariamente para passar no build
-  // Se for usar no futuro, você deve aplicar lógica no retorno do JSX ou no GSAP
-  className?: string 
-}
-
 export default function SectionGeometry() {
   const containerRef = useRef<HTMLDivElement>(null)
   const masterShapeRef = useRef<HTMLDivElement>(null)
@@ -57,7 +51,7 @@ export default function SectionGeometry() {
 
   return (
     <div ref={containerRef} className="absolute inset-0 z-0 pointer-events-none overflow-hidden" aria-hidden="true">
-      {/* Lâmina: Usei bg-slate-200 para dar contraste real no fundo claro */}
+      {/* Lâmina: Fundo geométrico com clip-path */}
       <div 
         ref={masterShapeRef}
         className="absolute top-[-10%] left-[-10%] w-[130%] h-[140%] bg-slate-200 border-r border-slate-300 shadow-2xl"
