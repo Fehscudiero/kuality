@@ -23,12 +23,12 @@ export default function Footer() {
 
   return (
     <footer className="relative bg-slate-950 pt-12 pb-6 overflow-hidden">
-      {/* Efeito de Glow de Fundo (Reduzido para não vazar) */}
+      {/* Efeito de Glow de Fundo */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[1px] bg-gradient-to-r from-transparent via-cyan-500/50 to-transparent" />
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[500px] h-[200px] bg-cyan-500/10 blur-[100px] rounded-full pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        {/* Card CTA - Padding reduzido de mb-24 para mb-12 */}
+        {/* Card CTA */}
         <div
           className={`mb-12 transition-all duration-1000 ease-out ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
@@ -36,7 +36,7 @@ export default function Footer() {
         >
           <div className="bg-white/[0.03] backdrop-blur-md border border-white/10 rounded-[2rem] p-6 md:p-10 flex flex-col lg:flex-row items-center justify-between gap-8">
             <div className="max-w-xl text-center lg:text-left">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 text-cyan-400 text-[10px] font-black uppercase tracking-widest mb-4">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 text-cyan-300 text-[10px] font-black uppercase tracking-widest mb-4">
                 <Globe className="w-3 h-3" />
                 Soluções Industriais
               </div>
@@ -46,10 +46,11 @@ export default function Footer() {
             </div>
 
             <div className="flex flex-col sm:flex-row gap-3 w-full lg:w-auto">
+              {/* Ajustado: bg-cyan-700 para contraste AA com texto branco */}
               <a
                 href={`tel:${companyInfo.phone?.replace(/\D/g, "")}`}
                 aria-label="Ligar para a Kuality"
-                className="group flex items-center justify-center gap-3 px-6 py-4 bg-cyan-600 text-white font-black uppercase text-[10px] tracking-widest rounded-xl hover:bg-cyan-500 transition-all active:scale-95 shadow-lg shadow-cyan-900/20"
+                className="group flex items-center justify-center gap-3 px-6 py-4 bg-cyan-700 text-white font-black uppercase text-[10px] tracking-widest rounded-xl hover:bg-cyan-600 transition-all active:scale-95 shadow-lg shadow-cyan-900/20"
               >
                 <Phone className="w-4 h-4" />
                 {companyInfo.phone}
@@ -57,7 +58,7 @@ export default function Footer() {
               <a
                 href={`mailto:${companyInfo.salesEmail}`}
                 aria-label="E-mail comercial"
-                className="group flex items-center justify-center gap-3 px-6 py-4 bg-white/10 text-white border border-white/10 font-black uppercase text-[10px] tracking-widest rounded-xl hover:bg-white/20 transition-all active:scale-95"
+                className="group flex items-center justify-center gap-3 px-6 py-4 bg-white/10 text-white border border-white/20 font-black uppercase text-[10px] tracking-widest rounded-xl hover:bg-white/20 transition-all active:scale-95"
               >
                 <Mail className="w-4 h-4" />
                 Contato Direto
@@ -66,7 +67,7 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Grid Principal - mb reduzido de 20 para 12 */}
+        {/* Grid Principal */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
           <div className="space-y-6">
             <img
@@ -83,8 +84,8 @@ export default function Footer() {
                 href="https://www.facebook.com/KualityQuimica/"
                 target="_blank"
                 rel="noreferrer"
-                aria-label="Facebook"
-                className="w-9 h-9 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-slate-400 hover:bg-cyan-600 hover:text-white transition-all"
+                aria-label="Facebook da Kuality"
+                className="w-9 h-9 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-slate-300 hover:bg-cyan-700 hover:text-white transition-all"
               >
                 <svg
                   className="w-4 h-4"
@@ -102,8 +103,8 @@ export default function Footer() {
                 href="https://www.instagram.com/kualityquimica/"
                 target="_blank"
                 rel="noreferrer"
-                aria-label="Instagram"
-                className="w-9 h-9 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-slate-400 hover:bg-cyan-600 hover:text-white transition-all"
+                aria-label="Instagram da Kuality"
+                className="w-9 h-9 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-slate-300 hover:bg-cyan-700 hover:text-white transition-all"
               >
                 <svg
                   className="w-4 h-4"
@@ -123,8 +124,8 @@ export default function Footer() {
                 href="https://www.linkedin.com/company/kuality-quimica-ltda/"
                 target="_blank"
                 rel="noreferrer"
-                aria-label="LinkedIn"
-                className="w-9 h-9 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-slate-400 hover:bg-cyan-600 hover:text-white transition-all"
+                aria-label="LinkedIn da Kuality"
+                className="w-9 h-9 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-slate-300 hover:bg-cyan-700 hover:text-white transition-all"
               >
                 <svg
                   className="w-4 h-4"
@@ -168,12 +169,17 @@ export default function Footer() {
             </h4>
             <div className="space-y-4 text-slate-300">
               <div className="flex items-start gap-3">
-                <Phone className="w-4 h-4 text-cyan-600 mt-0.5" />
-                <p className="text-xs font-bold">{companyInfo.phone}</p>
+                {/* Ajustado: cyan-500 tem melhor contraste no fundo escuro que o 600 */}
+                <Phone className="w-4 h-4 text-cyan-500 mt-0.5" />
+                <p className="text-xs font-bold leading-none">
+                  {companyInfo.phone}
+                </p>
               </div>
               <div className="flex items-start gap-3">
-                <Mail className="w-4 h-4 text-cyan-600 mt-0.5" />
-                <p className="text-xs font-bold">{companyInfo.salesEmail}</p>
+                <Mail className="w-4 h-4 text-cyan-500 mt-0.5" />
+                <p className="text-xs font-bold leading-none">
+                  {companyInfo.salesEmail}
+                </p>
               </div>
             </div>
           </div>
@@ -188,7 +194,7 @@ export default function Footer() {
                 <br />
                 {companyInfo.address.city} - CEP {companyInfo.address.cep}
               </p>
-              <div className="inline-flex items-center gap-2 text-[9px] text-emerald-500 font-bold uppercase tracking-widest bg-emerald-500/5 px-2 py-1 rounded-lg border border-emerald-500/20">
+              <div className="inline-flex items-center gap-2 text-[9px] text-emerald-400 font-bold uppercase tracking-widest bg-emerald-500/5 px-2 py-1 rounded-lg border border-emerald-500/20">
                 <ShieldCheck className="w-3 h-3" />
                 Unidade Homologada
               </div>
@@ -196,15 +202,15 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Barra Final - Reduzido pt-12 para pt-8 */}
+        {/* Barra Final */}
         <div className="pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6">
-          <p className="text-slate-500 text-[9px] font-bold uppercase tracking-[0.2em]">
+          <p className="text-slate-400 text-[9px] font-bold uppercase tracking-[0.2em]">
             © {new Date().getFullYear()} Kuality Química • CNPJ:{" "}
-            {companyInfo.cnpj || "00.000.000/0001-00"}
+            {companyInfo.cnpj || "67.287.409/0001-01"}
           </p>
           <button
             onClick={scrollToTop}
-            aria-label="Voltar ao topo"
+            aria-label="Voltar ao topo da página"
             className="group flex items-center gap-3 text-white text-[9px] font-black uppercase tracking-widest hover:text-cyan-400 transition-colors"
           >
             Voltar ao Topo

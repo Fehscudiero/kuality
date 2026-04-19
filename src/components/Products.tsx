@@ -20,7 +20,6 @@ function SectionGeometry({
       if (!triggerRef.current || !shapeRef.current) return;
       ScrollTrigger.refresh();
 
-      // Reveal: A lâmina entra rasgando pela DIREITA
       gsap.fromTo(
         shapeRef.current,
         { x: "120%", opacity: 0 },
@@ -37,7 +36,6 @@ function SectionGeometry({
         },
       );
 
-      // Parallax
       gsap.to(shapeRef.current, {
         y: -200,
         ease: "none",
@@ -58,9 +56,10 @@ function SectionGeometry({
       style={{ zIndex: 1 }}
       aria-hidden="true"
     >
+      {/* Ajustado: bg-cyan-100 com opacidade para garantir contraste do texto que passa por cima */}
       <div
         ref={shapeRef}
-        className="absolute top-[-10%] right-0 w-[150%] h-[150%] bg-cyan-200 shadow-2xl"
+        className="absolute top-[-10%] right-0 w-[150%] h-[150%] bg-cyan-100/40 shadow-2xl"
         style={{
           clipPath: "polygon(30% 0, 100% 0, 100% 100%, 70% 100%)",
           transform: "rotate(3deg)",
@@ -92,8 +91,9 @@ export default function Products() {
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-8 md:mb-12 lg:mb-16">
+          {/* Ajustado: cyan-700 para contraste no span */}
           <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 mb-3 md:mb-4">
-            Nossos <span className="text-cyan-600">Produtos</span>
+            Nossos <span className="text-cyan-700">Produtos</span>
           </h2>
           <p className="text-slate-600 text-base md:text-lg lg:text-xl mt-2 md:mt-3">
             Clique em um produto para ver os detalhes completos
@@ -107,8 +107,8 @@ export default function Products() {
               onClick={() => setActiveCategory(category)}
               className={`px-4 md:px-5 py-2 md:py-2.5 rounded-full text-sm font-semibold transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2 ${
                 activeCategory === category
-                  ? "bg-cyan-600 text-white shadow-lg shadow-cyan-600/25"
-                  : "bg-white text-slate-600 border border-slate-200 hover:border-cyan-300 hover:text-cyan-600 hover:shadow-md"
+                  ? "bg-cyan-700 text-white shadow-lg shadow-cyan-900/20"
+                  : "bg-white text-slate-700 border border-slate-200 hover:border-cyan-300 hover:text-cyan-700 hover:shadow-md"
               }`}
             >
               {category === "all" ? "Todos" : category}
@@ -141,7 +141,7 @@ function ProductCard({ product }: { product: Product }) {
       <div className="p-5 md:p-6 lg:p-7">
         <div className="flex items-start justify-between gap-4 mb-3 md:mb-4">
           <div className="flex items-start gap-3 md:gap-4">
-            <div className="w-12 md:w-14 h-12 md:h-14 bg-gradient-to-br from-cyan-500 to-cyan-600 rounded-xl flex items-center justify-center shadow-lg shadow-cyan-500/25 group-hover:scale-110 transition-transform duration-300">
+            <div className="w-12 md:w-14 h-12 md:h-14 bg-gradient-to-br from-cyan-600 to-cyan-700 rounded-xl flex items-center justify-center shadow-lg shadow-cyan-900/20 group-hover:scale-110 transition-transform duration-300">
               <svg
                 className="w-6 md:w-7 h-6 md:h-7 text-white"
                 fill="none"
@@ -157,7 +157,8 @@ function ProductCard({ product }: { product: Product }) {
               </svg>
             </div>
             <div>
-              <span className="text-xs font-bold uppercase tracking-wider text-cyan-600 bg-cyan-50 px-2 py-0.5 rounded">
+              {/* Ajustado: cyan-700 e bg-cyan-100/50 para contraste WCAG AA */}
+              <span className="text-xs font-bold uppercase tracking-wider text-cyan-700 bg-cyan-100/50 px-2 py-0.5 rounded">
                 {product.category}
               </span>
               <h3 className="text-lg md:text-xl lg:text-2xl font-bold text-slate-900 mt-1">
@@ -166,7 +167,6 @@ function ProductCard({ product }: { product: Product }) {
             </div>
           </div>
 
-          {/* BOTÃO CORRIGIDO PARA ACESSIBILIDADE (LIGHTHOUSE) */}
           <button
             type="button"
             aria-label={
@@ -177,8 +177,8 @@ function ProductCard({ product }: { product: Product }) {
             title={isExpanded ? "Recolher" : "Expandir"}
             className={`w-9 h-9 md:w-10 md:h-10 rounded-full flex items-center justify-center transition-all duration-300 flex-shrink-0 ${
               isExpanded
-                ? "bg-cyan-600 rotate-180 text-white"
-                : "bg-slate-100 text-slate-600"
+                ? "bg-cyan-700 rotate-180 text-white shadow-lg"
+                : "bg-slate-100 text-slate-700"
             }`}
           >
             <svg
@@ -197,7 +197,7 @@ function ProductCard({ product }: { product: Product }) {
           </button>
         </div>
 
-        <p className="text-sm md:text-base lg:text-lg text-slate-600 leading-relaxed mb-4 md:mb-5">
+        <p className="text-sm md:text-base lg:text-lg text-slate-700 leading-relaxed mb-4 md:mb-5">
           {product.description}
         </p>
 
@@ -207,33 +207,33 @@ function ProductCard({ product }: { product: Product }) {
           <div className="overflow-hidden">
             <div className="pt-4 md:pt-5 border-t border-slate-200">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5 lg:gap-6">
-                <div className="bg-cyan-50 rounded-xl md:rounded-2xl p-4 md:p-5 lg:p-6">
-                  <h4 className="text-sm md:text-base font-bold text-cyan-700 mb-3 md:mb-4 flex items-center gap-2">
+                <div className="bg-cyan-50/50 rounded-xl md:rounded-2xl p-4 md:p-5 lg:p-6">
+                  <h4 className="text-sm md:text-base font-bold text-cyan-800 mb-3 md:mb-4 flex items-center gap-2">
                     Características
                   </h4>
                   <ul className="space-y-2">
                     {product.features.map((f, i) => (
                       <li
                         key={i}
-                        className="flex items-start gap-2 text-xs md:text-sm text-slate-700"
+                        className="flex items-start gap-2 text-xs md:text-sm text-slate-800"
                       >
-                        <span className="w-2 h-2 rounded-full bg-cyan-500 mt-1.5 flex-shrink-0" />
+                        <span className="w-2 h-2 rounded-full bg-cyan-600 mt-1.5 flex-shrink-0" />
                         <span>{f}</span>
                       </li>
                     ))}
                   </ul>
                 </div>
-                <div className="bg-green-50 rounded-xl md:rounded-2xl p-4 md:p-5 lg:p-6">
-                  <h4 className="text-sm md:text-base font-bold text-green-700 mb-3 md:mb-4 flex items-center gap-2">
+                <div className="bg-green-50/50 rounded-xl md:rounded-2xl p-4 md:p-5 lg:p-6">
+                  <h4 className="text-sm md:text-base font-bold text-green-800 mb-3 md:mb-4 flex items-center gap-2">
                     Vantagens
                   </h4>
                   <ul className="space-y-2">
                     {product.advantages.map((a, i) => (
                       <li
                         key={i}
-                        className="flex items-start gap-2 text-xs md:text-sm text-slate-700"
+                        className="flex items-start gap-2 text-xs md:text-sm text-slate-800"
                       >
-                        <span className="w-2 h-2 rounded-full bg-green-500 mt-1.5 flex-shrink-0" />
+                        <span className="w-2 h-2 rounded-full bg-green-600 mt-1.5 flex-shrink-0" />
                         <span>{a}</span>
                       </li>
                     ))}
