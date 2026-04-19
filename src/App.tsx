@@ -32,7 +32,7 @@ function App() {
         <Quality />
         <Contact />
       </main>
-      <Footer />
+      <Footer scrollToSection={scrollToSection} />
     </div>
   );
 }
