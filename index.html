@@ -1,32 +1,167 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Kuality Produtos Químicos - Mais de 35 anos de experiência em produtos químicos industriais. Qualidade e eficiência garantidas." />
+
+    <title>
+      Kuality Química | Soluções em Produtos Químicos Industriais em São Paulo
+    </title>
+    <meta
+      name="description"
+      content="Especializada no desenvolvimento de soluções químicas para indústrias de diversos portes. Mais de 35 anos de excelência, pureza garantida e suporte técnico especializado."
+    />
+    <meta
+      name="keywords"
+      content="produtos químicos industriais, soluções químicas, Kuality Química, indústria química São Paulo, reagentes químicos"
+    />
+    <meta name="author" content="Kuality Química" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://kuality.com.br/" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://kuality.com.br/" />
+    <meta
+      property="og:title"
+      content="Kuality Química | Soluções em Produtos Químicos Industriais"
+    />
+    <meta
+      property="og:description"
+      content="Alta tecnologia molecular para soluções de máxima performance industrial. Pureza garantida e 35 anos de know-how."
+    />
+    <meta
+      property="og:image"
+      content="https://kuality.com.br/assets/og-image.webp"
+    />
+
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://kuality.com.br/" />
+    <meta
+      property="twitter:title"
+      content="Kuality Química | Soluções Químicas de Alta Performance"
+    />
+    <meta
+      property="twitter:description"
+      content="Especializada em soluções químicas industriais com foco em pureza e eficiência."
+    />
+    <meta
+      property="twitter:image"
+      content="https://kuality.com.br/assets/og-image.webp"
+    />
+
+    <link rel="icon" type="image/svg+xml" href="/assets/logo.webp" />
+    <link rel="apple-touch-icon" href="/assets/logo.webp" />
     <meta name="theme-color" content="#0D1117" />
-    <title>Kuality Produtos Químicos | Quem entende, busca Kuality</title>
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "name": "Kuality Química",
+        "image": "https://kuality.com.br/assets/logo.webp",
+        "@id": "https://kuality.com.br",
+        "url": "https://kuality.com.br",
+        "telephone": "+5511999999999",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Rua Exemplo, 123",
+          "addressLocality": "São Paulo",
+          "addressRegion": "SP",
+          "postalCode": "03314-000",
+          "addressCountry": "BR"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": -23.5489,
+          "longitude": -46.5644
+        },
+        "description": "Especialista em desenvolvimento de soluções químicas para indústrias de diversos portes.",
+        "openingHoursSpecification": {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+          "opens": "08:00",
+          "closes": "18:00"
+        },
+        "sameAs": [
+          "https://www.linkedin.com/company/kuality-quimica",
+          "https://www.instagram.com/kualityquimica"
+        ]
+      }
+    </script>
+
     <style>
-      body { margin: 0; background: #0D1117; }
-      .loader { position: fixed; inset: 0; background: #0D1117; display: flex; align-items: center; justify-content: center; z-index: 9999; transition: opacity 0.5s; }
-      .loader.hidden { opacity: 0; pointer-events: none; }
-      .loader-spinner { width: 50px; height: 50px; border: 3px solid #161B22; border-top-color: #00F0FF; border-radius: 50%; animation: spin 1s linear infinite; }
-      @keyframes spin { to { transform: rotate(360deg); } }
+      body {
+        margin: 0;
+        background: #0d1117;
+        font-family: "Inter", sans-serif;
+      }
+      .loader {
+        position: fixed;
+        inset: 0;
+        background: #0d1117;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 9999;
+        transition: opacity 0.5s;
+      }
+      .loader.hidden {
+        opacity: 0;
+        pointer-events: none;
+      }
+      .loader-spinner {
+        width: 50px;
+        height: 50px;
+        border: 3px solid #161b22;
+        border-top-color: #00f0ff;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+      }
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
     </style>
   </head>
   <body>
-    <div id="loader" class="loader">
+    <a
+      href="#root"
+      class="sr-only"
+      style="
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        border: 0;
+      "
+      >Pular para o conteúdo</a
+    >
+
+    <div id="loader" class="loader" aria-hidden="true">
       <div class="loader-spinner"></div>
     </div>
+
     <div id="root"></div>
+
     <script type="module" src="/src/main.tsx"></script>
     <script>
-      window.addEventListener('load', () => { setTimeout(() => document.getElementById('loader').classList.add('hidden'), 500) })
+      window.addEventListener("load", () => {
+        setTimeout(() => {
+          const loader = document.getElementById("loader");
+          if (loader) loader.classList.add("hidden");
+        }, 500);
+      });
     </script>
   </body>
 </html>
