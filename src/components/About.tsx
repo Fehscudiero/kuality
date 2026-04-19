@@ -3,25 +3,21 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 
-// Registro obrigatório do Plugin
-gsap.registerPlugin(ScrollTrigger);
+// Registro seguro para o deploy (SSR safe)
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
-// --- COMPONENTE DE GEOMETRIA (O "Corte" da tela) ---
-function SectionGeometry({
-  triggerRef,
-}: {
-  triggerRef: React.RefObject<HTMLElement>;
-}) {
+// --- COMPONENTE DE GEOMETRIA (Autônomo para Produção) ---
+function SectionGeometry() {
+  const containerRef = useRef<HTMLDivElement>(null);
   const shapeRef = useRef<HTMLDivElement>(null);
 
   useGSAP(
     () => {
-      if (!triggerRef.current || !shapeRef.current) return;
+      if (!containerRef.current || !shapeRef.current) return;
 
-      // Forçamos o GSAP a ler o estado real da página
-      ScrollTrigger.refresh();
-
-      // 1. Reveal: A lâmina entra rasgando
+      // 1. Reveal: A lâmina entra rasgando da esquerda
       gsap.fromTo(
         shapeRef.current,
         { x: "-120%", opacity: 0 },
@@ -31,37 +27,39 @@ function SectionGeometry({
           duration: 1.5,
           ease: "power4.out",
           scrollTrigger: {
-            trigger: triggerRef.current,
+            trigger: containerRef.current,
             start: "top 80%",
             toggleActions: "play none none reverse",
           },
         },
       );
 
-      // 2. Parallax: A lâmina sobe devagar enquanto o usuário desce
+      // 2. Parallax: Movimento sutil no scroll
       gsap.to(shapeRef.current, {
         y: -200,
         ease: "none",
         scrollTrigger: {
-          trigger: triggerRef.current,
+          trigger: containerRef.current,
           start: "top bottom",
           end: "bottom top",
           scrub: 1,
         },
       });
+
+      // Garante sincronia de layout após renderização inicial
+      const timer = setTimeout(() => ScrollTrigger.refresh(), 100);
+      return () => clearTimeout(timer);
     },
-    { scope: triggerRef },
+    { scope: containerRef },
   );
 
   return (
     <div
+      ref={containerRef}
       className="absolute inset-0 pointer-events-none overflow-hidden"
       style={{ zIndex: 1 }}
       aria-hidden="true"
     >
-      {/* MANTIVE O Z-INDEX 50 E A ESTRUTURA DO QUE FUNCIONOU.
-          Troquei bg-red-500 por bg-cyan-200 (Azul Claro visível).
-      */}
       <div
         ref={shapeRef}
         className="absolute top-[-10%] left-0 w-[150%] h-[150%] bg-cyan-200 shadow-2xl"
@@ -75,7 +73,6 @@ function SectionGeometry({
   );
 }
 
-// --- SEU COMPONENTE ABOUT ORIGINAL COMPLETO ---
 export default function About() {
   const sectionRef = useRef<HTMLElement>(null);
 
@@ -117,12 +114,11 @@ export default function About() {
       ref={sectionRef}
       id="sobre"
       className="relative py-24 bg-white overflow-hidden border-t border-slate-200"
-      style={{ isolation: "isolate" }} // Cria um novo stacking context
+      style={{ isolation: "isolate" }}
     >
-      {/* 1. Geometria de fundo */}
-      <SectionGeometry triggerRef={sectionRef} />
+      {/* Chamada do componente geométrico sem props (autônomo) */}
+      <SectionGeometry />
 
-      {/* 2. Conteúdo em Z-10 */}
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-5xl lg:text-6xl font-extrabold text-slate-900 mb-4 tracking-tight">
