@@ -95,7 +95,7 @@ export default function Products() {
           <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 mb-3 md:mb-4">
             Nossos <span className="text-cyan-600">Produtos</span>
           </h2>
-          <p className="text-slate-500 text-base md:text-lg lg:text-xl mt-2 md:mt-3">
+          <p className="text-slate-600 text-base md:text-lg lg:text-xl mt-2 md:mt-3">
             Clique em um produto para ver os detalhes completos
           </p>
         </div>

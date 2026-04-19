@@ -146,7 +146,7 @@ export default function Contact() {
                   Sintetize seu <br />{" "}
                   <span className="text-cyan-600">Sucesso.</span>
                 </h2>
-                <p className="text-slate-500 text-sm font-medium italic">
+                <p className="text-slate-600 text-sm font-medium italic">
                   Preencha os dados técnicos abaixo para iniciar o protocolo de
                   atendimento industrial.
                 </p>
@@ -158,7 +158,7 @@ export default function Contact() {
                   <h3 className="text-xl font-black uppercase italic text-slate-900">
                     Transmissão Concluída
                   </h3>
-                  <p className="text-slate-500 text-sm mt-2">
+                  <p className="text-slate-600 text-sm mt-2">
                     Aguarde o contato da nossa engenharia.
                   </p>
                 </div>
@@ -290,7 +290,7 @@ export default function Contact() {
                     <p className="text-sm font-bold">
                       {companyInfo.address.street}
                     </p>
-                    <p className="text-xs text-slate-500 uppercase tracking-widest mt-1">
+                    <p className="text-xs text-slate-600 uppercase tracking-widest mt-1">
                       {companyInfo.address.neighborhood} •{" "}
                       {companyInfo.address.city}
                     </p>
