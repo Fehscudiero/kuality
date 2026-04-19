@@ -14,22 +14,20 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import { companyInfo } from "../data/content";
 
-gsap.registerPlugin(ScrollTrigger);
+// TRAVA DE SEGURANÇA PARA O DEPLOY
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
-// --- COMPONENTE DE GEOMETRIA ---
-function SectionGeometry({
-  triggerRef,
-}: {
-  triggerRef: React.RefObject<HTMLElement>;
-}) {
+// --- COMPONENTE DE GEOMETRIA (Autônomo para Produção) ---
+function SectionGeometry() {
+  const containerRef = useRef<HTMLDivElement>(null);
   const shapeRef = useRef<HTMLDivElement>(null);
 
   useGSAP(
     () => {
-      if (!triggerRef.current || !shapeRef.current) return;
-      ScrollTrigger.refresh();
+      if (!containerRef.current || !shapeRef.current) return;
 
-      // 1. Reveal: A lâmina entra rasgando pela DIREITA
       gsap.fromTo(
         shapeRef.current,
         { x: "120%", opacity: 0 },
@@ -39,33 +37,32 @@ function SectionGeometry({
           duration: 1.5,
           ease: "power4.out",
           scrollTrigger: {
-            trigger: triggerRef.current,
+            trigger: containerRef.current,
             start: "top 80%",
             toggleActions: "play none none reverse",
           },
         },
       );
 
-      // 2. Parallax: Movimento no scroll
       gsap.to(shapeRef.current, {
         y: -200,
         ease: "none",
         scrollTrigger: {
-          trigger: triggerRef.current,
+          trigger: containerRef.current,
           start: "top bottom",
           end: "bottom top",
           scrub: 1,
         },
       });
     },
-    { scope: triggerRef },
+    { scope: containerRef },
   );
 
   return (
     <div
+      ref={containerRef}
       className="absolute inset-0 pointer-events-none overflow-hidden"
       style={{ zIndex: 1 }}
-      aria-hidden="true"
     >
       <div
         ref={shapeRef}
@@ -119,21 +116,18 @@ export default function Contact() {
       className="py-24 lg:py-36 bg-slate-50 relative overflow-hidden"
       style={{ isolation: "isolate" }}
     >
-      {/* EFEITO DE GEOMETRIA */}
-      <SectionGeometry triggerRef={sectionRef} />
+      <SectionGeometry />
 
       <div className="relative z-10 max-w-6xl mx-auto px-6">
-        {/* CONTAINER PREMIUM */}
         <div
           className={`relative bg-white rounded-[2.5rem] border-2 border-slate-200 shadow-[0_50px_100px_-20px_rgba(0,0,0,0.12)] transition-all duration-1000 ease-out overflow-hidden ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-16"
           }`}
         >
-          {/* Barra de Status Superior */}
           <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-cyan-600 via-cyan-400 to-slate-900"></div>
 
           <div className="grid grid-cols-1 lg:grid-cols-12">
-            {/* ================= FORMULÁRIO (COL 7) ================= */}
+            {/* FORMULÁRIO */}
             <div className="lg:col-span-7 p-8 md:p-14 border-r border-slate-100">
               <header className="mb-10">
                 <div className="flex items-center gap-2 text-cyan-600 mb-4">
@@ -158,9 +152,6 @@ export default function Contact() {
                   <h3 className="text-xl font-black uppercase italic text-slate-900">
                     Transmissão Concluída
                   </h3>
-                  <p className="text-slate-600 text-sm mt-2">
-                    Aguarde o contato da nossa engenharia.
-                  </p>
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-8">
@@ -176,13 +167,13 @@ export default function Contact() {
                         onChange={(e) =>
                           setFormData({ ...formData, name: e.target.value })
                         }
-                        className="w-full h-14 px-0 bg-transparent border-b-2 border-slate-100 focus:border-cyan-600 text-slate-900 font-bold transition-all outline-none placeholder:text-slate-200 text-sm"
+                        className="w-full h-14 px-0 bg-transparent border-b-2 border-slate-100 focus:border-cyan-600 text-slate-900 font-bold transition-all outline-none text-sm"
                         placeholder="Nome ou Empresa"
                       />
                     </div>
                     <div className="group space-y-2">
                       <label className="text-[11px] font-black text-slate-700 uppercase tracking-widest ml-1 group-focus-within:text-cyan-600 transition-colors">
-                        Seu melhor email para Contato
+                        Seu melhor email
                       </label>
                       <input
                         type="email"
@@ -191,15 +182,14 @@ export default function Contact() {
                         onChange={(e) =>
                           setFormData({ ...formData, email: e.target.value })
                         }
-                        className="w-full h-14 px-0 bg-transparent border-b-2 border-slate-100 focus:border-cyan-600 text-slate-900 font-bold transition-all outline-none placeholder:text-slate-200 text-sm"
+                        className="w-full h-14 px-0 bg-transparent border-b-2 border-slate-100 focus:border-cyan-600 text-slate-900 font-bold transition-all outline-none text-sm"
                         placeholder="email@corporativo.com"
                       />
                     </div>
                   </div>
-
                   <div className="group space-y-2">
                     <label className="text-[11px] font-black text-slate-700 uppercase tracking-widest ml-1 group-focus-within:text-cyan-600 transition-colors">
-                      Especificações do Orçamento
+                      Especificações
                     </label>
                     <textarea
                       required
@@ -209,14 +199,13 @@ export default function Contact() {
                         setFormData({ ...formData, message: e.target.value })
                       }
                       className="w-full p-6 rounded-2xl bg-slate-50 border-2 border-transparent focus:border-cyan-600 focus:bg-white text-slate-900 font-medium transition-all outline-none resize-none"
-                      placeholder="Descreva a demanda química ou industrial..."
+                      placeholder="Descreva a demanda química..."
                     />
                   </div>
-
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full md:w-max px-16 h-16 rounded-2xl bg-slate-900 text-white font-black italic uppercase text-xs tracking-[0.2em] hover:bg-cyan-600 active:scale-95 transition-all duration-300 flex items-center justify-center gap-4 shadow-2xl shadow-slate-900/20 disabled:opacity-50"
+                    className="w-full md:w-max px-16 h-16 rounded-2xl bg-slate-900 text-white font-black italic uppercase text-xs tracking-[0.2em] hover:bg-cyan-600 active:scale-95 transition-all flex items-center justify-center gap-4"
                   >
                     {isSubmitting ? (
                       <Loader2 className="w-6 h-6 animate-spin" />
@@ -230,10 +219,9 @@ export default function Contact() {
               )}
             </div>
 
-            {/* ================= INFO (COL 5) ================= */}
+            {/* INFO (COL 5) */}
             <div className="lg:col-span-5 bg-slate-900 p-8 md:p-14 text-white flex flex-col justify-between relative">
               <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(0,240,255,0.08),transparent_70%)]"></div>
-
               <div className="relative z-10 space-y-10">
                 <div>
                   <ShieldCheck className="text-cyan-400 w-10 h-10 mb-6" />
@@ -241,13 +229,13 @@ export default function Contact() {
                     Kuality Labs
                   </h3>
                   <p className="text-slate-400 text-sm mt-2 leading-relaxed">
-                    Sua segurança e confidencialidade técnica são garantidas por
-                    nossos protocolos de conformidade química.
+                    Confidencialidade técnica garantida por nossos protocolos de
+                    conformidade.
                   </p>
                 </div>
 
                 <div className="space-y-4 sm:space-y-6">
-                  {/* Botão de Telefone */}
+                  {/* Telefone Responsivo */}
                   <a
                     href={`tel:${companyInfo.phone}`}
                     className="flex items-center gap-3 sm:gap-5 group active:scale-[0.98] transition-transform duration-200"
@@ -265,7 +253,7 @@ export default function Contact() {
                     </div>
                   </a>
 
-                  {/* Botão de E-mail */}
+                  {/* Email Responsivo */}
                   <a
                     href={`mailto:${companyInfo.salesEmail}`}
                     className="flex items-center gap-3 sm:gap-5 group active:scale-[0.98] transition-transform duration-200"
@@ -285,7 +273,6 @@ export default function Contact() {
                 </div>
               </div>
 
-              {/* Endereço embaixo na caixa escura */}
               <div className="relative z-10 mt-12 pt-10 border-t border-white/5">
                 <div className="flex items-start gap-4">
                   <MapPin className="text-cyan-500 w-5 h-5 mt-1" />
@@ -304,8 +291,7 @@ export default function Contact() {
           </div>
         </div>
 
-        {/* ================= FOOTER SEÇÃO ================= */}
-        {/* PRETO PURO, LADO A LADO, SEM HOVER */}
+        {/* FOOTER SEÇÃO - PRETO PURO, LADO A LADO, SEM HOVER */}
         <div className="mt-12 flex justify-between items-center w-full gap-2 md:gap-6">
           <p className="text-[6px] sm:text-[8px] md:text-[10px] font-black text-black uppercase tracking-[0.1em] sm:tracking-widest md:tracking-[0.4em] whitespace-nowrap">
             Kuality Chemistry Solutions © 2026
