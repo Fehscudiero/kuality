@@ -204,12 +204,13 @@ export const products: Product[] = [
 ];
 
 export const qualityTests = {
-  title: "Testes e Qualidade",
-  testName: "Teste de Cura",
-  testNorm: "Norma ABNT NBR 17088 - 2023",
-  testDetails: "Ensaio de Névoa Salina - 500hs Salt Spray",
+  // O componente Quality.tsx espera a propriedade "process"
+  process:
+    "Nossos produtos são submetidos a ensaios rigorosos de laboratório, incluindo o Teste de Cura e o Ensaio de Névoa Salina (500hs Salt Spray), seguindo estritamente a Norma ABNT NBR 17088 - 2023.",
+
+  // O componente Quality.tsx espera a propriedade "result"
   result:
-    'Sem geração de blister; sem migração ou infiltração no "CROSS CUT" (Aderência Aprovada)',
+    'Aprovação total no controle de qualidade: Sem geração de blister, sem migração ou infiltração no "CROSS CUT" (Aderência Aprovada).',
 };
 
 export const socialProof = {
