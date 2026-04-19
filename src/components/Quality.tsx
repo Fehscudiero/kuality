@@ -1,10 +1,10 @@
-import React, { useRef } from "react";
+import { useRef } from "react"; // Removido o "React" que não estava sendo usado
 import { qualityTests } from "../data/content";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 
-// TRAVA DE SEGURANÇA PARA A VERCEL: Evita erro de "window is not defined" no build
+// TRAVA DE SEGURANÇA PARA A VERCEL
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
 }
@@ -78,7 +78,6 @@ export default function Quality() {
       className="py-24 lg:py-36 bg-slate-50 relative overflow-hidden"
       style={{ isolation: "isolate" }}
     >
-      {/* Chamada do componente geométrico */}
       <SectionGeometry />
 
       <div className="relative z-10 max-w-7xl mx-auto px-6">
