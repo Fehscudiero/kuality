@@ -9,8 +9,8 @@ import {
   CheckCircle2,
   Zap,
   Beaker,
-  MoveHorizontal,
   Target,
+  ArrowRight,
 } from "lucide-react";
 
 if (typeof window !== "undefined") {
@@ -139,11 +139,11 @@ export default function Products() {
             <div
               onTouchStart={onTouchStart}
               onTouchEnd={onTouchEnd}
-              className="bg-slate-950 md:rounded-[4rem] text-white relative shadow-2xl min-h-[720px] md:min-h-[600px] flex flex-col overflow-hidden"
+              className="bg-slate-950 md:rounded-[4rem] text-white relative shadow-2xl min-h-[700px] md:min-h-[600px] flex flex-col overflow-hidden"
             >
-              {/* MOBILE: Informativo e Progresso no Topo */}
-              <div className="lg:hidden absolute top-0 left-0 right-0 z-30 p-4 flex flex-col gap-4 bg-gradient-to-b from-slate-950 to-transparent">
-                <div className="flex gap-1.5">
+              {/* MOBILE: Informativo Superior (Sinalização para Direita) */}
+              <div className="lg:hidden absolute top-0 left-0 right-0 z-30 p-4 flex flex-col gap-3 bg-gradient-to-b from-slate-950 via-slate-950/80 to-transparent">
+                <div className="flex gap-1">
                   {products.map((_, idx) => (
                     <div
                       key={idx}
@@ -156,61 +156,64 @@ export default function Products() {
                   ))}
                 </div>
                 <div className="flex justify-center">
-                  <div className="flex items-center gap-2 px-3 py-1 bg-white/5 rounded-full border border-white/10 animate-swipe-pulse">
-                    <MoveHorizontal className="w-3 h-3 text-cyan-500" />
-                    <span className="text-[8px] font-black uppercase tracking-widest text-white/40">
-                      Deslize lateral para navegar
+                  <div className="flex items-center gap-2 px-4 py-1.5 bg-white/5 rounded-full border border-white/10 animate-swipe-right">
+                    <span className="text-[7px] font-black uppercase tracking-[0.2em] text-white">
+                      Deslize para o lado
                     </span>
+                    <ArrowRight className="w-3.5 h-3.5 text-cyan-400" />
                   </div>
                 </div>
               </div>
 
               <div
                 ref={contentRef}
-                className="relative z-10 p-8 pt-28 md:p-16 w-full flex-1 flex flex-col"
+                className="relative z-10 p-8 pt-24 md:p-16 w-full flex-1 flex flex-col"
               >
-                <header className="mb-12">
-                  <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-cyan-500/10 rounded-full border border-cyan-500/20 mb-8">
-                    <FlaskConical className="w-4 h-4 text-cyan-400" />
-                    <span className="text-[10px] font-bold uppercase tracking-widest text-cyan-400">
+                <header className="mb-10">
+                  <div className="inline-flex items-center gap-2 px-3 py-1 bg-cyan-500/10 rounded-full border border-cyan-500/20 mb-6">
+                    <FlaskConical className="w-3.5 h-3.5 text-cyan-400" />
+                    <span className="text-[9px] font-bold uppercase tracking-widest text-cyan-400">
                       {selectedProduct.category}
                     </span>
                   </div>
-                  <h3 className="text-5xl md:text-7xl font-black text-white uppercase italic tracking-tighter leading-none mb-8">
+                  {/* Fonte reduzida no mobile (text-4xl vs text-5xl anterior) */}
+                  <h3 className="text-4xl md:text-7xl font-black text-white uppercase italic tracking-tighter leading-none mb-6">
                     {selectedProduct.name}
                   </h3>
-                  <p className="text-xl md:text-2xl text-slate-400 leading-relaxed font-medium italic border-l-4 border-cyan-600 pl-8">
+                  {/* Fonte reduzida no mobile (text-lg vs text-xl anterior) */}
+                  <p className="text-lg md:text-2xl text-slate-400 leading-relaxed font-medium italic border-l-4 border-cyan-600 pl-6">
                     {selectedProduct.description}
                   </p>
                 </header>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mt-auto pt-10 border-t border-white/5">
-                  <div className="space-y-6">
-                    <h4 className="text-[11px] font-black uppercase tracking-[0.4em] text-cyan-500 flex items-center gap-2">
-                      <Zap className="w-4 h-4 fill-current" /> Especificações
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mt-auto pt-8 border-t border-white/5">
+                  <div className="space-y-4">
+                    <h4 className="text-[10px] font-black uppercase tracking-[0.4em] text-cyan-500 flex items-center gap-2">
+                      <Zap className="w-3.5 h-3.5 fill-current" />{" "}
+                      Especificações
                     </h4>
-                    <ul className="space-y-4">
+                    <ul className="space-y-3">
                       {selectedProduct.features.map((f, i) => (
                         <li key={i} className="flex items-start gap-3">
-                          <ChevronRight className="w-5 h-5 text-cyan-600 mt-1 flex-shrink-0" />
-                          <span className="text-base text-slate-300 font-bold uppercase italic leading-tight">
+                          <ChevronRight className="w-4 h-4 text-cyan-600 mt-1 flex-shrink-0" />
+                          <span className="text-sm md:text-base text-slate-300 font-bold uppercase italic leading-tight">
                             {f}
                           </span>
                         </li>
                       ))}
                     </ul>
                   </div>
-                  <div className="space-y-6">
-                    <h4 className="text-[11px] font-black uppercase tracking-[0.4em] text-emerald-500 flex items-center gap-2">
-                      <CheckCircle2 className="w-5 h-5" /> Vantagens
+                  <div className="space-y-4">
+                    <h4 className="text-[10px] font-black uppercase tracking-[0.4em] text-emerald-500 flex items-center gap-2">
+                      <CheckCircle2 className="w-4 h-4" /> Vantagens
                     </h4>
-                    <div className="grid gap-3">
+                    <div className="grid gap-2">
                       {selectedProduct.advantages.map((a, i) => (
                         <div
                           key={i}
-                          className="p-4 bg-white/5 rounded-2xl border border-white/5 flex items-center gap-4"
+                          className="p-3 bg-white/5 rounded-xl border border-white/5 flex items-center"
                         >
-                          <span className="text-sm text-slate-200 font-bold italic uppercase tracking-tight">
+                          <span className="text-[11px] md:text-sm text-slate-200 font-bold italic uppercase tracking-tight">
                             {a}
                           </span>
                         </div>
@@ -239,8 +242,12 @@ export default function Products() {
       <style
         dangerouslySetInnerHTML={{
           __html: `
-        @keyframes swipe-pulse { 0%, 100% { opacity: 0.4; transform: scale(1); } 50% { opacity: 1; transform: scale(1.05); } }
-        .animate-swipe-pulse { animation: swipe-pulse 2s infinite ease-in-out; }
+        @keyframes swipe-right { 
+          0% { transform: translateX(-5px); opacity: 0.6; } 
+          50% { transform: translateX(5px); opacity: 1; } 
+          100% { transform: translateX(-5px); opacity: 0.6; } 
+        }
+        .animate-swipe-right { animation: swipe-right 1.5s infinite ease-in-out; }
       `,
         }}
       />
