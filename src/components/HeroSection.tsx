@@ -166,10 +166,10 @@ export default function HeroSection() {
 
         {/* Ações Minimalistas */}
         <div className="hero-reveal mt-12 flex flex-col sm:flex-row gap-5">
-          <button className="px-12 py-4 bg-cyan-600 text-white text-[10px] font-black rounded-xl shadow-[0_20px_40px_-10px_rgba(0,175,255,0.4)] hover:-translate-y-1 transition-all active:scale-95 tracking-[0.25em]">
+          <button aria-label="Explorar soluções químicas" className="px-12 py-4 bg-cyan-600 text-white text-[10px] font-black rounded-xl shadow-[0_20px_40px_-10px_rgba(0,175,255,0.4)] hover:-translate-y-1 transition-all active:scale-95 tracking-[0.25em]">
             EXPLORAR SOLUÇÕES
           </button>
-          <button className="px-12 py-4 border border-white/5 text-white/60 text-[10px] font-bold rounded-xl hover:bg-white/[0.03] transition-all backdrop-blur-md tracking-[0.25em]">
+          <button aria-label="Solicitar consultoria técnica" className="px-12 py-4 border border-white/5 text-white/60 text-[10px] font-bold rounded-xl hover:bg-white/[0.03] transition-all backdrop-blur-md tracking-[0.25em]">
             CONSULTORIA TÉCNICA
           </button>
         </div>

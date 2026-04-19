@@ -98,9 +98,13 @@ export default function Contact() {
                 />
               </div>
 
-              <button
+              <div id="submit-status" aria-live="polite" className="sr-only">
+              {isSubmitting ? 'Enviando mensagem' : submitStatus === 'success' ? 'Mensagem enviada com sucesso' : ''}
+            </div>
+            <button
                 type="submit"
                 disabled={isSubmitting}
+                aria-describedby="submit-status"
                 className="w-full py-3 md:py-4 bg-gradient-to-r from-cyan-500 to-cyan-600 text-white font-semibold rounded-xl hover:from-cyan-400 hover:to-cyan-500 transition-all shadow-lg shadow-cyan-500/25 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
               >
                 {isSubmitting ? (

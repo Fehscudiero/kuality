@@ -48,7 +48,7 @@ export default function Footer() {
         </div>
 
         <div className="border-t border-white/10 pt-8 md:pt-10 lg:pt-12">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-10 lg:gap-12 mb-8 md:mb-10">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-10 lg:gap-12 mb-8 md:mb-10" role="navigation" aria-label="Rodapé">
             <div className="text-center md:text-left">
               <div className="flex items-center justify-center md:justify-start mb-4">
                 <img 

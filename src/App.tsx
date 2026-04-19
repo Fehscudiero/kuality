@@ -20,11 +20,11 @@ function scrollToSection(sectionId: string) {
 }
 
 function App() {
-  return (
-    // A mágica acontece aqui: adicionamos o overflow-x-hidden no wrapper principal
+return (
+    // A magia acontece aqui: adicionamos o overflow-x-hidden no wrapper principal
     <div className="min-h-screen overflow-x-hidden bg-abyss">
       <Navbar scrollToSection={scrollToSection} />
-      <main>
+      <main role="main">
         <HeroSection />
         <SocialProof />
         <About />

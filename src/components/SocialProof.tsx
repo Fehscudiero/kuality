@@ -71,8 +71,8 @@ export default function SocialProof() {
             ref={marqueeRef}
             className="flex gap-4 md:gap-6 lg:gap-8 overflow-x-hidden py-2"
             style={{ scrollbarWidth: 'none' }}
-            role="marquee"
             aria-label="Logotipos de empresas parceiras"
+            aria-roledescription="marquee"
           >
             {allBrands.map((brand, index) => (
               <div 
