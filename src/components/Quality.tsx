@@ -1,10 +1,13 @@
-import { useRef } from "react";
+import React, { useRef } from "react";
 import { qualityTests } from "../data/content";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 
-gsap.registerPlugin(ScrollTrigger);
+// TRAVA DE SEGURANÇA PARA A VERCEL: Evita erro de "window is not defined" no build
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
 // --- COMPONENTE DE GEOMETRIA (Autônomo para Produção) ---
 function SectionGeometry() {
@@ -13,7 +16,6 @@ function SectionGeometry() {
 
   useGSAP(
     () => {
-      // Autonomia do container para disparar no deploy
       if (!containerRef.current || !shapeRef.current) return;
 
       gsap.fromTo(
@@ -76,7 +78,7 @@ export default function Quality() {
       className="py-24 lg:py-36 bg-slate-50 relative overflow-hidden"
       style={{ isolation: "isolate" }}
     >
-      {/* Chamada limpa do componente */}
+      {/* Chamada do componente geométrico */}
       <SectionGeometry />
 
       <div className="relative z-10 max-w-7xl mx-auto px-6">
