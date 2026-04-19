@@ -7,5 +7,17 @@ export default defineConfig({
     port: 3000,
     host: true,
     open: true
+  },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          'vendor-gsap': ['gsap', '@gsap/react'],
+          'vendor-icons': ['lucide-react'],
+        }
+      }
+    },
+    cssCodeSplit: true,
+    chunkSizeWarningLimit: 500,
   }
 })
