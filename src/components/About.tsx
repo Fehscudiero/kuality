@@ -107,7 +107,7 @@ export default function About() {
                 História e Compromisso
               </span>
             </div>
-            <h2 className="text-5xl md:text-8xl font-black text-slate-950 tracking-tighter uppercase italic leading-[0.85]">
+            <h2 className="text-5xl md:text-6xl font-black text-slate-950 tracking-tighter uppercase italic leading-[0.85]">
               Sobre a <br /> <span className="text-cyan-600">Kuality.</span>
             </h2>
           </div>
