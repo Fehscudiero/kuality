@@ -1,95 +1,96 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { socialProof } from "../data/content";
+import { gsap } from "gsap";
+
+// Mapeamento dos ficheiros na sua pasta public/assets
+const partnerLogos: Record<string, string> = {
+  FIDELFERRO: "/assets/fidelferro.webp",
+  "JOHN DEERE": "/assets/john.webp",
+  "NAKATA AUTOMOTIVA": "/assets/Nacata.webp",
+  "MEGA LIGHT": "/assets/mega.webp",
+  COLOMBO: "/assets/Colombo.webp",
+  JUMIL: "/assets/jumil.webp",
+  IVECO: "/assets/iveco.webp",
+  WHEATON: "/assets/wheaton.webp",
+  GM: "/assets/gm.webp",
+  VOLVO: "/assets/volvo.webp",
+  KANJIKO: "/assets/kanjico.webp",
+};
 
 export default function SocialProof() {
-  const [isMobile, setIsMobile] = useState(true);
   const marqueeRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 768);
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
-    return () => window.removeEventListener("resize", checkMobile);
-  }, []);
+    if (!marqueeRef.current) return;
 
-  useEffect(() => {
-    if (isMobile || !marqueeRef.current) return;
+    const marquee = marqueeRef.current;
+    const totalWidth = marquee.scrollWidth / 3;
 
-    let animationId: number;
-    const container = marqueeRef.current;
+    // Lógica de velocidade: menor duração = mais rápido
+    // Mobile (< 768px): 15s | Desktop: 25s
+    const isMobile = window.innerWidth < 768;
+    const customDuration = isMobile ? 5 : 15;
 
-    const animate = () => {
-      container.scrollLeft += 0.5;
-      if (container.scrollLeft >= container.scrollWidth / 3) {
-        container.scrollLeft = 0;
-      }
-      animationId = requestAnimationFrame(animate);
-    };
+    // Animação GSAP
+    const animation = gsap.to(marquee, {
+      x: `-${totalWidth}px`,
+      duration: customDuration,
+      ease: "none",
+      repeat: -1,
+    });
 
-    const handleMouseEnter = () => cancelAnimationFrame(animationId);
-    const handleMouseLeave = () => {
-      animationId = requestAnimationFrame(animate);
-    };
+    // UX: Pausar ao passar o rato (apenas em dispositivos com ponteiro)
+    const handleMouseEnter = () => animation.pause();
+    const handleMouseLeave = () => animation.play();
 
-    container.addEventListener("mouseenter", handleMouseEnter);
-    container.addEventListener("mouseleave", handleMouseLeave);
-    animate();
+    marquee.addEventListener("mouseenter", handleMouseEnter);
+    marquee.addEventListener("mouseleave", handleMouseLeave);
 
     return () => {
-      cancelAnimationFrame(animationId);
-      container.removeEventListener("mouseenter", handleMouseEnter);
-      container.removeEventListener("mouseleave", handleMouseLeave);
+      animation.kill();
+      marquee.removeEventListener("mouseenter", handleMouseEnter);
+      marquee.removeEventListener("mouseleave", handleMouseLeave);
     };
-  }, [isMobile]);
+  }, []);
 
-  const allBrands = [
+  const infiniteBrands = [
     ...socialProof.brands,
     ...socialProof.brands,
     ...socialProof.brands,
   ];
 
   return (
-    <section className="py-8 md:py-10 lg:py-12 bg-slate-100 overflow-hidden">
+    <section className="py-16 md:py-24 bg-white overflow-hidden border-b border-slate-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-6 md:mb-8">
-          <p className="text-xs md:text-sm uppercase tracking-widest text-slate-600">
+        <div className="text-center mb-12">
+          <p className="text-[10px] md:text-sm uppercase tracking-[0.3em] text-slate-700 font-black">
             Empresas que confiam na Kuality
           </p>
         </div>
 
-        {isMobile ? (
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 md:gap-4">
-            {socialProof.brands.map((brand, index) => (
-              <div
-                key={index}
-                className="bg-white rounded-xl md:rounded-2xl p-4 md:p-5 shadow-md hover:shadow-lg transition-shadow"
-              >
-                <span className="text-xs md:text-sm lg:text-base font-bold text-slate-700 text-center block">
-                  {brand}
-                </span>
-              </div>
-            ))}
-          </div>
-        ) : (
+        <div className="relative w-full overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_15%,black_85%,transparent)]">
           <div
             ref={marqueeRef}
-            className="flex gap-4 md:gap-6 lg:gap-8 overflow-x-hidden py-2"
-            style={{ scrollbarWidth: "none" }}
-            aria-label="Logotipos de empresas parceiras"
-            aria-roledescription="marquee"
+            className="flex items-center gap-12 md:gap-20 whitespace-nowrap will-change-transform"
           >
-            {allBrands.map((brand, index) => (
+            {infiniteBrands.map((brand, index) => (
               <div
-                key={index}
-                className="flex-shrink-0 px-6 md:px-8 lg:px-10 py-3 md:py-4 bg-white rounded-xl md:rounded-2xl shadow-md hover:shadow-lg transition-shadow"
+                key={`${brand}-${index}`}
+                className="flex-shrink-0 flex items-center justify-center hover:scale-110 transition-transform duration-500 cursor-pointer"
               >
-                <span className="text-sm md:text-base lg:text-lg font-semibold text-slate-700 whitespace-nowrap">
-                  {brand}
-                </span>
+                <img
+                  src={partnerLogos[brand] || "/assets/placeholder.webp"}
+                  alt={`Parceiro Kuality - ${brand}`}
+                  className="h-9 md:h-14 w-auto object-contain"
+                  loading="lazy"
+                  onError={(e) => {
+                    (e.target as HTMLImageElement).style.display = "none";
+                  }}
+                />
               </div>
             ))}
           </div>
-        )}
+        </div>
       </div>
     </section>
   );
