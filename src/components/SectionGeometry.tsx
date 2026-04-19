@@ -6,10 +6,12 @@ import { useGSAP } from '@gsap/react'
 gsap.registerPlugin(ScrollTrigger)
 
 interface SectionGeometryProps {
-  variant?: 'about' | 'products' | 'contact' | 'default'
+  // Removi o 'variant' temporariamente para passar no build
+  // Se for usar no futuro, você deve aplicar lógica no retorno do JSX ou no GSAP
+  className?: string 
 }
 
-export default function SectionGeometry({ variant = 'about' }: SectionGeometryProps) {
+export default function SectionGeometry() {
   const containerRef = useRef<HTMLDivElement>(null)
   const masterShapeRef = useRef<HTMLDivElement>(null)
   const lineRef = useRef<HTMLDivElement>(null)
