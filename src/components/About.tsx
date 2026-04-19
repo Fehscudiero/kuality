@@ -4,12 +4,10 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import { Beaker, ShieldCheck, ArrowRight } from "lucide-react";
 
-// Registro seguro para o deploy (SSR safe)
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
 }
 
-// --- COMPONENTE DE GEOMETRIA (Efeito de Lâmina) ---
 function SectionGeometry() {
   const containerRef = useRef<HTMLDivElement>(null);
   const shapeRef = useRef<HTMLDivElement>(null);
@@ -17,7 +15,6 @@ function SectionGeometry() {
   useGSAP(
     () => {
       if (!containerRef.current || !shapeRef.current) return;
-
       gsap.fromTo(
         shapeRef.current,
         { x: "-120%", opacity: 0 },
@@ -33,17 +30,6 @@ function SectionGeometry() {
           },
         },
       );
-
-      gsap.to(shapeRef.current, {
-        y: -200,
-        ease: "none",
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: "top bottom",
-          end: "bottom top",
-          scrub: 1,
-        },
-      });
     },
     { scope: containerRef },
   );
@@ -53,7 +39,6 @@ function SectionGeometry() {
       ref={containerRef}
       className="absolute inset-0 pointer-events-none overflow-hidden"
       style={{ zIndex: 1 }}
-      aria-hidden="true"
     >
       <div
         ref={shapeRef}
@@ -80,12 +65,12 @@ export default function About() {
     {
       title: "Laboratórios Próprios",
       desc: "Técnicos capacitados desenvolvem produtos com matéria-prima selecionada",
-      icon: "M19.428 15.428a2 2 0 00-1.022-.547l-2.384-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z",
+      icon: "M19.428 15.428a2 2 0 00-1.022-.547l-2.384-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547",
     },
     {
       title: "Produtos Controlados",
       desc: "Atendemos padrões da ANVISA e órgãos fiscalizadores",
-      icon: "M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z",
+      icon: "M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944",
     },
   ];
 
@@ -93,11 +78,10 @@ export default function About() {
     <section
       ref={sectionRef}
       id="sobre"
-      className="relative py-24 md:py-32 lg:py-44 bg-white overflow-hidden border-t border-slate-200"
+      className="relative py-24 md:py-44 bg-white overflow-hidden border-t border-slate-200"
       style={{ isolation: "isolate" }}
     >
       <SectionGeometry />
-
       <div className="relative z-10 max-w-7xl mx-auto px-6">
         <header className="mb-16 md:mb-24 flex flex-col md:flex-row md:items-end justify-between gap-10">
           <div className="max-w-2xl text-center md:text-left">
@@ -107,11 +91,10 @@ export default function About() {
                 História e Compromisso
               </span>
             </div>
-            <h2 className="text-5xl md:text-6xl font-black text-slate-950 tracking-tighter uppercase italic leading-[0.85]">
+            <h2 className="text-5xl md:text-8xl font-black text-slate-950 tracking-tighter uppercase italic leading-[0.85]">
               Sobre a <br /> <span className="text-cyan-600">Kuality.</span>
             </h2>
           </div>
-          <div className="hidden md:block h-[2px] flex-1 bg-gradient-to-r from-slate-100 via-cyan-100 to-slate-100 mx-10 mb-4" />
           <div className="flex items-center gap-4 bg-slate-50 p-4 rounded-2xl border border-slate-100">
             <ShieldCheck className="w-8 h-8 text-cyan-600" />
             <p className="text-slate-500 font-bold italic text-[11px] max-w-[150px] leading-tight uppercase">
@@ -166,21 +149,19 @@ export default function About() {
                     />
                   </svg>
                 </div>
-                <div>
-                  <h3 className="text-xl font-bold text-slate-950 mb-2">
-                    {feature.title}
-                  </h3>
-                  <p className="text-slate-600 text-base leading-relaxed">
-                    {feature.desc}
-                  </p>
-                </div>
+                <h3 className="text-xl font-bold text-slate-950 mb-2">
+                  {feature.title}
+                </h3>
+                <p className="text-slate-600 text-base leading-relaxed">
+                  {feature.desc}
+                </p>
               </div>
             </div>
           ))}
         </div>
 
-        <div className="bg-slate-900 rounded-[3rem] p-12 text-center relative overflow-hidden shadow-2xl">
-          <h3 className="text-2xl md:text-4xl font-bold text-white mb-8">
+        <div className="bg-slate-900 rounded-[3rem] p-12 text-center relative overflow-hidden shadow-2xl mt-12">
+          <h3 className="text-2xl md:text-4xl font-bold text-white mb-6">
             Pronto para transformar sua produção?
           </h3>
           <a
