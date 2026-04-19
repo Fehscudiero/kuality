@@ -1,15 +1,15 @@
-import { useRef } from "react"; // Removido o "React" que não estava sendo usado
+import { useRef } from "react";
 import { qualityTests } from "../data/content";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 
-// TRAVA DE SEGURANÇA PARA A VERCEL
+// Registro seguro para o deploy (SSR safe)
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
 }
 
-// --- COMPONENTE DE GEOMETRIA (Autônomo para Produção) ---
+// --- COMPONENTE DE GEOMETRIA (Idêntico ao About - Direção: Esquerda) ---
 function SectionGeometry() {
   const containerRef = useRef<HTMLDivElement>(null);
   const shapeRef = useRef<HTMLDivElement>(null);
@@ -18,6 +18,7 @@ function SectionGeometry() {
     () => {
       if (!containerRef.current || !shapeRef.current) return;
 
+      // 1. Reveal: A lâmina entra rasgando da esquerda
       gsap.fromTo(
         shapeRef.current,
         { x: "-120%", opacity: 0 },
@@ -34,6 +35,7 @@ function SectionGeometry() {
         },
       );
 
+      // 2. Parallax: Movimento sutil no scroll
       gsap.to(shapeRef.current, {
         y: -200,
         ease: "none",
@@ -44,6 +46,10 @@ function SectionGeometry() {
           scrub: 1,
         },
       });
+
+      // Garante sincronia de layout após renderização inicial (Vital para Vercel)
+      const timer = setTimeout(() => ScrollTrigger.refresh(), 100);
+      return () => clearTimeout(timer);
     },
     { scope: containerRef },
   );
@@ -59,7 +65,8 @@ function SectionGeometry() {
         ref={shapeRef}
         className="absolute top-[-10%] left-0 w-[150%] h-[150%] bg-cyan-200 shadow-2xl"
         style={{
-          clipPath: "polygon(0 0, 70% 0, 100% 100%, 30% 100%)",
+          // ClipPath idêntico ao About para manter a unidade visual
+          clipPath: "polygon(0 0, 70% 0, 30% 100%, 0% 100%)",
           transform: "rotate(-3deg)",
           zIndex: 50,
         }}
@@ -78,6 +85,7 @@ export default function Quality() {
       className="py-24 lg:py-36 bg-slate-50 relative overflow-hidden"
       style={{ isolation: "isolate" }}
     >
+      {/* Chamada do componente geométrico autônomo */}
       <SectionGeometry />
 
       <div className="relative z-10 max-w-7xl mx-auto px-6">
@@ -167,6 +175,7 @@ export default function Quality() {
           </div>
         </div>
 
+        {/* Certificações */}
         <div className="bg-gradient-to-r from-cyan-600 to-cyan-500 rounded-2xl md:rounded-3xl p-6 md:p-8 lg:p-10 shadow-2xl">
           <p className="text-center text-white font-semibold text-lg mb-8">
             Certificações e Padrões
