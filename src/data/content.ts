@@ -181,6 +181,26 @@ export const products: Product[] = [
     ],
     advantages: ["Alta transparência", "Longa duração", "Fácil aplicação"],
   },
+  // Adicione este objeto ao seu array de produtos no data/content.ts
+  {
+    id: "kualiphos-606",
+    name: "KUALIPHOS 606",
+    category: "Desengraxantes", // ou a categoria que preferir
+    description:
+      "Desengraxante ecológico de alta performance que combina eficiência industrial com sustentabilidade.",
+    features: [
+      "Desengraxante ecológico e biodegradável",
+      "Fórmula com íon exclusivo Kuality",
+      "Ação desoxidante e fosfatizante",
+      "Agente passivante integrado",
+    ],
+    advantages: [
+      "Remove carepa preta e resíduos de solda com facilidade",
+      "Máxima proteção contra oxidação posterior",
+      "Redução significativa no consumo de energia industrial",
+      "Sustentabilidade: amigo do meio ambiente e da sua empresa",
+    ],
+  },
 ];
 
 export const qualityTests = {

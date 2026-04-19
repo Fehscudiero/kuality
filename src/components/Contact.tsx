@@ -16,7 +16,7 @@ import { companyInfo } from "../data/content";
 
 gsap.registerPlugin(ScrollTrigger);
 
-// --- COMPONENTE DE GEOMETRIA (Efeito idêntico ao dos Produtos) ---
+// --- COMPONENTE DE GEOMETRIA ---
 function SectionGeometry({
   triggerRef,
 }: {
@@ -119,11 +119,11 @@ export default function Contact() {
       className="py-24 lg:py-36 bg-slate-50 relative overflow-hidden"
       style={{ isolation: "isolate" }}
     >
-      {/* EFEITO DE GEOMETRIA DOS PRODUTOS APLICADO AQUI */}
+      {/* EFEITO DE GEOMETRIA */}
       <SectionGeometry triggerRef={sectionRef} />
 
       <div className="relative z-10 max-w-6xl mx-auto px-6">
-        {/* CONTAINER PREMIUM MANTIDO */}
+        {/* CONTAINER PREMIUM */}
         <div
           className={`relative bg-white rounded-[2.5rem] border-2 border-slate-200 shadow-[0_50px_100px_-20px_rgba(0,0,0,0.12)] transition-all duration-1000 ease-out overflow-hidden ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-16"
@@ -133,7 +133,7 @@ export default function Contact() {
           <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-cyan-600 via-cyan-400 to-slate-900"></div>
 
           <div className="grid grid-cols-1 lg:grid-cols-12">
-            {/* FORMULÁRIO */}
+            {/* ================= FORMULÁRIO (COL 7) ================= */}
             <div className="lg:col-span-7 p-8 md:p-14 border-r border-slate-100">
               <header className="mb-10">
                 <div className="flex items-center gap-2 text-cyan-600 mb-4">
@@ -166,7 +166,7 @@ export default function Contact() {
                 <form onSubmit={handleSubmit} className="space-y-8">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <div className="group space-y-2">
-                      <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1 group-focus-within:text-cyan-600 transition-colors">
+                      <label className="text-[11px] font-black text-slate-700 uppercase tracking-widest ml-1 group-focus-within:text-cyan-600 transition-colors">
                         Seu nome
                       </label>
                       <input
@@ -176,12 +176,12 @@ export default function Contact() {
                         onChange={(e) =>
                           setFormData({ ...formData, name: e.target.value })
                         }
-                        className="w-full h-14 px-0 bg-transparent border-b-2 border-slate-100 focus:border-cyan-600 text-slate-900 font-bold transition-all outline-none placeholder:text-slate-200 text-lg"
+                        className="w-full h-14 px-0 bg-transparent border-b-2 border-slate-100 focus:border-cyan-600 text-slate-900 font-bold transition-all outline-none placeholder:text-slate-200 text-sm"
                         placeholder="Nome ou Empresa"
                       />
                     </div>
                     <div className="group space-y-2">
-                      <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1 group-focus-within:text-cyan-600 transition-colors">
+                      <label className="text-[11px] font-black text-slate-700 uppercase tracking-widest ml-1 group-focus-within:text-cyan-600 transition-colors">
                         Seu melhor email para Contato
                       </label>
                       <input
@@ -191,14 +191,14 @@ export default function Contact() {
                         onChange={(e) =>
                           setFormData({ ...formData, email: e.target.value })
                         }
-                        className="w-full h-14 px-0 bg-transparent border-b-2 border-slate-100 focus:border-cyan-600 text-slate-900 font-bold transition-all outline-none placeholder:text-slate-200 text-lg"
+                        className="w-full h-14 px-0 bg-transparent border-b-2 border-slate-100 focus:border-cyan-600 text-slate-900 font-bold transition-all outline-none placeholder:text-slate-200 text-sm"
                         placeholder="email@corporativo.com"
                       />
                     </div>
                   </div>
 
                   <div className="group space-y-2">
-                    <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1 group-focus-within:text-cyan-600 transition-colors">
+                    <label className="text-[11px] font-black text-slate-700 uppercase tracking-widest ml-1 group-focus-within:text-cyan-600 transition-colors">
                       Especificações do Orçamento
                     </label>
                     <textarea
@@ -230,7 +230,7 @@ export default function Contact() {
               )}
             </div>
 
-            {/* INFO (COL 5) */}
+            {/* ================= INFO (COL 5) ================= */}
             <div className="lg:col-span-5 bg-slate-900 p-8 md:p-14 text-white flex flex-col justify-between relative">
               <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(0,240,255,0.08),transparent_70%)]"></div>
 
@@ -246,36 +246,38 @@ export default function Contact() {
                   </p>
                 </div>
 
-                <div className="space-y-6">
+                <div className="space-y-4 sm:space-y-6">
+                  {/* Botão de Telefone */}
                   <a
                     href={`tel:${companyInfo.phone}`}
-                    className="flex items-center gap-5 group"
+                    className="flex items-center gap-3 sm:gap-5 group active:scale-[0.98] transition-transform duration-200"
                   >
-                    <div className="w-12 h-12 bg-white/5 rounded-xl flex items-center justify-center group-hover:bg-cyan-600 transition-all border border-white/10">
-                      <Phone className="w-5 h-5" />
+                    <div className="flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 bg-white/5 rounded-xl flex items-center justify-center md:group-hover:bg-cyan-600 transition-all border border-white/10">
+                      <Phone className="w-4 h-4 sm:w-5 sm:h-5" />
                     </div>
-                    <div>
-                      <p className="text-[9px] font-black text-cyan-400 uppercase tracking-widest">
+                    <div className="flex-1 min-w-0">
+                      <p className="text-[8px] sm:text-[9px] font-black text-cyan-400 uppercase tracking-widest mb-0.5">
                         Hotline
                       </p>
-                      <p className="text-lg font-bold group-hover:text-cyan-400 transition-colors">
+                      <p className="text-xs sm:text-sm md:text-base font-bold md:group-hover:text-cyan-400 transition-colors truncate">
                         {companyInfo.phone}
                       </p>
                     </div>
                   </a>
 
+                  {/* Botão de E-mail */}
                   <a
                     href={`mailto:${companyInfo.salesEmail}`}
-                    className="flex items-center gap-5 group"
+                    className="flex items-center gap-3 sm:gap-5 group active:scale-[0.98] transition-transform duration-200"
                   >
-                    <div className="w-12 h-12 bg-white/5 rounded-xl flex items-center justify-center group-hover:bg-cyan-600 transition-all border border-white/10">
-                      <Mail className="w-5 h-5" />
+                    <div className="flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 bg-white/5 rounded-xl flex items-center justify-center md:group-hover:bg-cyan-600 transition-all border border-white/10">
+                      <Mail className="w-4 h-4 sm:w-5 sm:h-5" />
                     </div>
-                    <div>
-                      <p className="text-[9px] font-black text-cyan-400 uppercase tracking-widest">
+                    <div className="flex-1 min-w-0">
+                      <p className="text-[8px] sm:text-[9px] font-black text-cyan-400 uppercase tracking-widest mb-0.5">
                         E-mail Oficial
                       </p>
-                      <p className="text-lg font-bold group-hover:text-cyan-400 transition-colors">
+                      <p className="text-xs sm:text-sm md:text-base font-bold md:group-hover:text-cyan-400 transition-colors truncate">
                         {companyInfo.salesEmail}
                       </p>
                     </div>
@@ -283,6 +285,7 @@ export default function Contact() {
                 </div>
               </div>
 
+              {/* Endereço embaixo na caixa escura */}
               <div className="relative z-10 mt-12 pt-10 border-t border-white/5">
                 <div className="flex items-start gap-4">
                   <MapPin className="text-cyan-500 w-5 h-5 mt-1" />
@@ -301,13 +304,14 @@ export default function Contact() {
           </div>
         </div>
 
-        {/* Footer Seção */}
-        <div className="mt-12 flex justify-between items-center opacity-20 group hover:opacity-100 transition-opacity">
-          <p className="text-[9px] font-black text-slate-900 uppercase tracking-[0.5em]">
+        {/* ================= FOOTER SEÇÃO ================= */}
+        {/* PRETO PURO, LADO A LADO, SEM HOVER */}
+        <div className="mt-12 flex justify-between items-center w-full gap-2 md:gap-6">
+          <p className="text-[6px] sm:text-[8px] md:text-[10px] font-black text-black uppercase tracking-[0.1em] sm:tracking-widest md:tracking-[0.4em] whitespace-nowrap">
             Kuality Chemistry Solutions © 2026
           </p>
-          <div className="h-[1px] flex-1 bg-slate-900 mx-8"></div>
-          <p className="text-[9px] font-black text-slate-900 uppercase tracking-[0.5em]">
+          <div className="h-[2px] flex-1 bg-black mx-2 md:mx-4"></div>
+          <p className="text-[6px] sm:text-[8px] md:text-[10px] font-black text-black uppercase tracking-[0.1em] sm:tracking-widest md:tracking-[0.4em] whitespace-nowrap text-right">
             Those who understand, seek Kuality.
           </p>
         </div>

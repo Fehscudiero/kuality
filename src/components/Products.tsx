@@ -56,10 +56,9 @@ function SectionGeometry({
       style={{ zIndex: 1 }}
       aria-hidden="true"
     >
-      {/* Ajustado: bg-cyan-100 com opacidade para garantir contraste do texto que passa por cima */}
       <div
         ref={shapeRef}
-        className="absolute top-[-10%] right-0 w-[150%] h-[150%] bg-cyan-100/40 shadow-2xl"
+        className="absolute top-[-10%] right-0 w-[150%] h-[150%] bg-cyan-200 shadow-2xl"
         style={{
           clipPath: "polygon(30% 0, 100% 0, 100% 100%, 70% 100%)",
           transform: "rotate(3deg)",
@@ -91,7 +90,6 @@ export default function Products() {
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-8 md:mb-12 lg:mb-16">
-          {/* Ajustado: cyan-700 para contraste no span */}
           <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 mb-3 md:mb-4">
             Nossos <span className="text-cyan-700">Produtos</span>
           </h2>
@@ -116,7 +114,8 @@ export default function Products() {
           ))}
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6 lg:gap-8">
+        {/* items-start impede que os cards vizinhos estiquem */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6 lg:gap-8 items-start">
           {filteredProducts.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}
@@ -131,7 +130,8 @@ function ProductCard({ product }: { product: Product }) {
 
   return (
     <div
-      className={`group bg-white/90 backdrop-blur-sm rounded-2xl shadow-lg border-2 transition-all duration-300 cursor-pointer ${
+      // duration-500 e ease-in-out deixam o movimento suave e sem trancos
+      className={`group bg-white/90 backdrop-blur-sm rounded-2xl shadow-lg border-2 transition-all duration-500 ease-in-out cursor-pointer ${
         isExpanded
           ? "border-cyan-500 shadow-2xl ring-4 ring-cyan-500/10"
           : "border-slate-100 hover:border-cyan-300 hover:shadow-xl hover:-translate-y-1"
@@ -141,7 +141,7 @@ function ProductCard({ product }: { product: Product }) {
       <div className="p-5 md:p-6 lg:p-7">
         <div className="flex items-start justify-between gap-4 mb-3 md:mb-4">
           <div className="flex items-start gap-3 md:gap-4">
-            <div className="w-12 md:w-14 h-12 md:h-14 bg-gradient-to-br from-cyan-600 to-cyan-700 rounded-xl flex items-center justify-center shadow-lg shadow-cyan-900/20 group-hover:scale-110 transition-transform duration-300">
+            <div className="w-12 md:w-14 h-12 md:h-14 bg-gradient-to-br from-cyan-600 to-cyan-700 rounded-xl flex items-center justify-center shadow-lg shadow-cyan-900/20 group-hover:scale-110 transition-transform duration-500 ease-in-out">
               <svg
                 className="w-6 md:w-7 h-6 md:h-7 text-white"
                 fill="none"
@@ -157,11 +157,10 @@ function ProductCard({ product }: { product: Product }) {
               </svg>
             </div>
             <div>
-              {/* Ajustado: cyan-700 e bg-cyan-100/50 para contraste WCAG AA */}
-              <span className="text-xs font-bold uppercase tracking-wider text-cyan-700 bg-cyan-100/50 px-2 py-0.5 rounded">
+              <span className="text-xs font-bold uppercase tracking-wider text-cyan-700 bg-cyan-100/50 px-2 py-0.5 rounded transition-colors duration-500">
                 {product.category}
               </span>
-              <h3 className="text-lg md:text-xl lg:text-2xl font-bold text-slate-900 mt-1">
+              <h3 className="text-lg md:text-xl lg:text-2xl font-bold text-slate-900 mt-1 transition-colors duration-500">
                 {product.name}
               </h3>
             </div>
@@ -175,7 +174,7 @@ function ProductCard({ product }: { product: Product }) {
                 : `Expandir detalhes de ${product.name}`
             }
             title={isExpanded ? "Recolher" : "Expandir"}
-            className={`w-9 h-9 md:w-10 md:h-10 rounded-full flex items-center justify-center transition-all duration-300 flex-shrink-0 ${
+            className={`w-9 h-9 md:w-10 md:h-10 rounded-full flex items-center justify-center transition-all duration-500 ease-in-out flex-shrink-0 ${
               isExpanded
                 ? "bg-cyan-700 rotate-180 text-white shadow-lg"
                 : "bg-slate-100 text-slate-700"
@@ -201,8 +200,13 @@ function ProductCard({ product }: { product: Product }) {
           {product.description}
         </p>
 
+        {/* Animação do grid sincronizada */}
         <div
-          className={`grid transition-all duration-300 ease-out overflow-hidden ${isExpanded ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"}`}
+          className={`grid transition-all duration-500 ease-in-out overflow-hidden ${
+            isExpanded
+              ? "grid-rows-[1fr] opacity-100"
+              : "grid-rows-[0fr] opacity-0"
+          }`}
         >
           <div className="overflow-hidden">
             <div className="pt-4 md:pt-5 border-t border-slate-200">

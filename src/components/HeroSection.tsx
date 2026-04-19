@@ -5,7 +5,7 @@ import { useGSAP } from "@gsap/react";
 
 gsap.registerPlugin(ScrollTrigger);
 
-// --- 1. Contador Sincronizado (Performance de Elite) ---
+// --- Contador Sincronizado ---
 function AnimatedCounter({
   end,
   suffix = "",
@@ -34,7 +34,7 @@ function AnimatedCounter({
   );
 }
 
-// --- 2. Particle Canvas: "Fluido Molecular" ---
+// --- Particle Canvas ---
 const ParticleCanvas = ({ scrollProgress }: { scrollProgress: number }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const particles = useRef<any[]>([]);
@@ -60,7 +60,6 @@ const ParticleCanvas = ({ scrollProgress }: { scrollProgress: number }) => {
 
     const animate = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      // O scroll progress afeta a velocidade e o rastro das partículas
       const scrollBoost = 1 + scrollProgress * 5;
 
       particles.current.forEach((p) => {
@@ -98,20 +97,93 @@ export default function HeroSection() {
   const contentRef = useRef<HTMLDivElement>(null);
   const [scrollProgress, setScrollProgress] = useState(0);
 
+  // CORES DE FUNDO
+  const bgColorPrimary = "#0a0d12";
+  const bgColorSecondary = "#06080a";
+
   useGSAP(
     () => {
-      // 1. Revelação Otimizada: Menos tempo, sem blur pesado no LCP
-      const tl = gsap.timeline({ defaults: { ease: "power4.out" } });
+      let mm = gsap.matchMedia();
 
-      tl.from(".hero-reveal", {
-        y: 30, // Reduzi de 60 para 30 para ser mais rápido
-        opacity: 0,
-        duration: 0.8, // De 2s para 0.8s (Crucial para o LCP)
-        stagger: 0.1,
-        clearProps: "all", // Limpa os estilos após animar para não bugar o SEO
+      mm.add("(min-width: 768px)", () => {
+        // --- ANIMAÇÃO DESKTOP: Premium 3D & Elastic Refinada ---
+        const tl = gsap.timeline({ defaults: { ease: "power4.out" } });
+
+        tl.from(".tag-item", {
+          y: -50,
+          opacity: 0,
+          duration: 1.2,
+          stagger: 0.15,
+          ease: "back.out(1.7)",
+          clearProps: "all",
+        })
+          .from(
+            ".headline",
+            {
+              y: 80,
+              rotationX: -40,
+              opacity: 0,
+              duration: 1.4,
+              transformOrigin: "center bottom",
+              clearProps: "all",
+            },
+            "-=0.8",
+          )
+          .from(
+            ".description",
+            {
+              y: 30,
+              opacity: 0,
+              duration: 1.2,
+              ease: "power3.out",
+              clearProps: "all",
+            },
+            "-=1",
+          )
+          .from(
+            ".cta-button",
+            {
+              scale: 0.85,
+              y: 40,
+              opacity: 0,
+              duration: 1.4,
+              ease: "elastic.out(1.2, 0.7)",
+              clearProps: "all",
+            },
+            "-=1",
+          )
+          .from(
+            ".stat-item",
+            {
+              y: 60,
+              opacity: 0,
+              duration: 1.2,
+              stagger: 0.2,
+              ease: "power4.out",
+              clearProps: "all",
+            },
+            "-=1.2",
+          )
+          .from(
+            ".scroll-indicator",
+            { opacity: 0, scale: 0.5, duration: 1, clearProps: "all" },
+            "-=0.5",
+          );
       });
 
-      // 2. REAÇÃO QUÍMICA VIA SCROLL
+      mm.add("(max-width: 767px)", () => {
+        // --- ANIMAÇÃO MOBILE: Slide Up Limpo e Elegante ---
+        const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+
+        tl.from(".mobile-reveal", {
+          y: 40,
+          opacity: 0,
+          duration: 0.9,
+          stagger: 0.12,
+          clearProps: "all",
+        });
+      });
+
       ScrollTrigger.create({
         trigger: sectionRef.current,
         start: "top top",
@@ -120,93 +192,162 @@ export default function HeroSection() {
         onUpdate: (self) => {
           setScrollProgress(self.progress);
           gsap.to(sectionRef.current, {
-            backgroundColor: self.progress > 0.5 ? "#06080a" : "#0a0d12",
+            backgroundColor:
+              self.progress > 0.5 ? bgColorSecondary : bgColorPrimary,
             duration: 0.5,
           });
         },
       });
 
-      gsap.to(".chem-cloud", {
-        y: (i) => (i + 1) * -150,
-        opacity: 0,
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top top",
-          scrub: 1,
-        },
-      });
+      return () => mm.revert();
     },
     { scope: sectionRef },
   );
+
+  // Mantido para o botão principal
+  const scrollToProducts = () => {
+    const el = document.getElementById("produtos");
+    if (el) {
+      const yOffset = -50;
+      const y = el.getBoundingClientRect().top + window.pageYOffset + yOffset;
+      window.scrollTo({ top: y, behavior: "smooth" });
+    }
+  };
+
+  // Nova âncora focada no componente About/Sobre
+  const scrollToAbout = () => {
+    const el = document.getElementById("sobre"); // Certifique-se de que a section Sobre tem esse ID
+    if (el) {
+      const yOffset = -50;
+      const y = el.getBoundingClientRect().top + window.pageYOffset + yOffset;
+      window.scrollTo({ top: y, behavior: "smooth" });
+    }
+  };
 
   return (
     <section
       ref={sectionRef}
       id="hero"
-      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#0a0d12]"
+      className="relative h-[100dvh] min-h-[800px] w-full flex flex-col items-center justify-center overflow-hidden bg-[#0a0d12]"
+      style={{ perspective: "1000px" }}
     >
-      {/* Background e Particles continuam... */}
+      <style>{`
+        @keyframes text-shimmer {
+          0% { background-position: 0% center; }
+          100% { background-position: -200% center; }
+        }
+        .animate-text-shimmer {
+          background-size: 200% auto;
+          animation: text-shimmer 4s linear infinite;
+        }
+        @keyframes button-breathe {
+          0%, 100% { box-shadow: 0 0 15px rgba(6,182,212,0.2); }
+          50% { box-shadow: 0 0 30px rgba(6,182,212,0.5); }
+        }
+        .animate-button-breathe {
+          animation: button-breathe 3s ease-in-out infinite;
+        }
+        @keyframes mouse-scroll {
+          0% { transform: translateY(0); opacity: 1; }
+          100% { transform: translateY(12px); opacity: 0; }
+        }
+        .animate-mouse-scroll {
+          animation: mouse-scroll 1.5s cubic-bezier(0.15, 0.41, 0.69, 0.94) infinite;
+        }
+      `}</style>
+
       <ParticleCanvas scrollProgress={scrollProgress} />
 
-      {/* CORREÇÃO DO NOISE: Removido link externo que dava 403 e substituído por um gradiente ou asset local */}
       <div className="absolute inset-0 z-[4] opacity-[0.015] pointer-events-none bg-noise" />
 
+      {/* O AJUSTE ESTÁ AQUI:
+        Diminuímos o pt (padding top) de 28 para 20 no mobile e 40 para 28 no desktop.
+        Aumentamos o pb (padding bottom) de 20 para 32 no mobile e 28 para 40 no desktop.
+        Isso "empurra" o bloco inteiro para cima sem usar margins negativas, mantendo o flex-box intacto.
+      */}
       <div
         ref={contentRef}
-        className="relative z-[10] flex flex-col items-center px-6 max-w-5xl w-full text-center"
+        className="relative z-[10] flex flex-col items-center justify-between px-6 max-w-6xl w-full h-full pt-20 pb-32 md:pt-28 md:pb-40"
       >
-        {/* Badge */}
-        <div className="hero-reveal mb-8 inline-flex items-center gap-3 px-4 py-1.5 bg-white/[0.02] border border-white/10 rounded-full backdrop-blur-xl">
-          <div className="relative flex h-1.5 w-1.5">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
-            <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-cyan-500"></span>
+        {/* Bloco Central */}
+        <div className="flex flex-col items-center justify-center w-full">
+          {/* Tags */}
+          <div className="flex flex-wrap items-center justify-center gap-2 mb-8 md:mb-12">
+            {[
+              "Tratamento de Superfície",
+              "Decapagem Química",
+              "Linha Automotiva",
+            ].map((tag, i) => (
+              <div
+                key={i}
+                className="tag-item mobile-reveal inline-flex items-center gap-2 px-3 py-1.5 bg-cyan-950/40 border border-cyan-800/50 rounded-full backdrop-blur-sm"
+              >
+                <div className="relative flex h-1.5 w-1.5">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-cyan-500"></span>
+                </div>
+                <span className="text-cyan-300 text-[9px] sm:text-[10px] font-bold tracking-widest uppercase">
+                  {tag}
+                </span>
+              </div>
+            ))}
           </div>
-          <span className="text-white/40 text-[9px] font-bold tracking-[0.5em] uppercase font-mono italic">
-            Kuality Molecular Lab v4.0
-          </span>
-        </div>
 
-        {/* Headline - H1 deve carregar o mais rápido possível */}
-        <h1 className="hero-reveal text-[36px] leading-[0.92] sm:text-6xl md:text-[85px] lg:text-[100px] font-black text-white tracking-[-0.05em] uppercase">
-          Quem entende,
-          <br />
-          <span className="text-transparent bg-clip-text bg-gradient-to-br from-cyan-400 via-white to-blue-600">
-            busca Kuality.
-          </span>
-        </h1>
+          {/* Headline */}
+          <h1 className="headline mobile-reveal text-[38px] leading-[1.05] sm:text-6xl md:text-[90px] lg:text-[80px] font-black text-white tracking-normal uppercase text-center">
+            Quem entende,
+            <br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-white to-cyan-500 animate-text-shimmer">
+              busca Kuality.
+            </span>
+          </h1>
 
-        {/* PARÁGRAFO LCP: Removi o delay excessivo e o blur */}
-        <p className="hero-reveal mt-8 text-[14px] sm:text-lg text-slate-400/80 max-w-xl font-medium leading-relaxed tracking-tight px-4 border-cyan-500/20 md:border-none">
-          Especializada no desenvolvimento de soluções químicas para indústrias
-          de diversos portes.
-        </p>
+          <p className="description mobile-reveal mt-6 md:mt-8 text-[15px] sm:text-lg md:text-xl text-slate-400/80 max-w-2xl font-medium leading-relaxed px-4 text-center">
+            Especializada no desenvolvimento de soluções químicas para
+            indústrias de diversos portes.
+          </p>
 
-        {/* Botões */}
-        <div className="hero-reveal mt-12 flex flex-col sm:flex-row gap-5">
-          <button className="px-12 py-4 bg-cyan-600 text-white text-[10px] font-black rounded-xl shadow-lg hover:-translate-y-1 transition-all tracking-[0.25em]">
-            EXPLORAR SOLUÇÕES
-          </button>
-          <button className="px-12 py-4 border border-white/5 text-white/60 text-[10px] font-bold rounded-xl hover:bg-white/[0.03] transition-all tracking-[0.25em]">
-            CONSULTORIA TÉCNICA
-          </button>
+          {/* CTA - Botão Principal -> Vai para os Produtos */}
+          <div className="cta-button mobile-reveal mt-10 md:mt-14 w-full sm:w-auto">
+            <button
+              onClick={scrollToProducts}
+              className="relative overflow-hidden w-full sm:w-auto px-16 py-4 md:py-5 bg-cyan-700 text-white text-[11px] font-black rounded-xl tracking-[0.25em] transition-all duration-300 animate-button-breathe active:scale-95 active:bg-cyan-800 md:hover:-translate-y-1 md:hover:bg-cyan-600 md:hover:shadow-[0_0_40px_rgba(6,182,212,0.8)]"
+            >
+              <span className="relative z-10">EXPLORAR SOLUÇÕES</span>
+            </button>
+          </div>
         </div>
 
         {/* Stats */}
-        <div className="hero-reveal mt-24 grid grid-cols-2 md:grid-cols-3 gap-8 md:gap-16 border-t border-white/5 pt-12 w-full max-w-4xl">
+        <div className="mt-12 md:mt-auto grid grid-cols-2 md:grid-cols-3 gap-y-10 md:gap-y-12 gap-x-4 md:gap-16 border-t border-cyan-500/20 pt-8 md:pt-12 w-full max-w-4xl">
           {[
             { n: 35, s: "+", l: "ANOS DE KNOW-HOW", d: 0.5 },
             { n: 100, s: "%", l: "PUREZA GARANTIDA", d: 0.6 },
-            { n: 9, s: "+", l: "LINHAS ATIVAS", d: 0.7 },
+            { n: 10, s: "+", l: "LINHAS ATIVAS", d: 0.7 },
           ].map((s, i) => (
-            <div key={i} className="flex flex-col items-center">
-              <div className="text-3xl md:text-5xl font-black text-white">
+            <div
+              key={i}
+              className={`stat-item mobile-reveal flex flex-col items-center text-center ${i === 2 ? "col-span-2 md:col-span-1" : ""}`}
+            >
+              <div className="text-4xl md:text-5xl lg:text-6xl font-black text-white drop-shadow-[0_0_15px_rgba(255,255,255,0.1)]">
                 <AnimatedCounter end={s.n} suffix={s.s} delay={s.d} />
               </div>
-              <div className="text-[8px] md:text-[9px] mt-2 tracking-[0.4em] text-cyan-500/30 font-black uppercase">
+              <div className="text-[10px] md:text-[11px] mt-2 md:mt-3 tracking-[0.25em] md:tracking-[0.4em] text-cyan-400 font-bold uppercase transition-colors duration-300">
                 {s.l}
               </div>
             </div>
           ))}
+        </div>
+      </div>
+
+      {/* Scroll Indicator: Linkado para scrollToAbout */}
+      <div
+        onClick={scrollToAbout}
+        className="scroll-indicator mobile-reveal absolute bottom-6 md:bottom-10 left-1/2 -translate-x-1/2 p-3 cursor-pointer group z-[20] transition-opacity hover:opacity-100 opacity-60"
+        aria-label="Rolar para a seção Sobre"
+      >
+        <div className="w-5 h-9 md:w-6 md:h-10 border-2 border-cyan-500/50 rounded-full flex justify-center pt-2 group-hover:border-cyan-400 transition-colors shadow-[0_0_15px_rgba(6,182,212,0.2)]">
+          <div className="w-1 h-2 bg-cyan-400 rounded-full animate-mouse-scroll" />
         </div>
       </div>
     </section>
