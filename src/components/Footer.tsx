@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { companyInfo } from "../data/content";
-import { Globe, Phone, Mail, ChevronUp, ShieldCheck } from "lucide-react";
+import { Phone, Mail, ChevronUp } from "lucide-react";
 
 interface FooterProps {
   scrollToSection: (id: string) => void;
