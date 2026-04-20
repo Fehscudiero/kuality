@@ -33,10 +33,9 @@ export default function SocialProof() {
         gsap.killTweensOf(marquee);
         gsap.set(marquee, { x: 0 });
 
-        // VELOCIDADE ACELERADA: Reduzi os valores para passar mais rápido
-        // Menos segundos = Mais velocidade.
+        // Velocidade ajustada para FLUIDEZ. Mais tempo = movimento mais suave.
         const isMobile = window.innerWidth < 768;
-        const duration = isMobile ? 10 : 18;
+        const duration = isMobile ? 10 : 25;
 
         gsap.to(marquee, {
           x: -singleSetWidth,
@@ -72,36 +71,36 @@ export default function SocialProof() {
   ];
 
   return (
-    <section className="py-16 md:py-24 bg-white overflow-hidden border-b border-slate-100">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
-          <p className="text-[10px] md:text-sm uppercase tracking-[0.4em] text-slate-700 font-black">
-            Empresas que confiam na Kuality
-          </p>
-        </div>
+    <section className="bg-white overflow-hidden w-full border-b border-slate-100">
+      {/* Título com espaçamento leve para não grudar no componente de cima */}
+      <div className="text-center pt-10 pb-6">
+        <p className="text-[10px] md:text-sm uppercase tracking-[0.4em] text-slate-700 font-black">
+          Empresas que confiam na Kuality
+        </p>
+      </div>
 
+      {/* Container de Ponta a Ponta (w-full) SEM paddings laterais */}
+      <div
+        ref={containerRef}
+        className="relative w-full overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_5%,black_95%,transparent)] mb-10"
+      >
         <div
-          ref={containerRef}
-          className="relative w-full overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]"
+          ref={marqueeRef}
+          className="flex items-center gap-16 md:gap-32 whitespace-nowrap will-change-transform"
         >
-          <div
-            ref={marqueeRef}
-            className="flex items-center gap-12 md:gap-24 whitespace-nowrap will-change-transform"
-          >
-            {infiniteBrands.map((brand, index) => (
-              <div
-                key={`${brand}-${index}`}
-                className="flex-shrink-0 flex items-center justify-center transition-all duration-500 cursor-pointer opacity-100 hover:scale-110"
-              >
-                <img
-                  src={partnerLogos[brand] || "/assets/placeholder.webp"}
-                  alt={`Parceiro Kuality - ${brand}`}
-                  className="h-8 md:h-12 w-auto object-contain"
-                  loading="lazy"
-                />
-              </div>
-            ))}
-          </div>
+          {infiniteBrands.map((brand, index) => (
+            <div
+              key={`${brand}-${index}`}
+              className="flex-shrink-0 flex items-center justify-center transition-transform duration-500 cursor-pointer hover:scale-110"
+            >
+              <img
+                src={partnerLogos[brand] || "/assets/placeholder.webp"}
+                alt={`Parceiro Kuality - ${brand}`}
+                className="h-16 sm:h-20 md:h-24 lg:h-28 w-auto object-contain"
+                loading="lazy"
+              />
+            </div>
+          ))}
         </div>
       </div>
     </section>
