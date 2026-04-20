@@ -36,7 +36,7 @@ export default function SocialProof() {
         // VELOCIDADE ACELERADA: Reduzi os valores para passar mais rápido
         // Menos segundos = Mais velocidade.
         const isMobile = window.innerWidth < 768;
-        const duration = isMobile ? 12 : 20;
+        const duration = isMobile ? 10 : 18;
 
         gsap.to(marquee, {
           x: -singleSetWidth,
