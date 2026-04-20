@@ -8,7 +8,6 @@ import {
   FlaskConical,
   CheckCircle2,
   Zap,
-  Target,
   ArrowRight,
   ArrowLeft,
 } from "lucide-react";
