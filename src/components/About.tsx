@@ -2,7 +2,14 @@ import { useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
-import { Beaker, ShieldCheck, ArrowRight } from "lucide-react";
+import {
+  Award,
+  ShieldCheck,
+  ArrowRight,
+  Trophy,
+  Microscope,
+  BadgeCheck,
+} from "lucide-react";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -42,7 +49,7 @@ function SectionGeometry() {
     >
       <div
         ref={shapeRef}
-        className="absolute top-[-10%] left-0 w-[150%] h-[150%] bg-cyan-200 shadow-2xl"
+        className="absolute top-[-10%] left-0 w-[150%] h-[150%] bg-cyan-100 shadow-2xl"
         style={{
           clipPath: "polygon(0 0, 70% 0, 30% 100%, 0% 100%)",
           transform: "rotate(-3deg)",
@@ -59,18 +66,18 @@ export default function About() {
   const features = [
     {
       title: "Know-how de 35+ anos",
-      desc: "Experiência consolidada no segmento químico industrial",
-      icon: "M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z",
+      desc: "Experiência consolidada no segmento químico industrial.",
+      icon: Trophy,
     },
     {
       title: "Laboratórios Próprios",
-      desc: "Técnicos capacitados desenvolvem produtos com matéria-prima selecionada",
-      icon: "M19.428 15.428a2 2 0 00-1.022-.547l-2.384-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547",
+      desc: "Pesquisa avançada e desenvolvimento técnico rigoroso.",
+      icon: Microscope,
     },
     {
       title: "Produtos Controlados",
-      desc: "Atendemos padrões da ANVISA e órgãos fiscalizadores",
-      icon: "M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944",
+      desc: "Garantia total de conformidade e segurança química.",
+      icon: BadgeCheck,
     },
   ];
 
@@ -78,90 +85,116 @@ export default function About() {
     <section
       ref={sectionRef}
       id="sobre"
-      className="relative py-24 md:py-44 bg-white overflow-hidden border-t border-slate-200"
+      className="relative py-20 md:py-32 lg:py-40 bg-white overflow-hidden border-t border-slate-100"
       style={{ isolation: "isolate" }}
     >
       <SectionGeometry />
+
       <div className="relative z-10 max-w-7xl mx-auto px-6">
         <header className="mb-16 md:mb-24 flex flex-col md:flex-row md:items-end justify-between gap-10">
           <div className="max-w-2xl text-center md:text-left">
-            <div className="flex items-center justify-center md:justify-start gap-3 text-cyan-600 mb-4">
-              <Beaker className="w-6 h-6 animate-pulse" />
+            <div className="flex items-center justify-center md:justify-start gap-3 text-[#020B29] mb-4">
+              {" "}
+              <Award className="w-5 h-5" />
               <span className="text-[10px] font-black uppercase tracking-[0.4em]">
                 História e Compromisso
               </span>
             </div>
-            <h2 className="text-5xl md:text-8xl font-black text-slate-950 tracking-tighter uppercase italic leading-[0.85]">
+            <h2 className="text-4xl md:text-6xl font-black text-[slate-950] tracking-tighter uppercase italic leading-[0.9]">
               Sobre a <br /> <span className="text-cyan-600">Kuality.</span>
             </h2>
           </div>
-          <div className="flex items-center gap-4 bg-slate-50 p-4 rounded-2xl border border-slate-100">
-            <ShieldCheck className="w-8 h-8 text-cyan-600" />
-            <p className="text-slate-500 font-bold italic text-[11px] max-w-[150px] leading-tight uppercase">
+
+          {/* Badge 1: Excelência Química com Borda Azul Escuro */}
+          <div className="flex items-center gap-4 bg-white p-4 rounded-2xl border-2 border-[#020B29] shadow-lg self-center md:self-end">
+            <ShieldCheck className="w-8 h-8 text-[#020B29]" />
+            <p className="text-[#0891B2] font-black italic text-[11px] max-w-[150px] leading-tight uppercase">
               Excelência Química há 35 anos.
             </p>
           </div>
         </header>
 
+        {/* Texto Institucional com Destaques Estratégicos */}
         <div className="max-w-4xl mx-auto mb-20">
-          <div className="bg-white/80 backdrop-blur-xl rounded-[2.5rem] p-8 md:p-14 shadow-2xl border border-white text-slate-600 text-lg md:text-xl leading-relaxed text-justify font-medium">
+          <div className="bg-white/90 backdrop-blur-xl rounded-[2.5rem] p-8 md:p-14 shadow-2xl border border-slate-100 text-slate-600 text-lg md:text-xl leading-relaxed text-justify font-medium">
             <p className="mb-6">
-              A Kuality fabrica produtos químicos para indústrias de pequeno,
-              médio e grande porte. Com know-how de mais de{" "}
-              <span className="text-slate-950 font-bold">35 anos</span> no
-              segmento, a Kuality se preocupa em oferecer produtos de qualidade
-              com a máxima eficiência.
+              A Kuality é especialista no desenvolvimento de{" "}
+              <span className="text-slate-950 font-bold">
+                soluções químicas
+              </span>{" "}
+              de{" "}
+              <span className="text-slate-950 font-bold">alta performance</span>{" "}
+              para indústrias de todos os portes. Com uma trajetória consolidada
+              de <span className="text-slate-950 font-bold">35 anos</span>,
+              nossa missão é entregar{" "}
+              <span className="text-slate-950 font-bold">
+                eficiência operacional
+              </span>{" "}
+              e qualidade técnica superior em cada formulação.
             </p>
+
             <p className="mb-6">
-              Técnicos e profissionais capacitados desenvolvem em nossos
-              laboratórios, produtos com matéria-prima selecionada, seguindo
-              todas as normas e procedimentos padrões adotados pelos órgãos
-              fiscalizadores da área. Atendemos produtos controlados pela{" "}
+              Nossos{" "}
+              <span className="text-slate-950 font-bold">
+                laboratórios próprios
+              </span>{" "}
+              contam com tecnologia de ponta e especialistas dedicados ao
+              processamento de{" "}
+              <span className="text-slate-950 font-bold">
+                matéria-prima certificada
+              </span>
+              . Operamos sob os mais rígidos controles de qualidade, garantindo
+              total{" "}
+              <span className="text-slate-950 font-bold">
+                conformidade regulatória
+              </span>{" "}
+              e aprovação técnica da{" "}
               <span className="text-cyan-600 font-bold">ANVISA</span>.
             </p>
+
             <p>
-              A Kuality tem por objetivo melhorar a cada dia, construindo assim
-              uma relação exclusiva com nossos clientes, desde o atendimento,
-              como também logística de entrega, prazos e preços.
+              Focada em inovação e{" "}
+              <span className="text-slate-950 font-bold">
+                exclusividade no atendimento
+              </span>
+              , a Kuality otimiza processos desde a consultoria inicial até a{" "}
+              <span className="text-slate-950 font-bold">
+                logística inteligente
+              </span>
+              , assegurando prazos ágeis, preços competitivos e uma parceria
+              estratégica duradoura.
             </p>
           </div>
         </div>
 
+        {/* Cards de Features com Borda Azul */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
           {features.map((feature, i) => (
             <div
               key={i}
-              className="group bg-white/90 backdrop-blur-sm rounded-2xl p-8 shadow-lg border border-slate-100 transition-all duration-500 hover:-translate-y-2"
+              className="group bg-white rounded-2xl p-8 shadow-md border border-blue-900/20 hover:border-blue-900 transition-all duration-500 hover:-translate-y-2"
             >
               <div className="flex flex-col gap-6">
-                <div className="w-14 h-14 bg-slate-50 border border-slate-100 rounded-xl flex items-center justify-center group-hover:bg-cyan-500 transition-all">
-                  <svg
-                    className="w-7 h-7 text-cyan-600 group-hover:text-white transition-colors"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={1.5}
-                      d={feature.icon}
-                    />
-                  </svg>
+                <div className="w-14 h-14 bg-slate-50 border border-slate-100 rounded-xl flex items-center justify-center group-hover:bg-blue-900 transition-all">
+                  <feature.icon className="w-7 h-7 text-blue-900 group-hover:text-white transition-colors" />
                 </div>
-                <h3 className="text-xl font-bold text-slate-950 mb-2">
-                  {feature.title}
-                </h3>
-                <p className="text-slate-600 text-base leading-relaxed">
-                  {feature.desc}
-                </p>
+                <div>
+                  <h3 className="text-xl font-bold text-slate-950 mb-2">
+                    {feature.title}
+                  </h3>
+                  <p className="text-slate-600 text-sm md:text-base leading-relaxed">
+                    {feature.desc}
+                  </p>
+                </div>
               </div>
             </div>
           ))}
         </div>
 
-        <div className="bg-slate-900 rounded-[3rem] p-12 text-center relative overflow-hidden shadow-2xl mt-12">
-          <h3 className="text-2xl md:text-4xl font-bold text-white mb-6">
+        {/* CTA Banner */}
+        <div className="bg-slate-950 rounded-[3rem] p-10 md:p-16 text-center relative overflow-hidden shadow-2xl">
+          <div className="absolute top-0 right-0 w-64 h-64 bg-cyan-500/10 blur-[100px]" />
+          <h3 className="text-2xl md:text-4xl font-bold text-white mb-8">
             Pronto para transformar sua produção?
           </h3>
           <a
