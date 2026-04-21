@@ -98,7 +98,7 @@ export default function Quality() {
   return (
     <section
       id="qualidade"
-      className="relative py-24 md:py-44 bg-white overflow-hidden border-t border-slate-100"
+      className="relative py-24 md:py-8 bg-white overflow-hidden border-t border-slate-100"
       style={{ isolation: "isolate" }}
     >
       <SectionGeometry />
@@ -113,7 +113,7 @@ export default function Quality() {
                 Laboratório e Conformidade
               </span>
             </div>
-            <h2 className="text-5xl md:text-8xl font-black text-slate-950 tracking-tighter uppercase italic leading-[0.85]">
+            <h2 className="text-5xl md:text-6xl font-black text-slate-950 tracking-tighter uppercase italic leading-[0.85]">
               Padrão <br /> <span className="text-cyan-600">Kuality.</span>
             </h2>
           </div>

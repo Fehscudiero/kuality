@@ -20,9 +20,9 @@ function AnimatedCounter({
   useGSAP(() => {
     gsap.to(countRef.current, {
       value: end,
-      duration: 3,
+      duration: 1.5, // Reduzido de 3 para 1.5 para maior fluidez
       delay,
-      ease: "expo.out",
+      ease: "power3.out", // Trocado de expo.out para power3.out para evitar a lentidão no fim da animação
       onUpdate: () => setDisplayValue(Math.floor(countRef.current.value)),
     });
   }, [end, delay]);
@@ -318,8 +318,8 @@ export default function HeroSection() {
           </div>
         </div>
 
-        {/* Stats */}
-        <div className="mt-12 md:mt-auto grid grid-cols-2 md:grid-cols-3 gap-y-10 md:gap-y-12 gap-x-4 md:gap-16 border-t border-cyan-500/20 pt-8 md:pt-12 w-full max-w-4xl">
+        {/* Stats - Grid alterado para manter as 3 colunas em todas as resoluções */}
+        <div className="mt-12 md:mt-auto grid grid-cols-3 gap-y-10 md:gap-y-12 gap-x-2 sm:gap-x-4 md:gap-16 border-t border-cyan-500/20 pt-8 md:pt-12 w-full max-w-4xl">
           {[
             { n: 35, s: "+", l: "ANOS DE KNOW-HOW", d: 0.5 },
             { n: 100, s: "%", l: "PUREZA GARANTIDA", d: 0.6 },
@@ -327,12 +327,12 @@ export default function HeroSection() {
           ].map((s, i) => (
             <div
               key={i}
-              className={`stat-item mobile-reveal flex flex-col items-center text-center ${i === 2 ? "col-span-2 md:col-span-1" : ""}`}
+              className="stat-item mobile-reveal flex flex-col items-center text-center"
             >
-              <div className="text-4xl md:text-5xl lg:text-6xl font-black text-white drop-shadow-[0_0_15px_rgba(255,255,255,0.1)]">
+              <div className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white drop-shadow-[0_0_15px_rgba(255,255,255,0.1)]">
                 <AnimatedCounter end={s.n} suffix={s.s} delay={s.d} />
               </div>
-              <div className="text-[10px] md:text-[11px] mt-2 md:mt-3 tracking-[0.25em] md:tracking-[0.4em] text-cyan-400 font-bold uppercase transition-colors duration-300">
+              <div className="text-[8px] sm:text-[10px] md:text-[11px] mt-2 md:mt-3 tracking-wider sm:tracking-[0.25em] md:tracking-[0.4em] text-cyan-400 font-bold uppercase transition-colors duration-300">
                 {s.l}
               </div>
             </div>
@@ -340,10 +340,10 @@ export default function HeroSection() {
         </div>
       </div>
 
-      {/* Scroll Indicator: Linkado para scrollToAbout */}
+      {/* Scroll Indicator: Adicionado hidden md:block para esconder APENAS no mobile */}
       <div
         onClick={scrollToAbout}
-        className="scroll-indicator mobile-reveal absolute bottom-6 md:bottom-10 left-1/2 -translate-x-1/2 p-3 cursor-pointer group z-[20] transition-opacity hover:opacity-100 opacity-60"
+        className="scroll-indicator mobile-reveal absolute bottom-6 md:bottom-10 left-1/2 -translate-x-1/2 p-3 cursor-pointer group z-[20] transition-opacity hover:opacity-100 opacity-60 hidden md:block"
         aria-label="Rolar para a seção Sobre"
       >
         <div className="w-5 h-9 md:w-6 md:h-10 border-2 border-cyan-500/50 rounded-full flex justify-center pt-2 group-hover:border-cyan-400 transition-colors shadow-[0_0_15px_rgba(6,182,212,0.2)]">

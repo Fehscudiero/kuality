@@ -113,7 +113,7 @@ export default function Contact() {
     <section
       ref={sectionRef}
       id="contato"
-      className="py-24 lg:py-36 bg-slate-50 relative overflow-hidden"
+      className="py-24 lg:py-12 bg-slate-50 relative overflow-hidden"
       style={{ isolation: "isolate" }}
     >
       <SectionGeometry />

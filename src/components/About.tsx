@@ -85,7 +85,7 @@ export default function About() {
     <section
       ref={sectionRef}
       id="sobre"
-      className="relative py-20 md:py-32 lg:py-40 bg-white overflow-hidden border-t border-slate-100"
+      className="relative py-20 md:py-32 lg:py-12 bg-white overflow-hidden border-t border-slate-100"
       style={{ isolation: "isolate" }}
     >
       <SectionGeometry />

@@ -50,7 +50,7 @@ function SectionGeometry() {
     >
       <div
         ref={shapeRef}
-        className="absolute top-[-10%] right-0 w-[140%] h-[120%] bg-cyan-100"
+        className="absolute top-[-10%] right-0 w-[160%] h-[160%] bg-cyan-100"
         style={{
           clipPath: "polygon(45% 0, 100% 0, 100% 100%, 75% 100%)",
           transform: "rotate(1deg)",
@@ -99,7 +99,8 @@ export default function Products() {
   return (
     <section
       id="produtos"
-      className="py-16 sm:py-24 md:py-40 bg-white relative overflow-hidden"
+      // O PADDING INFERIOR FOI AUMENTADO AQUI (pb-32, pb-40, pb-32)
+      className="pt-16 pb-32 sm:pt-24 sm:pb-40 md:pt-4 md:pb-16 bg-white relative overflow-hidden"
       style={{ isolation: "isolate" }}
     >
       <SectionGeometry />
@@ -205,12 +206,10 @@ export default function Products() {
                         <Zap className="w-2.5 h-2.5 sm:w-3.5 sm:h-3.5 fill-current" />{" "}
                         Especificações
                       </h4>
-                      {/* ESPAÇAMENTO AUMENTADO NO MOBILE: space-y-3 no lugar de space-y-1 */}
                       <ul className="space-y-3 sm:space-y-3">
                         {selectedProduct.features.map((f, i) => (
                           <li
                             key={i}
-                            /* ESPAÇAMENTO AUMENTADO NO MOBILE: gap-2.5 no lugar de gap-1 */
                             className="flex items-start gap-2.5 sm:gap-3"
                           >
                             <ChevronRight className="w-3 h-3 sm:w-4 sm:h-4 text-cyan-600 mt-[2px] flex-shrink-0" />
