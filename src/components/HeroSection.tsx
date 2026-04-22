@@ -20,9 +20,9 @@ function AnimatedCounter({
   useGSAP(() => {
     gsap.to(countRef.current, {
       value: end,
-      duration: 1.5, // Reduzido de 3 para 1.5 para maior fluidez
+      duration: 1.5,
       delay,
-      ease: "power3.out", // Trocado de expo.out para power3.out para evitar a lentidão no fim da animação
+      ease: "power3.out",
       onUpdate: () => setDisplayValue(Math.floor(countRef.current.value)),
     });
   }, [end, delay]);
@@ -51,10 +51,12 @@ const ParticleCanvas = ({ scrollProgress }: { scrollProgress: number }) => {
       particles.current = Array.from({ length: 80 }, () => ({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
-        size: Math.random() * 1.5 + 0.5,
+        // EDIT CIRÚRGICO: Partículas levemente maiores (1.0 a 3.0)
+        size: Math.random() * 2.0 + 1.0,
         speedX: (Math.random() - 0.5) * 1,
         speedY: (Math.random() - 0.5) * 1,
-        alpha: Math.random() * 0.5 + 0.1,
+        // EDIT CIRÚRGICO: Mais opacas e visíveis (0.4 a 0.9)
+        alpha: Math.random() * 0.5 + 0.4,
       }));
     };
 
@@ -70,7 +72,8 @@ const ParticleCanvas = ({ scrollProgress }: { scrollProgress: number }) => {
         if (p.y > canvas.height) p.y = 0;
         if (p.y < 0) p.y = canvas.height;
 
-        ctx.fillStyle = `rgba(255, 51, 51, ${p.alpha})`;
+        // EDIT CIRÚRGICO: Vermelho intenso puro ao invés de cyan
+        ctx.fillStyle = `rgba(255, 20, 20, ${p.alpha})`;
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
         ctx.fill();
@@ -106,7 +109,6 @@ export default function HeroSection() {
       let mm = gsap.matchMedia();
 
       mm.add("(min-width: 768px)", () => {
-        // --- ANIMAÇÃO DESKTOP: Premium 3D & Elastic Refinada ---
         const tl = gsap.timeline({ defaults: { ease: "power4.out" } });
 
         tl.from(".tag-item", {
@@ -172,7 +174,6 @@ export default function HeroSection() {
       });
 
       mm.add("(max-width: 767px)", () => {
-        // --- ANIMAÇÃO MOBILE: Slide Up Limpo e Elegante ---
         const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
 
         tl.from(".mobile-reveal", {
@@ -204,7 +205,6 @@ export default function HeroSection() {
     { scope: sectionRef },
   );
 
-  // Mantido para o botão principal
   const scrollToProducts = () => {
     const el = document.getElementById("produtos");
     if (el) {
@@ -214,9 +214,8 @@ export default function HeroSection() {
     }
   };
 
-  // Nova âncora focada no componente About/Sobre
   const scrollToAbout = () => {
-    const el = document.getElementById("sobre"); // Certifique-se de que a section Sobre tem esse ID
+    const el = document.getElementById("sobre");
     if (el) {
       const yOffset = -50;
       const y = el.getBoundingClientRect().top + window.pageYOffset + yOffset;
@@ -260,18 +259,11 @@ export default function HeroSection() {
 
       <div className="absolute inset-0 z-[4] opacity-[0.015] pointer-events-none bg-noise" />
 
-      {/* O AJUSTE ESTÁ AQUI:
-        Diminuímos o pt (padding top) de 28 para 20 no mobile e 40 para 28 no desktop.
-        Aumentamos o pb (padding bottom) de 20 para 32 no mobile e 28 para 40 no desktop.
-        Isso "empurra" o bloco inteiro para cima sem usar margins negativas, mantendo o flex-box intacto.
-      */}
       <div
         ref={contentRef}
         className="relative z-[10] flex flex-col items-center justify-between px-6 max-w-6xl w-full h-full pt-20 pb-32 md:pt-28 md:pb-40"
       >
-        {/* Bloco Central */}
         <div className="flex flex-col items-center justify-center w-full">
-          {/* Tags */}
           <div className="flex flex-wrap items-center justify-center gap-2 mb-8 md:mb-12">
             {[
               "Tratamento de Superfície",
@@ -293,7 +285,6 @@ export default function HeroSection() {
             ))}
           </div>
 
-          {/* Headline */}
           <h1 className="headline mobile-reveal text-[38px] leading-[1.05] sm:text-6xl md:text-[90px] lg:text-[80px] font-black text-white tracking-normal uppercase text-center">
             Quem entende,
             <br />
@@ -307,7 +298,6 @@ export default function HeroSection() {
             indústrias de diversos portes.
           </p>
 
-          {/* CTA - Botão Principal -> Vai para os Produtos */}
           <div className="cta-button mobile-reveal mt-10 md:mt-14 w-full sm:w-auto">
             <button
               onClick={scrollToProducts}
@@ -318,7 +308,6 @@ export default function HeroSection() {
           </div>
         </div>
 
-        {/* Stats - Grid alterado para manter as 3 colunas em todas as resoluções */}
         <div className="mt-12 md:mt-auto grid grid-cols-3 gap-y-10 md:gap-y-12 gap-x-2 sm:gap-x-4 md:gap-16 border-t border-cyan-500/20 pt-8 md:pt-12 w-full max-w-4xl">
           {[
             { n: 35, s: "+", l: "ANOS DE KNOW-HOW", d: 0.5 },
@@ -340,7 +329,6 @@ export default function HeroSection() {
         </div>
       </div>
 
-      {/* Scroll Indicator: Adicionado hidden md:block para esconder APENAS no mobile */}
       <div
         onClick={scrollToAbout}
         className="scroll-indicator mobile-reveal absolute bottom-6 md:bottom-10 left-1/2 -translate-x-1/2 p-3 cursor-pointer group z-[20] transition-opacity hover:opacity-100 opacity-60 hidden md:block"
