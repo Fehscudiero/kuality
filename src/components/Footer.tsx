@@ -4,7 +4,7 @@ import { Phone, Mail, ChevronUp, MapPin, Globe } from "lucide-react";
 
 interface FooterProps {
   scrollToSection: (id: string) => void;
-}
+} 
 
 export default function Footer({ scrollToSection }: FooterProps) {
   const [isVisible, setIsVisible] = useState(false);

@@ -19,10 +19,13 @@
       content="produtos químicos industriais, soluções químicas, Kuality Química, indústria química São Paulo, reagentes químicos"
     />
     <meta name="author" content="Kuality Química" />
-    <meta name="robots" content="index, follow" />
+    
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
     <link rel="canonical" href="https://kuality.com.br/" />
 
+    <meta property="og:locale" content="pt_BR" />
     <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Kuality Química" />
     <meta property="og:url" content="https://kuality.com.br/" />
     <meta
       property="og:title"
@@ -32,28 +35,33 @@
       property="og:description"
       content="Alta tecnologia molecular para soluções de máxima performance industrial. Pureza garantida e 35 anos de know-how."
     />
-    <meta
-      property="og:image"
-      content="https://kuality.com.br/assets/og-image.webp"
-    />
+    <meta property="og:image" content="https://kuality.com.br/assets/logo.webp" />
+    <meta property="og:image:secure_url" content="https://kuality.com.br/assets/logo.webp" />
+    <meta property="og:image:type" content="image/webp" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Logotipo Kuality Química - Soluções Químicas Industriais" />
 
-    <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:url" content="https://kuality.com.br/" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://kuality.com.br/" />
     <meta
-      property="twitter:title"
+      name="twitter:title"
       content="Kuality Química | Soluções Químicas de Alta Performance"
     />
     <meta
-      property="twitter:description"
+      name="twitter:description"
       content="Especializada em soluções químicas industriais com foco em pureza e eficiência."
     />
-    <meta
-      property="twitter:image"
-      content="https://kuality.com.br/assets/og-image.webp"
-    />
+    <meta name="twitter:image" content="https://kuality.com.br/assets/logo.webp" />
+    <meta name="twitter:image:alt" content="Logotipo Kuality Química" />
 
-    <link rel="icon" type="image/svg+xml" href="/assets/logo.webp" />
-    <link rel="apple-touch-icon" href="/assets/logo.webp" />
+    <meta name="geo.region" content="BR-SP" />
+    <meta name="geo.placename" content="São Paulo" />
+    <meta name="geo.position" content="-23.5505;-46.6333" />
+    <meta name="ICBM" content="-23.5505, -46.6333" />
+
+    <link rel="icon" type="image/webp" href="/assets/icone.webp" />
+    <link rel="apple-touch-icon" href="/assets/icone.webp" />
     <meta name="theme-color" content="#0D1117" />
 
     <script type="application/ld+json">
@@ -65,6 +73,7 @@
         "@id": "https://kuality.com.br",
         "url": "https://kuality.com.br",
         "telephone": "+5511986370023",
+        "priceRange": "$$",
         "address": {
           "@type": "PostalAddress",
           "streetAddress": "Rua Jornal O Saltense",
@@ -72,6 +81,11 @@
           "addressRegion": "SP",
           "postalCode": "03314-000",
           "addressCountry": "BR"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": -23.5505,
+          "longitude": -46.6333
         },
         "description": "Especialista em desenvolvimento de soluções químicas para indústrias de diversos portes."
       }
@@ -123,11 +137,39 @@
 
     <script type="module" src="/src/main.tsx"></script>
     <script>
+      // Script do Loader Original
       window.addEventListener("load", () => {
         setTimeout(() => {
           const loader = document.getElementById("loader");
           if (loader) loader.classList.add("hidden");
         }, 500);
+      });
+
+      // NOVA MICRO-INTERAÇÃO: Efeito Alternado Seguro
+      const originalTitle = document.title;
+      let titleInterval;
+      
+      // Frases de impacto técnico e industrial (sem emojis)
+      const alertFrames = [
+        "[ PROTOCOLO EM ESPERA ]",
+        "Retorne para a Kuality",
+      ];
+      let frameIndex = 0;
+
+      document.addEventListener("visibilitychange", () => {
+        if (document.hidden) {
+          // O usuário saiu: Aplica a primeira frase e inicia o loop de 1 segundo
+          document.title = alertFrames[0];
+          titleInterval = setInterval(() => {
+            frameIndex = (frameIndex + 1) % alertFrames.length;
+            document.title = alertFrames[frameIndex];
+          }, 1000);
+        } else {
+          // O usuário voltou: Mata o processo instantaneamente e zera as variáveis
+          clearInterval(titleInterval);
+          document.title = originalTitle;
+          frameIndex = 0;
+        }
       });
     </script>
   </body>
