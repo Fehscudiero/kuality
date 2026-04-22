@@ -70,7 +70,7 @@ const ParticleCanvas = ({ scrollProgress }: { scrollProgress: number }) => {
         if (p.y > canvas.height) p.y = 0;
         if (p.y < 0) p.y = canvas.height;
 
-        ctx.fillStyle = `rgba(0, 240, 255, ${p.alpha})`;
+        ctx.fillStyle = `rgba(255, 51, 51, ${p.alpha})`;
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
         ctx.fill();

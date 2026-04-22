@@ -2,7 +2,6 @@ import { useState, useEffect, useRef } from "react";
 import {
   Send,
   CheckCircle,
-  Loader2,
   Phone,
   Mail,
   MapPin,
@@ -11,13 +10,13 @@ import {
   RefreshCw,
   FileSearch,
   X,
+  FlaskConical,
 } from "lucide-react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import { companyInfo } from "../data/content";
 
-// TRAVA DE SEGURANÇA PARA O DEPLOY
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
 }
@@ -82,7 +81,7 @@ function SectionGeometry() {
 
 export default function Contact() {
   const sectionRef = useRef<HTMLElement>(null);
-
+  
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -90,7 +89,7 @@ export default function Contact() {
     company: "",
     message: "",
   });
-
+  
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<"idle" | "success">("idle");
@@ -111,12 +110,11 @@ export default function Contact() {
   const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     let val = e.target.value.replace(/\D/g, "");
     if (val.length > 11) val = val.slice(0, 11);
-
+    
     let formatted = val;
     if (val.length > 2) formatted = `(${val.slice(0, 2)}) ${val.slice(2)}`;
-    if (val.length > 7)
-      formatted = `(${val.slice(0, 2)}) ${val.slice(2, 7)}-${val.slice(7)}`;
-
+    if (val.length > 7) formatted = `(${val.slice(0, 2)}) ${val.slice(2, 7)}-${val.slice(7)}`;
+    
     setFormData({ ...formData, phone: formatted });
     if (errors.phone) setErrors((prev) => ({ ...prev, phone: "" }));
   };
@@ -146,16 +144,16 @@ export default function Contact() {
     if (!validateForm()) return;
 
     setIsSubmitting(true);
-
+    
     const now = new Date();
-    const day = String(now.getDate()).padStart(2, "0");
-    const month = String(now.getMonth() + 1).padStart(2, "0");
-    const hours = String(now.getHours()).padStart(2, "0");
-    const minutes = String(now.getMinutes()).padStart(2, "0");
+    const day = String(now.getDate()).padStart(2, '0');
+    const month = String(now.getMonth() + 1).padStart(2, '0');
+    const hours = String(now.getHours()).padStart(2, '0');
+    const minutes = String(now.getMinutes()).padStart(2, '0');
     const generatedProtocol = `${day}/${month} - ${hours}:${minutes} - 2026`;
-
-    await new Promise((resolve) => setTimeout(resolve, 2000));
-
+    
+    await new Promise((resolve) => setTimeout(resolve, 2500)); 
+    
     setProtocolNumber(generatedProtocol);
     setIsSubmitting(false);
     setSubmitStatus("success");
@@ -176,80 +174,108 @@ export default function Contact() {
     >
       <SectionGeometry />
 
+      <style>{`
+        @keyframes shimmer-fast {
+          0% { transform: translateX(-150%) skewX(-15deg); }
+          100% { transform: translateX(250%) skewX(-15deg); }
+        }
+        .animate-shimmer-fast {
+          animation: shimmer-fast 1.5s infinite linear;
+        }
+        @keyframes float-smooth {
+          0%, 100% { transform: translateY(0px); }
+          50% { transform: translateY(-10px); }
+        }
+        .animate-float-smooth {
+          animation: float-smooth 3s ease-in-out infinite;
+        }
+        .border-glow-modern {
+          position: relative;
+          background: #020617; /* Slate-950 escuro para o texto branco sobressair */
+          border-radius: 2.5rem;
+        }
+        .border-glow-modern::before {
+          content: "";
+          position: absolute;
+          inset: -3px; 
+          border-radius: 2.6rem; 
+          background: linear-gradient(135deg, #06b6d4 0%, #020617 40%, #06b6d4 100%);
+          background-size: 200% 200%;
+          animation: gradient-shift 4s ease infinite;
+          z-index: -1;
+        }
+        @keyframes gradient-shift {
+          0% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
+          100% { background-position: 0% 50%; }
+        }
+      `}</style>
+
       <div className="relative z-10 max-w-6xl mx-auto px-6">
         <div
           className={`relative bg-white rounded-[2.5rem] border-2 border-slate-200 shadow-[0_50px_100px_-20px_rgba(0,0,0,0.12)] transition-all duration-1000 ease-out overflow-hidden ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-16"
           }`}
         >
-          <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-cyan-600 via-cyan-400 to-slate-900"></div>
+          <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-cyan-600 via-cyan-400 to-slate-900 z-10"></div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-12">
-            <div className="lg:col-span-7 p-8 md:p-14 border-r border-slate-100 flex flex-col min-h-[650px]">
-              {/* MODAL / VIEW DE SUCESSO */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 relative">
+            
+            <div className="lg:col-span-7 p-8 md:p-14 border-r border-slate-100 flex flex-col min-h-[650px] relative">
+              
+              {/* MODAL / VIEW DE SUCESSO PREMIUM - AGORA DARK COM TEXTO BRANCO */}
               {submitStatus === "success" && (
-                <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 lg:absolute lg:inset-0 lg:z-50 lg:bg-white animate-in fade-in duration-300">
-                  {/* Backdrop para mobile */}
-                  <div
-                    className="absolute inset-0 bg-slate-950/40 backdrop-blur-sm lg:hidden"
-                    onClick={handleReset}
-                  />
-
-                  <div className="relative w-full max-w-md bg-white rounded-[2.5rem] p-8 md:p-12 text-center space-y-8 shadow-2xl lg:shadow-none border-2 border-slate-100 lg:border-none animate-in zoom-in duration-500">
-                    {/* Botão de Fechar (X) */}
-                    <button
+                <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 lg:absolute lg:inset-0 lg:z-50 lg:bg-white/60 lg:backdrop-blur-md animate-in fade-in duration-500">
+                  <div className="absolute inset-0 bg-slate-950/70 backdrop-blur-md lg:hidden" onClick={handleReset} />
+                  
+                  <div className="border-glow-modern w-full max-w-md p-8 md:p-12 text-center space-y-8 shadow-[0_30px_80px_rgba(6,182,212,0.2)] animate-in zoom-in-95 duration-500 z-10">
+                    
+                    <button 
                       onClick={handleReset}
-                      className="absolute top-6 right-6 p-2 text-slate-400 hover:text-cyan-600 transition-colors"
+                      className="absolute top-6 right-6 p-2 text-slate-500 hover:text-white hover:rotate-90 transition-all duration-300 z-20"
                       aria-label="Fechar"
                     >
                       <X className="w-6 h-6" />
                     </button>
 
-                    <div className="relative mx-auto w-24">
-                      <div className="absolute inset-0 bg-cyan-500/20 blur-3xl rounded-full animate-pulse"></div>
-                      <div className="relative w-24 h-24 bg-cyan-50 rounded-3xl border-2 border-cyan-500 flex items-center justify-center shadow-[0_0_30px_rgba(6,182,212,0.3)]">
-                        <CheckCircle className="w-12 h-12 text-cyan-600" />
+                    <div className="relative mx-auto w-24 animate-float-smooth z-10">
+                      <div className="absolute inset-0 bg-cyan-500/20 blur-2xl rounded-full animate-pulse"></div>
+                      <div className="relative w-24 h-24 bg-slate-900 rounded-3xl border border-cyan-500/50 flex items-center justify-center shadow-[0_10px_30px_rgba(6,182,212,0.3)]">
+                        <CheckCircle className="w-12 h-12 text-cyan-400" />
                       </div>
                     </div>
 
                     <div className="space-y-4">
-                      <h3 className="text-3xl md:text-4xl font-black text-slate-900 uppercase italic tracking-tighter leading-none">
-                        Demanda <br />{" "}
-                        <span className="text-cyan-600">Protocolada.</span>
+                      {/* TÍTULO BRANCO AQUI */}
+                      <h3 className="text-3xl md:text-4xl font-black text-white uppercase italic tracking-tighter leading-none">
+                        Demanda <br /> <span className="text-cyan-400 drop-shadow-sm">Protocolada.</span>
                       </h3>
-                      <p className="text-slate-500 text-[10px] font-black tracking-widest uppercase">
-                        Fila de processamento:{" "}
-                        <span className="text-slate-900">Prioritária</span>
+                      <p className="text-slate-400 text-[10px] font-black tracking-widest uppercase">
+                        Fila de processamento: <span className="text-cyan-400 bg-cyan-950/50 px-2 py-1 rounded-md ml-1 border border-cyan-900/50">Prioritária</span>
                       </p>
                     </div>
 
-                    <div className="w-full bg-slate-50 border-2 border-slate-100 rounded-2xl p-6 space-y-4">
-                      <div className="flex justify-between items-center border-b border-slate-200 pb-4">
+                    <div className="w-full bg-slate-900/50 border border-slate-800 rounded-2xl p-6 space-y-4 shadow-inner">
+                      <div className="flex justify-between items-center border-b border-slate-800 pb-4">
                         <div className="flex items-center gap-2">
-                          <FileSearch className="w-4 h-4 text-slate-400" />
-                          <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">
-                            Data / Hora
-                          </span>
+                          <FileSearch className="w-4 h-4 text-cyan-400" />
+                          <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Data / Hora</span>
                         </div>
-                        <span className="text-xs font-black text-slate-900 font-mono tracking-tighter">
+                        <span className="text-[11px] font-black text-white font-mono tracking-tighter bg-slate-800 px-2 py-1 rounded border border-slate-700 shadow-sm">
                           {protocolNumber}
                         </span>
                       </div>
-                      <p className="text-xs text-slate-600 leading-relaxed font-medium">
-                        Obrigado pelo contato. Um Engenheiro de Performance da{" "}
-                        <span className="text-cyan-600 font-bold">
-                          Kuality Química
-                        </span>{" "}
-                        analisará suas especificações técnicas e retornará em
-                        até 24h úteis.
+                      <p className="text-xs text-slate-400 leading-relaxed font-medium">
+                        Obrigado pelo contato. Um Engenheiro de Performance da <span className="text-cyan-400 font-bold">Kuality Química</span> analisará suas especificações técnicas e retornará em até 24h úteis.
                       </p>
                     </div>
 
+                    {/* BOTÃO DO MODAL CENTRALIZADO COM mx-auto */}
                     <button
                       onClick={handleReset}
-                      className="flex items-center justify-center gap-3 w-full text-[10px] font-black text-slate-400 hover:text-cyan-600 transition-colors uppercase tracking-[0.2em]"
+                      className="mx-auto flex items-center justify-center gap-3 w-max text-[10px] font-black text-slate-400 hover:text-cyan-400 transition-colors uppercase tracking-[0.2em] group"
                     >
-                      <RefreshCw className="w-3.5 h-3.5" />
+                      <RefreshCw className="w-3.5 h-3.5 group-hover:-rotate-180 transition-transform duration-500" />
                       Iniciar novo atendimento
                     </button>
                   </div>
@@ -259,7 +285,7 @@ export default function Contact() {
               {/* FORMULÁRIO PADRÃO */}
               <header className="mb-10">
                 <div className="flex items-center gap-2 text-cyan-600 mb-4">
-                  <Zap className="w-5 h-5 fill-current" />
+                  <Zap className="w-5 h-5 fill-current animate-pulse" />
                   <span className="text-[10px] font-black uppercase tracking-[0.3em]">
                     Priority Request
                   </span>
@@ -274,11 +300,7 @@ export default function Contact() {
                 </p>
               </header>
 
-              <form
-                onSubmit={handleSubmit}
-                className="space-y-6 md:space-y-8"
-                noValidate
-              >
+              <form onSubmit={handleSubmit} className="space-y-6 md:space-y-8" noValidate>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
                   <div className="group space-y-2">
                     <label className="text-[11px] font-black text-slate-700 uppercase tracking-widest ml-1 group-focus-within:text-cyan-600 transition-colors">
@@ -289,19 +311,14 @@ export default function Contact() {
                       value={formData.name}
                       onChange={(e) => {
                         setFormData({ ...formData, name: e.target.value });
-                        if (errors.name)
-                          setErrors((prev) => ({ ...prev, name: "" }));
+                        if (errors.name) setErrors((prev) => ({ ...prev, name: "" }));
                       }}
                       className={`w-full h-14 px-0 bg-transparent border-b-2 ${errors.name ? "border-red-400" : "border-slate-100"} focus:border-cyan-600 text-slate-900 font-bold transition-all outline-none text-sm`}
                       placeholder="Nome Completo"
                     />
-                    {errors.name && (
-                      <p className="text-[10px] text-red-500 font-bold uppercase tracking-wider">
-                        {errors.name}
-                      </p>
-                    )}
+                    {errors.name && <p className="text-[10px] text-red-500 font-bold uppercase tracking-wider">{errors.name}</p>}
                   </div>
-
+                  
                   <div className="group space-y-2">
                     <label className="text-[11px] font-black text-slate-700 uppercase tracking-widest ml-1 group-focus-within:text-cyan-600 transition-colors">
                       E-mail Corporativo *
@@ -311,17 +328,12 @@ export default function Contact() {
                       value={formData.email}
                       onChange={(e) => {
                         setFormData({ ...formData, email: e.target.value });
-                        if (errors.email)
-                          setErrors((prev) => ({ ...prev, email: "" }));
+                        if (errors.email) setErrors((prev) => ({ ...prev, email: "" }));
                       }}
                       className={`w-full h-14 px-0 bg-transparent border-b-2 ${errors.email ? "border-red-400" : "border-slate-100"} focus:border-cyan-600 text-slate-900 font-bold transition-all outline-none text-sm`}
                       placeholder="email@corporativo.com.br"
                     />
-                    {errors.email && (
-                      <p className="text-[10px] text-red-500 font-bold uppercase tracking-wider">
-                        {errors.email}
-                      </p>
-                    )}
+                    {errors.email && <p className="text-[10px] text-red-500 font-bold uppercase tracking-wider">{errors.email}</p>}
                   </div>
                 </div>
 
@@ -337,13 +349,9 @@ export default function Contact() {
                       className={`w-full h-14 px-0 bg-transparent border-b-2 ${errors.phone ? "border-red-400" : "border-slate-100"} focus:border-cyan-600 text-slate-900 font-bold transition-all outline-none text-sm`}
                       placeholder="(00) 00000-0000"
                     />
-                    {errors.phone && (
-                      <p className="text-[10px] text-red-500 font-bold uppercase tracking-wider">
-                        {errors.phone}
-                      </p>
-                    )}
+                    {errors.phone && <p className="text-[10px] text-red-500 font-bold uppercase tracking-wider">{errors.phone}</p>}
                   </div>
-
+                  
                   <div className="group space-y-2">
                     <label className="text-[11px] font-black text-slate-700 uppercase tracking-widest ml-1 group-focus-within:text-cyan-600 transition-colors">
                       Empresa (Opcional)
@@ -351,9 +359,7 @@ export default function Contact() {
                     <input
                       type="text"
                       value={formData.company}
-                      onChange={(e) =>
-                        setFormData({ ...formData, company: e.target.value })
-                      }
+                      onChange={(e) => setFormData({ ...formData, company: e.target.value })}
                       className="w-full h-14 px-0 bg-transparent border-b-2 border-slate-100 focus:border-cyan-600 text-slate-900 font-bold transition-all outline-none text-sm"
                       placeholder="Razão Social ou Fantasia"
                     />
@@ -369,32 +375,43 @@ export default function Contact() {
                     value={formData.message}
                     onChange={(e) => {
                       setFormData({ ...formData, message: e.target.value });
-                      if (errors.message)
-                        setErrors((prev) => ({ ...prev, message: "" }));
+                      if (errors.message) setErrors((prev) => ({ ...prev, message: "" }));
                     }}
                     className={`w-full p-6 rounded-2xl bg-slate-50 border-2 ${errors.message ? "border-red-400" : "border-transparent"} focus:border-cyan-600 focus:bg-white text-slate-900 font-medium transition-all outline-none resize-none`}
                     placeholder="Descreva a demanda química ou necessidades de sua linha..."
                   />
-                  {errors.message && (
-                    <p className="text-[10px] text-red-500 font-bold uppercase tracking-wider pl-1">
-                      {errors.message}
-                    </p>
-                  )}
+                  {errors.message && <p className="text-[10px] text-red-500 font-bold uppercase tracking-wider pl-1">{errors.message}</p>}
                 </div>
-
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="w-full md:w-max px-16 h-16 rounded-2xl bg-slate-900 text-white font-black italic uppercase text-xs tracking-[0.2em] hover:bg-cyan-600 active:scale-95 transition-all flex items-center justify-center gap-4"
-                >
-                  {isSubmitting ? (
-                    <Loader2 className="w-6 h-6 animate-spin" />
-                  ) : (
-                    <>
-                      <Send className="w-4 h-4" /> Enviar Mensagem
-                    </>
-                  )}
-                </button>
+                
+                {/* CONTAINER FLEX PARA CENTRALIZAR O BOTÃO PRINCIPAL */}
+                <div className="flex justify-center w-full pt-4">
+                  <button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className={`relative overflow-hidden w-full md:w-max px-16 h-16 rounded-2xl text-white font-black italic uppercase text-xs tracking-[0.2em] transition-all duration-300 flex items-center justify-center gap-4 group ${
+                      isSubmitting 
+                        ? "bg-slate-950 pointer-events-none shadow-inner shadow-cyan-900/50" 
+                        : "bg-slate-900 hover:bg-cyan-600 active:scale-95 shadow-[0_10px_20px_-10px_rgba(0,0,0,0.5)]"
+                    }`}
+                  >
+                    {isSubmitting && (
+                      <>
+                        <div className="absolute inset-0 bg-slate-900">
+                          <div className="absolute inset-y-0 left-0 w-1/2 bg-gradient-to-r from-transparent via-cyan-500/40 to-transparent blur-sm animate-shimmer-fast"></div>
+                        </div>
+                        <FlaskConical className="w-5 h-5 text-cyan-400 relative z-10 animate-bounce drop-shadow-[0_0_8px_rgba(6,182,212,0.8)]" />
+                        <span className="relative z-10 text-cyan-400 drop-shadow-sm">Sintetizando...</span>
+                      </>
+                    )}
+                    
+                    {!isSubmitting && (
+                      <>
+                        <Send className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" /> 
+                        Enviar Mensagem
+                      </>
+                    )}
+                  </button>
+                </div>
               </form>
             </div>
 

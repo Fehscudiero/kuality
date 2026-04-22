@@ -73,7 +73,7 @@ export default function SocialProof() {
   return (
     <section className="bg-white overflow-hidden w-full border-b border-slate-100">
       {/* Título com espaçamento leve para não grudar no componente de cima */}
-      <div className="text-center pt-10 pb-6">
+      <div className="text-center pt-6 pb-4">
         <p className="text-[10px] md:text-sm uppercase tracking-[0.4em] text-slate-700 font-black">
           Empresas que confiam na Kuality
         </p>
@@ -82,7 +82,7 @@ export default function SocialProof() {
       {/* Container de Ponta a Ponta (w-full) SEM paddings laterais */}
       <div
         ref={containerRef}
-        className="relative w-full overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_5%,black_95%,transparent)] mb-10"
+        className="relative w-full overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_5%,black_95%,transparent)] mb-6"
       >
         <div
           ref={marqueeRef}
@@ -96,7 +96,7 @@ export default function SocialProof() {
               <img
                 src={partnerLogos[brand] || "/assets/placeholder.webp"}
                 alt={`Parceiro Kuality - ${brand}`}
-                className="h-16 sm:h-20 md:h-24 lg:h-28 w-auto object-contain"
+                className="h-10 sm:h-12 md:h-14 lg:h-16 w-auto object-contain"
                 loading="lazy"
               />
             </div>

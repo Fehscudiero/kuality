@@ -118,10 +118,10 @@ export default function Quality() {
             </h2>
           </div>
 
-          <div className="flex items-center gap-4 bg-white p-5 rounded-2xl border-2 border-[#020B29] shadow-xl self-center md:self-end">
-            <Award className="w-8 h-8 text-[#020B29]" />
+          <div className="flex items-center gap-4 bg-white p-5 rounded-2xl border-2 border-[#450a0a] shadow-xl self-center md:self-end">
+            <Award className="w-8 h-8 text-[#450a0a]" />
             <div className="flex flex-col">
-              <p className="text-[#0891B2] font-black italic text-[11px] leading-tight uppercase">
+              <p className="text-[#cc0000] font-black italic text-[11px] leading-tight uppercase">
                 Certificação de Lote
               </p>
               <p className="text-slate-500 font-bold text-[9px] uppercase tracking-widest">

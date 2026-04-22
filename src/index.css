@@ -32,7 +32,7 @@
   }
 
   ::selection {
-    background-color: #00afff;
+    background-color: #ff3333;
     color: #ffffff;
   }
 
@@ -45,12 +45,12 @@
   }
 
   ::-webkit-scrollbar-thumb {
-    background: linear-gradient(180deg, #00afff, #0080FF);
+    background: linear-gradient(180deg, #ff3333, #cc0000);
     border-radius: 4px;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    background: linear-gradient(180deg, #33bbff, #00afff);
+    background: linear-gradient(180deg, #ff5555, #ff3333);
   }
 }
 
@@ -59,7 +59,7 @@
     background: rgba(22, 27, 34, 0.7);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(0, 240, 255, 0.1);
+    border: 1px solid rgba(255, 51, 51, 0.1);
   }
 
   .glass-card {
@@ -70,45 +70,45 @@
 
   .light .glass-card {
     background: #ffffff;
-    border: 1px solid rgba(0, 175, 255, 0.2);
+    border: 1px solid rgba(255, 51, 51, 0.2);
     backdrop-filter: blur(8px);
   }
 
   .text-gradient {
-    background: linear-gradient(90deg, #00F0FF, #00FF66);
+    background: linear-gradient(90deg, #FF3333, #FF6666);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
 
   .btn-primary {
-    background: linear-gradient(135deg, #00afff 0%, #008fcc 100%);
+    background: linear-gradient(135deg, #ff3333 0%, #cc0000 100%);
     color: #ffffff;
     font-weight: 600;
     padding: 14px 32px;
     border-radius: 12px;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 20px rgba(0, 175, 255, 0.3);
+    box-shadow: 0 4px 20px rgba(255, 51, 51, 0.3);
   }
 
   .btn-primary:hover {
     transform: translateY(-2px) scale(1.02);
-    box-shadow: 0 8px 30px rgba(0, 175, 255, 0.5);
+    box-shadow: 0 8px 30px rgba(255, 51, 51, 0.5);
   }
 
   .btn-secondary {
     background: transparent;
-    color: #00afff;
+    color: #ff3333;
     font-weight: 600;
     padding: 14px 32px;
     border-radius: 12px;
-    border: 1px solid rgba(0, 175, 255, 0.5);
+    border: 1px solid rgba(255, 51, 51, 0.5);
     transition: all 0.3s ease;
   }
 
   .btn-secondary:hover {
-    background: rgba(0, 175, 255, 0.1);
-    border-color: #00afff;
+    background: rgba(255, 51, 51, 0.1);
+    border-color: #ff3333;
   }
 
   .section-padding {
@@ -123,13 +123,13 @@
 
   .bg-grid {
     background-image: 
-      linear-gradient(rgba(0, 175, 255, 0.03) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(0, 175, 255, 0.03) 1px, transparent 1px);
+      linear-gradient(rgba(255, 51, 51, 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 51, 51, 0.03) 1px, transparent 1px);
     background-size: 60px 60px;
   }
 
   .bg-dots {
-    background-image: radial-gradient(rgba(0, 175, 255, 0.15) 1px, transparent 1px);
+    background-image: radial-gradient(rgba(255, 51, 51, 0.15) 1px, transparent 1px);
     background-size: 24px 24px;
   }
 

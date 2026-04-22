@@ -93,7 +93,7 @@ export default function About() {
       <div className="relative z-10 max-w-7xl mx-auto px-6">
         <header className="mb-16 md:mb-24 flex flex-col md:flex-row md:items-end justify-between gap-10">
           <div className="max-w-2xl text-center md:text-left">
-            <div className="flex items-center justify-center md:justify-start gap-3 text-[#020B29] mb-4">
+            <div className="flex items-center justify-center md:justify-start gap-3 text-[#450a0a] mb-4">
               {" "}
               <Award className="w-5 h-5" />
               <span className="text-[10px] font-black uppercase tracking-[0.4em]">
@@ -106,9 +106,9 @@ export default function About() {
           </div>
 
           {/* Badge 1: Excelência Química com Borda Azul Escuro */}
-          <div className="flex items-center gap-4 bg-white p-4 rounded-2xl border-2 border-[#020B29] shadow-lg self-center md:self-end">
-            <ShieldCheck className="w-8 h-8 text-[#020B29]" />
-            <p className="text-[#0891B2] font-black italic text-[11px] max-w-[150px] leading-tight uppercase">
+          <div className="flex items-center gap-4 bg-white p-4 rounded-2xl border-2 border-[#450a0a] shadow-lg self-center md:self-end">
+            <ShieldCheck className="w-8 h-8 text-[#450a0a]" />
+            <p className="text-[#cc0000] font-black italic text-[11px] max-w-[150px] leading-tight uppercase">
               Excelência Química há 35 anos.
             </p>
           </div>
