@@ -142,10 +142,10 @@ export default function Footer({ scrollToSection }: FooterProps) {
         {/* Rodapé e Voltar ao Topo */}
         <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="flex flex-col md:flex-row items-center gap-4 md:gap-8">
-            <p className="text-cyan-500 text-[9px] font-black uppercase tracking-[0.2em] text-center md:text-left">
+            <p className="text-cyan-500 text-[10px] font-black uppercase tracking-[0.2em] text-center md:text-left">
               © {new Date().getFullYear()} Kuality Química
             </p>
-            <p className="text-white text-[7px] font-black uppercase tracking-[0.2em] text-center md:text-left">
+            <p className="text-white text-[9px] font-black uppercase tracking-[0.2em] text-center md:text-left">
               CNPJ:67.287.409/0001-01
             </p>
             <div className="flex items-center gap-2 px-3 py-1 bg-white/5 rounded-full border border-white/10">
@@ -159,7 +159,7 @@ export default function Footer({ scrollToSection }: FooterProps) {
           {/* Botão Voltar ao Topo */}
           <button
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-            className="group flex items-center gap-4 text-red-500 text-[9px] font-black uppercase tracking-widest hover:text-red-400 transition-all"
+            className="group flex items-center gap-4 text-red-500/80 text-[9px] font-black uppercase tracking-widest hover:text-red-400 transition-all"
           >
             Voltar ao Topo
             <div className="w-10 h-10 rounded-full border border-red-500/30 flex items-center justify-center group-hover:bg-red-500/10 group-hover:border-red-500 transition-all shadow-[0_0_15px_rgba(239,68,68,0.2)]">

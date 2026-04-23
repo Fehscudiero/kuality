@@ -2,10 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import {
   Send,
   CheckCircle,
-  Phone,
   Mail,
-  MapPin,
-  ShieldCheck,
   Zap,
   RefreshCw,
   FileSearch,
@@ -221,7 +218,7 @@ export default function Contact() {
 
           <div className="grid grid-cols-1 lg:grid-cols-12 relative">
             
-            {/* PAINEL DO FORMULÁRIO COMPACTADO (Removido o min-h-[650px] e reduzido paddings) */}
+            {/* PAINEL DO FORMULÁRIO */}
             <div className="lg:col-span-7 p-6 md:p-10 border-r border-slate-100 flex flex-col relative">
               
               {/* MODAL / VIEW DE SUCESSO PREMIUM */}
@@ -282,28 +279,28 @@ export default function Contact() {
               )}
 
               {/* FORMULÁRIO PADRÃO */}
-              <header className="mb-8">
-                <div className="flex items-center gap-2 text-cyan-600 mb-3">
-                  <Zap className="w-4 h-4 fill-current animate-pulse" />
-                  <span className="text-[9px] font-black uppercase tracking-[0.3em]">
+              <header className="mb-10">
+                <div className="flex items-center gap-3 text-cyan-600 mb-4">
+                  <Zap className="w-5 h-5 fill-current animate-pulse" />
+                  <span className="text-[10px] font-black uppercase tracking-[0.3em]">
                     Priority Request
                   </span>
                 </div>
-                <h2 className="text-3xl md:text-4xl font-black text-slate-900 tracking-tight uppercase leading-none mb-4">
+                <h2 className="text-4xl md:text-5xl font-black text-slate-900 tracking-tight uppercase leading-none mb-5">
                   Sintetize seu <br />{" "}
                   <span className="text-cyan-600">Sucesso.</span>
                 </h2>
-                <p className="text-slate-600 text-xs font-medium italic">
+                <p className="text-slate-600 text-sm font-medium italic">
                   Preencha os dados técnicos abaixo para iniciar o protocolo de
                   atendimento.
                 </p>
               </header>
 
-              {/* ESPAÇAMENTOS REDUZIDOS (space-y-5 e gap-5) */}
-              <form onSubmit={handleSubmit} className="space-y-5" noValidate>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                  <div className="group space-y-1.5">
-                    <label className="text-[10px] font-black text-slate-700 uppercase tracking-widest ml-1 group-focus-within:text-cyan-600 transition-colors">
+              {/* ESPAÇAMENTOS MAIORES */}
+              <form onSubmit={handleSubmit} className="space-y-6" noValidate>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="group space-y-2">
+                    <label className="text-[11px] font-black text-slate-700 uppercase tracking-widest ml-1 group-focus-within:text-cyan-600 transition-colors">
                       Seu nome *
                     </label>
                     <input
@@ -313,14 +310,14 @@ export default function Contact() {
                         setFormData({ ...formData, name: e.target.value });
                         if (errors.name) setErrors((prev) => ({ ...prev, name: "" }));
                       }}
-                      className={`w-full h-12 px-0 bg-transparent border-b-2 ${errors.name ? "border-red-400" : "border-slate-100"} focus:border-cyan-600 text-slate-900 font-bold transition-all outline-none text-sm`}
+                      className={`w-full h-14 px-0 bg-transparent border-b-2 ${errors.name ? "border-red-400" : "border-slate-100"} focus:border-cyan-600 text-slate-900 font-bold transition-all outline-none text-base`}
                       placeholder="Nome Completo"
                     />
-                    {errors.name && <p className="text-[9px] text-red-500 font-bold uppercase tracking-wider">{errors.name}</p>}
+                    {errors.name && <p className="text-[10px] text-red-500 font-bold uppercase tracking-wider">{errors.name}</p>}
                   </div>
                   
-                  <div className="group space-y-1.5">
-                    <label className="text-[10px] font-black text-slate-700 uppercase tracking-widest ml-1 group-focus-within:text-cyan-600 transition-colors">
+                  <div className="group space-y-2">
+                    <label className="text-[11px] font-black text-slate-700 uppercase tracking-widest ml-1 group-focus-within:text-cyan-600 transition-colors">
                       E-mail Corporativo *
                     </label>
                     <input
@@ -330,65 +327,65 @@ export default function Contact() {
                         setFormData({ ...formData, email: e.target.value });
                         if (errors.email) setErrors((prev) => ({ ...prev, email: "" }));
                       }}
-                      className={`w-full h-12 px-0 bg-transparent border-b-2 ${errors.email ? "border-red-400" : "border-slate-100"} focus:border-cyan-600 text-slate-900 font-bold transition-all outline-none text-sm`}
+                      className={`w-full h-14 px-0 bg-transparent border-b-2 ${errors.email ? "border-red-400" : "border-slate-100"} focus:border-cyan-600 text-slate-900 font-bold transition-all outline-none text-base`}
                       placeholder="email@corporativo.com.br"
                     />
-                    {errors.email && <p className="text-[9px] text-red-500 font-bold uppercase tracking-wider">{errors.email}</p>}
+                    {errors.email && <p className="text-[10px] text-red-500 font-bold uppercase tracking-wider">{errors.email}</p>}
                   </div>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                  <div className="group space-y-1.5">
-                    <label className="text-[10px] font-black text-slate-700 uppercase tracking-widest ml-1 group-focus-within:text-cyan-600 transition-colors">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="group space-y-2">
+                    <label className="text-[11px] font-black text-slate-700 uppercase tracking-widest ml-1 group-focus-within:text-cyan-600 transition-colors">
                       Telefone *
                     </label>
                     <input
                       type="tel"
                       value={formData.phone}
                       onChange={handlePhoneChange}
-                      className={`w-full h-12 px-0 bg-transparent border-b-2 ${errors.phone ? "border-red-400" : "border-slate-100"} focus:border-cyan-600 text-slate-900 font-bold transition-all outline-none text-sm`}
+                      className={`w-full h-14 px-0 bg-transparent border-b-2 ${errors.phone ? "border-red-400" : "border-slate-100"} focus:border-cyan-600 text-slate-900 font-bold transition-all outline-none text-base`}
                       placeholder="(00) 00000-0000"
                     />
-                    {errors.phone && <p className="text-[9px] text-red-500 font-bold uppercase tracking-wider">{errors.phone}</p>}
+                    {errors.phone && <p className="text-[10px] text-red-500 font-bold uppercase tracking-wider">{errors.phone}</p>}
                   </div>
                   
-                  <div className="group space-y-1.5">
-                    <label className="text-[10px] font-black text-slate-700 uppercase tracking-widest ml-1 group-focus-within:text-cyan-600 transition-colors">
+                  <div className="group space-y-2">
+                    <label className="text-[11px] font-black text-slate-700 uppercase tracking-widest ml-1 group-focus-within:text-cyan-600 transition-colors">
                       Empresa (Opcional)
                     </label>
                     <input
                       type="text"
                       value={formData.company}
                       onChange={(e) => setFormData({ ...formData, company: e.target.value })}
-                      className="w-full h-12 px-0 bg-transparent border-b-2 border-slate-100 focus:border-cyan-600 text-slate-900 font-bold transition-all outline-none text-sm"
+                      className="w-full h-14 px-0 bg-transparent border-b-2 border-slate-100 focus:border-cyan-600 text-slate-900 font-bold transition-all outline-none text-base"
                       placeholder="Razão Social ou Fantasia"
                     />
                   </div>
                 </div>
 
-                {/* TEXTAREA MENOR (rows 3, padding menor) */}
-                <div className="group space-y-1.5">
-                  <label className="text-[10px] font-black text-slate-700 uppercase tracking-widest ml-1 group-focus-within:text-cyan-600 transition-colors">
+                {/* TEXTAREA MAIOR */}
+                <div className="group space-y-2">
+                  <label className="text-[11px] font-black text-slate-700 uppercase tracking-widest ml-1 group-focus-within:text-cyan-600 transition-colors">
                     Especificações Técnicas *
                   </label>
                   <textarea
-                    rows={3}
+                    rows={4}
                     value={formData.message}
                     onChange={(e) => {
                       setFormData({ ...formData, message: e.target.value });
                       if (errors.message) setErrors((prev) => ({ ...prev, message: "" }));
                     }}
-                    className={`w-full p-4 rounded-xl bg-slate-50 border-2 ${errors.message ? "border-red-400" : "border-transparent"} focus:border-cyan-600 focus:bg-white text-slate-900 font-medium transition-all outline-none resize-none text-sm`}
+                    className={`w-full p-5 rounded-xl bg-slate-50 border-2 ${errors.message ? "border-red-400" : "border-transparent"} focus:border-cyan-600 focus:bg-white text-slate-900 font-medium transition-all outline-none resize-none text-base`}
                     placeholder="Descreva a demanda química ou necessidades de sua linha..."
                   />
-                  {errors.message && <p className="text-[9px] text-red-500 font-bold uppercase tracking-wider pl-1">{errors.message}</p>}
+                  {errors.message && <p className="text-[10px] text-red-500 font-bold uppercase tracking-wider pl-1">{errors.message}</p>}
                 </div>
                 
-                <div className="flex justify-center w-full pt-2">
+                <div className="flex justify-center w-full pt-4">
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className={`relative overflow-hidden w-full md:w-max px-12 h-14 rounded-xl text-white font-black italic uppercase text-[11px] tracking-[0.2em] transition-all duration-300 flex items-center justify-center gap-3 group ${
+                    className={`relative overflow-hidden w-full md:w-max px-14 h-16 rounded-xl text-white font-black italic uppercase text-sm tracking-[0.2em] transition-all duration-300 flex items-center justify-center gap-3 group ${
                       isSubmitting 
                         ? "bg-slate-950 pointer-events-none shadow-inner shadow-cyan-900/50" 
                         : "bg-slate-900 hover:bg-cyan-600 active:scale-95 shadow-[0_10px_20px_-10px_rgba(0,0,0,0.5)]"
@@ -399,14 +396,14 @@ export default function Contact() {
                         <div className="absolute inset-0 bg-slate-900">
                           <div className="absolute inset-y-0 left-0 w-1/2 bg-gradient-to-r from-transparent via-cyan-500/40 to-transparent blur-sm animate-shimmer-fast"></div>
                         </div>
-                        <FlaskConical className="w-4 h-4 text-cyan-400 relative z-10 animate-bounce drop-shadow-[0_0_8px_rgba(6,182,212,0.8)]" />
+                        <FlaskConical className="w-5 h-5 text-cyan-400 relative z-10 animate-bounce drop-shadow-[0_0_8px_rgba(6,182,212,0.8)]" />
                         <span className="relative z-10 text-cyan-400 drop-shadow-sm">Sintetizando...</span>
                       </>
                     )}
                     
                     {!isSubmitting && (
                       <>
-                        <Send className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" /> 
+                        <Send className="w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" /> 
                         Enviar Mensagem
                       </>
                     )}
@@ -415,125 +412,121 @@ export default function Contact() {
               </form>
             </div>
 
-            {/* INFO SIDEBAR COMPACTADA (Paddings p-6 md:p-10) */}
-            <div className="lg:col-span-5 bg-slate-900 p-6 md:p-10 text-white flex flex-col justify-between relative">
+{/* NOVO INFO SIDEBAR - HORÁRIO, RESPOSTA, CERTIFICAÇÕES, EXPERIÊNCIA */}
+            <div className="lg:col-span-5 bg-slate-900 p-8 md:p-12 text-white flex flex-col justify-between relative">
               <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(0,240,255,0.08),transparent_70%)]"></div>
               
-              <div className="relative z-10 space-y-8">
+              <div className="relative z-10 space-y-10">
                 <div>
-                  <ShieldCheck className="text-cyan-400 w-8 h-8 mb-4" />
-                  <h3 className="text-xl font-black uppercase tracking-tighter italic">
-                    Kuality Labs
+                  <h3 className="text-2xl font-black uppercase tracking-tighter italic">
+                    Kuality <span className="text-cyan-400">Forms</span>
                   </h3>
-                  <p className="text-slate-400 text-xs mt-2 leading-relaxed">
-                    Confidencialidade técnica garantida por nossos protocolos.
+                  <p className="text-slate-400 text-sm mt-3 leading-relaxed">
+                    Garantimos sigilo absoluto do seu projeto. Nosso laboratório utilizará essas especificações técnicas para sintetizar uma solução de alta pureza, feita sob medida para a sua linha de produção.
                   </p>
                 </div>
 
-                <div className="space-y-4">
-                  <a
-                    href={`tel:${companyInfo.phone}`}
-                    className="flex items-center gap-4 group active:scale-[0.98] transition-transform duration-200"
-                  >
-                    <div className="flex-shrink-0 w-10 h-10 bg-white/5 rounded-xl flex items-center justify-center md:group-hover:bg-cyan-600 transition-all border border-white/10">
-                      <Phone className="w-4 h-4" />
+                <div className="space-y-7">
+                  {/* HORÁRIO DE ATENDIMENTO */}
+                  <div className="flex items-center gap-5 group">
+                    <div className="flex-shrink-0 w-12 h-12 bg-cyan-500/10 rounded-xl flex items-center justify-center border border-cyan-500/20">
+                      <svg className="w-6 h-6 text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                        <circle cx="12" cy="12" r="10" />
+                        <path d="M12 6v6l4 2" />
+                      </svg>
                     </div>
-                    <div className="flex-1 min-w-0">
-                      <p className="text-[8px] font-black text-cyan-400 uppercase tracking-widest mb-0.5">
-                        Hotline
+                    <div>
+                      <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">
+                        Atendimento
                       </p>
-                      <p className="text-sm font-bold md:group-hover:text-cyan-400 transition-colors truncate">
-                        {companyInfo.phone}
-                      </p>
+                      <p className="text-base font-semibold text-white">Seg-Sex: 8h-18h (GMT-3)</p>
                     </div>
-                  </a>
+                  </div>
 
-                  <a
-                    href={`mailto:${companyInfo.salesEmail}`}
-                    className="flex items-center gap-4 group active:scale-[0.98] transition-transform duration-200"
-                  >
-                    <div className="flex-shrink-0 w-10 h-10 bg-white/5 rounded-xl flex items-center justify-center md:group-hover:bg-cyan-600 transition-all border border-white/10">
-                      <Mail className="w-4 h-4" />
+                  {/* TEMPO DE RESPOSTA */}
+                  <div className="flex items-center gap-5 group">
+                    <div className="flex-shrink-0 w-12 h-12 bg-cyan-500/10 rounded-xl flex items-center justify-center border border-cyan-500/20">
+                      <Zap className="w-6 h-6 text-cyan-400" />
                     </div>
-                    <div className="flex-1 min-w-0">
-                      <p className="text-[8px] font-black text-cyan-400 uppercase tracking-widest mb-0.5">
-                        E-mail Oficial
+                    <div>
+                      <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">
+                        Tempo de Resposta
                       </p>
-                      <p className="text-sm font-bold md:group-hover:text-cyan-400 transition-colors truncate">
-                        {companyInfo.salesEmail}
-                      </p>
+                      <p className="text-base font-semibold text-white">Primeiro contato em até 24h úteis</p>
                     </div>
-                  </a>
+                  </div>
 
-                  {/* BLOCO DE REDES SOCIAIS OFICIAIS */}
-                  <div className="pt-4 mt-2 flex items-center gap-4 border-t border-white/5">
-                    <a 
-                      href="https://www.linkedin.com/company/kuality-quimica-ltda/?originalSubdomain=br" 
-                      target="_blank" 
-                      rel="noopener noreferrer"
-                      className="hover:scale-110 hover:-translate-y-1 transition-all duration-300 drop-shadow-md"
-                      aria-label="LinkedIn da Kuality Química"
-                    >
-                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="w-8 h-8">
-                        <path fill="#0A66C2" d="M22.23 0H1.77C.8 0 0 .77 0 1.72v20.56C0 23.23.8 24 1.77 24h20.46c.98 0 1.77-.77 1.77-1.72V1.72C24 .77 23.2 0 22.23 0z"/>
-                        <path fill="#FFF" d="M7.12 20.45V9H3.56v11.45h3.56zM5.34 7.43c1.14 0 2.06-.93 2.06-2.06 0-1.14-.92-2.06-2.06-2.06-1.14 0-2.06.92-2.06 2.06 0 1.13.92 2.06 2.06 2.06zM20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67h-3.55V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28z"/>
+                  {/* ANOS DE EXPERIÊNCIA */}
+                  <div className="flex items-center gap-5 group">
+                    <div className="flex-shrink-0 w-12 h-12 bg-cyan-500/10 rounded-xl flex items-center justify-center border border-cyan-500/20">
+                      <svg className="w-6 h-6 text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
                       </svg>
-                    </a>
-                    
-                    <a 
-                      href="https://www.instagram.com/kualityquimica/" 
-                      target="_blank" 
-                      rel="noopener noreferrer"
-                      className="hover:scale-110 hover:-translate-y-1 transition-all duration-300 drop-shadow-md"
-                      aria-label="Instagram da Kuality Química"
-                    >
-                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="w-8 h-8">
-                        <defs>
-                          <linearGradient id="ig-grad-sidebar" x1="0%" y1="100%" x2="100%" y2="0%">
-                            <stop offset="0%" stopColor="#f09433" />
-                            <stop offset="25%" stopColor="#e6683c" />
-                            <stop offset="50%" stopColor="#dc2743" />
-                            <stop offset="75%" stopColor="#cc2366" />
-                            <stop offset="100%" stopColor="#bc1888" />
-                          </linearGradient>
-                        </defs>
-                        <rect fill="url(#ig-grad-sidebar)" width="24" height="24" rx="6" ry="6"/>
-                        <rect fill="none" stroke="#FFF" strokeWidth="2" x="5" y="5" width="14" height="14" rx="4" ry="4"/>
-                        <circle fill="none" stroke="#FFF" strokeWidth="2" cx="12" cy="12" r="3.5"/>
-                        <circle fill="#FFF" cx="16.5" cy="7.5" r="1"/>
-                      </svg>
-                    </a>
-                    
-                    <a 
-                      href="https://www.facebook.com/KualityQuimica/" 
-                      target="_blank" 
-                      rel="noopener noreferrer"
-                      className="hover:scale-110 hover:-translate-y-1 transition-all duration-300 drop-shadow-md"
-                      aria-label="Facebook da Kuality Química"
-                    >
-                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="w-8 h-8">
-                        <path fill="#1877F2" d="M24 12.072a12 12 0 1 0-13.875 11.854v-8.385H7.078v-3.469h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.234 2.686.234v2.953H15.83c-1.49 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.469h-2.796v8.385A12.004 12.004 0 0 0 24 12.072z"/>
-                        <path fill="#FFF" d="M16.671 15.293l.532-3.469h-3.328V9.572c0-.949.466-1.874 1.956-1.874h1.514V4.745s-1.374-.234-2.686-.234c-2.741 0-4.533 1.662-4.533 4.669v2.641H7.078v3.469h3.047v8.385a12.09 12.09 0 0 0 3.75 0v-8.385h2.796z"/>
-                      </svg>
-                    </a>
+                    </div>
+                    <div>
+                      <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">
+                        Experiência
+                      </p>
+                      <p className="text-base font-semibold text-white">35+ anos de mercado</p>
+                    </div>
+                  </div>
+
+                  {/* FORMULAÇÕES DESENVOLVIDAS */}
+                  <div className="flex items-center gap-5 group">
+                    <div className="flex-shrink-0 w-12 h-12 bg-cyan-500/10 rounded-xl flex items-center justify-center border border-cyan-500/20">
+                      <FlaskConical className="w-6 h-6 text-cyan-400" />
+                    </div>
+                    <div>
+                      <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">
+                        Formulações
+                      </p>
+                      <p className="text-base font-semibold text-white">500+ desenvolvidas</p>
+                    </div>
+                  </div>
+
+                  {/* CERTIFICAÇÕES OFICIAIS */}
+                  <div className="pt-8 mt-4 border-t border-white/10">
+                    <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-5">
+                      Certificações Oficiais
+                    </p>
+                    <div className="flex items-start gap-8">
+                      <div className="flex flex-col items-center gap-3" title="ANVISA">
+                        <img 
+                          src="/assets/anvisa.webp" 
+                          alt="ANVISA" 
+                          className="w-14 h-14 object-contain"
+                        />
+                      </div>
+                      <div className="flex flex-col items-center gap-3" title="ISO 9001">
+                        <img 
+                          src="/assets/iso.webp" 
+                          alt="ISO 9001" 
+                          className="w-14 h-14 object-contain"
+                        />
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
 
-              {/* FOOTER DA SIDEBAR REAJUSTADO */}
-              <div className="relative z-10 mt-auto pt-8 border-t border-white/5">
-                <div className="flex items-start gap-3">
-                  <MapPin className="text-cyan-500 w-4 h-4 mt-0.5" />
-                  <div>
-                    <p className="text-sm font-bold">
-                      {companyInfo.address.street}
+              {/* FOOTER DA SIDEBAR - CONTATO DIRETO */}
+              <div className="relative z-10 mt-auto pt-10 border-t border-white/10">
+                <a
+                  href={`mailto:${companyInfo.salesEmail}`}
+                  className="flex items-center gap-4 group active:scale-[0.98] transition-transform duration-200"
+                >
+                  <div className="flex-shrink-0 w-12 h-12 bg-white/5 rounded-xl flex items-center justify-center border border-white/10 group-hover:bg-cyan-500/20 group-hover:border-cyan-500/30 transition-all">
+                    <Mail className="w-5 h-5 text-cyan-400" />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">
+                      E-mail Comercial
                     </p>
-                    <p className="text-[10px] text-slate-400 uppercase tracking-widest mt-1">
-                      {companyInfo.address.neighborhood} •{" "}
-                      {companyInfo.address.city}
+                    <p className="text-base font-semibold text-white truncate group-hover:text-cyan-400 transition-colors">
+                      {companyInfo.salesEmail}
                     </p>
                   </div>
-                </div>
+</a>
               </div>
             </div>
           </div>
