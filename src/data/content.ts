@@ -14,6 +14,30 @@ export const companyInfo = {
     cep: "13323-746",
   },
 };
+// Objeto para os textos descritivos
+export const qualityContent = {
+  process:
+    "Nossos produtos são submetidos a ensaios rigorosos de laboratório, incluindo o Teste de Cura e o Ensaio de Névoa Salina (500hs Salt Spray), seguindo estritamente a Norma ABNT NBR 17088 - 2023.",
+  result:
+    'Aprovação total no controle de qualidade: Sem geração de blister, sem migração ou infiltração no "CROSS CUT" (Aderência Aprovada).',
+};
+
+// Array (Lista) para os cards de testes técnicos
+export const qualityTestsList = [
+  {
+    nome: "Salt Spray",
+    desc: "Resistência de 500hs em névoa salina corrosiva.",
+  },
+  {
+    nome: "Teste de Cura",
+    desc: "Verificação de polimerização e dureza técnica.",
+  },
+  { nome: "Cross Cut", desc: "Ensaio de aderência em grade conforme norma." },
+  {
+    nome: "Análise de PH",
+    desc: "Controle de estabilidade molecular constante.",
+  },
+];
 
 export const aboutText = {
   main: "Técnicos e profissionais capacitados desenvolvem em nossos laboratórios produtos com matéria-prima selecionada. Nosso objetivo é melhorar a cada dia, construindo uma relação exclusiva desde o atendimento, logística e prazos.",

@@ -70,12 +70,12 @@ export default function About() {
       icon: Trophy,
     },
     {
-      title: "Laboratórios Próprios",
+      title: "Laboratórios próprios",
       desc: "Pesquisa avançada e desenvolvimento técnico rigoroso.",
       icon: Microscope,
     },
     {
-      title: "Produtos Controlados",
+      title: "Produtos controlados",
       desc: "Garantia total de conformidade e segurança química.",
       icon: BadgeCheck,
     },
@@ -90,32 +90,49 @@ export default function About() {
     >
       <SectionGeometry />
 
+      {/* Estilos para animação dos ícones */}
+      <style>{`
+        @keyframes float-smooth {
+          0%, 100% { transform: translateY(0px) rotate(0deg); }
+          50% { transform: translateY(-8px) rotate(1deg); }
+        }
+        .animate-float-smooth {
+          animation: float-smooth 4s ease-in-out infinite;
+        }
+        @keyframes icon-pulse {
+          0%, 100% { transform: scale(1); opacity: 1; }
+          50% { transform: scale(1.1); opacity: 0.8; }
+        }
+        .animate-icon-pulse {
+          animation: icon-pulse 3s infinite ease-in-out;
+        }
+      `}</style>
+
       <div className="relative z-10 max-w-7xl mx-auto px-6">
         <header className="mb-16 md:mb-24 flex flex-col md:flex-row md:items-end justify-between gap-10">
           <div className="max-w-2xl text-center md:text-left">
             <div className="flex items-center justify-center md:justify-start gap-3 text-[#450a0a] mb-4">
-              {" "}
-              <Award className="w-5 h-5" />
+              <Award className="w-5 h-5 animate-icon-pulse" />
               <span className="text-[10px] font-black uppercase tracking-[0.4em]">
                 História e Compromisso
               </span>
             </div>
-            <h2 className="text-4xl md:text-6xl font-black text-[slate-950] tracking-tighter uppercase italic leading-[0.9]">
+            <h2 className="text-4xl md:text-6xl font-black text-slate-950 tracking-tighter uppercase italic leading-[0.9]">
               Sobre a <br /> <span className="text-cyan-600">Kuality.</span>
             </h2>
           </div>
 
-          {/* Badge 1: Excelência Química com Borda Azul Escuro */}
-          <div className="flex items-center gap-4 bg-white p-4 rounded-2xl border-2 border-[#450a0a] shadow-lg self-center md:self-end">
-            <ShieldCheck className="w-8 h-8 text-[#450a0a]" />
+          <div className="flex items-center gap-4 bg-white p-4 rounded-2xl border-2 border-[#450a0a] shadow-lg self-center md:self-end group hover:border-[#cc0000] transition-colors duration-500">
+            <div className="bg-[#450a0a]/5 p-2 rounded-lg group-hover:bg-[#cc0000]/5 transition-colors">
+              <ShieldCheck className="w-8 h-8 text-[#450a0a] group-hover:text-[#cc0000] transition-colors" />
+            </div>
             <p className="text-[#cc0000] font-black italic text-[11px] max-w-[150px] leading-tight uppercase">
               Excelência Química há 35 anos.
             </p>
           </div>
         </header>
 
-        {/* Texto Institucional com Destaques Estratégicos */}
-        <div className="max-w-4xl mx-auto mb-20">
+        <div className="max-w-4xl mx-auto mb-20 ">
           <div className="bg-white/90 backdrop-blur-xl rounded-[2.5rem] p-8 md:p-14 shadow-2xl border border-slate-100 text-slate-600 text-lg md:text-xl leading-relaxed text-justify font-medium">
             <p className="mb-6">
               A Kuality é especialista no desenvolvimento de{" "}
@@ -167,22 +184,26 @@ export default function About() {
           </div>
         </div>
 
-        {/* Cards de Features com Borda Azul */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
           {features.map((feature, i) => (
             <div
               key={i}
-              className="group bg-white rounded-2xl p-8 shadow-md border border-blue-900/20 hover:border-blue-900 transition-all duration-500 hover:-translate-y-2"
+              className="group bg-white rounded-3xl p-8 shadow-md border border-blue-900/10 hover:border-blue-900 transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl overflow-hidden relative"
             >
-              <div className="flex flex-col gap-6">
-                <div className="w-14 h-14 bg-slate-50 border border-slate-100 rounded-xl flex items-center justify-center group-hover:bg-blue-900 transition-all">
-                  <feature.icon className="w-7 h-7 text-blue-900 group-hover:text-white transition-colors" />
+              <div className="flex items-center justify-centerflex-col gap-6 relative z-10">
+                {/* Icon Container Otimizado (Molecular Pulse) */}
+                <div className="relative w-16 h-16 animate-float-smooth">
+                  <div className="absolute inset-0 bg-blue-900/20 blur-2xl rounded-full scale-150 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+                  <div className="relative w-16 h-16 bg-slate-900 rounded-2xl flex items-center justify-center border border-white/10 shadow-xl group-hover:bg-blue-900 transition-colors duration-500">
+                    <feature.icon className="w-8 h-8 text-cyan-400 group-hover:text-white transition-colors duration-500" />
+                  </div>
                 </div>
+
                 <div>
-                  <h3 className="text-xl font-bold text-slate-950 mb-2">
+                  <h3 className="text-xl font-bold text-slate-950 mb-3 tracking-tight">
                     {feature.title}
                   </h3>
-                  <p className="text-slate-600 text-sm md:text-base leading-relaxed">
+                  <p className="text-slate-600 text-sm md:text-base leading-relaxed font-medium">
                     {feature.desc}
                   </p>
                 </div>
@@ -191,18 +212,18 @@ export default function About() {
           ))}
         </div>
 
-        {/* CTA Banner */}
-        <div className="bg-slate-950 rounded-[3rem] p-10 md:p-16 text-center relative overflow-hidden shadow-2xl">
-          <div className="absolute top-0 right-0 w-64 h-64 bg-cyan-500/10 blur-[100px]" />
-          <h3 className="text-2xl md:text-4xl font-bold text-white mb-8">
-            Pronto para transformar sua produção?
+        <div className="bg-slate-950 rounded-[3rem] p-10 md:p-16 text-center relative overflow-hidden shadow-2xl group">
+          <div className="absolute top-0 right-0 w-64 h-64 bg-cyan-500/10 blur-[100px] group-hover:bg-cyan-500/20 transition-all duration-1000" />
+          <h3 className="text-2xl md:text-4xl font-bold text-white mb-10 tracking-tight leading-tight relative z-10">
+            Pronto para transformar sua <br />
+            <span className="text-cyan-500 italic">produção industrial?</span>
           </h3>
           <a
             href="#contato"
-            className="inline-flex items-center gap-3 px-10 py-5 bg-cyan-600 text-white font-bold rounded-xl hover:bg-cyan-500 transition-all shadow-lg hover:-translate-y-1"
+            className="relative z-10 inline-flex items-center gap-4 px-12 py-5 bg-cyan-600 text-white font-black uppercase text-[11px] tracking-[0.2em] rounded-xl hover:bg-cyan-500 transition-all shadow-lg hover:-translate-y-1 hover:shadow-cyan-500/20 active:scale-95"
           >
             Solicitar Orçamento
-            <ArrowRight className="w-5 h-5" />
+            <ArrowRight className="w-5 h-5 group-hover:translate-x-2 transition-transform" />
           </a>
         </div>
       </div>

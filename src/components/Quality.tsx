@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import { qualityTests } from "../data/content";
+import { qualityTestsList, qualityContent } from "../data/content";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
@@ -51,11 +51,11 @@ function SectionGeometry() {
     >
       <div
         ref={shapeRef}
-        className="absolute top-[-10%] left-0 w-[150%] h-[150%] bg-cyan-100 shadow-2xl"
+        className="absolute top-[-10%] left-0 w-[150%] h-[150%] bg-cyan-50 shadow-2xl"
         style={{
           clipPath: "polygon(0 0, 70% 0, 30% 100%, 0% 100%)",
           transform: "rotate(-3deg)",
-          zIndex: 5,
+          zIndex: 50,
         }}
       />
     </div>
@@ -63,189 +63,139 @@ function SectionGeometry() {
 }
 
 export default function Quality() {
-  const containerRef = useRef<HTMLDivElement>(null);
+  const sectionRef = useRef<HTMLElement>(null);
 
   useGSAP(
     () => {
-      const items = gsap.utils.toArray(".quality-card");
-      gsap.fromTo(
-        items,
-        { opacity: 0, y: 30 },
-        {
-          opacity: 1,
-          y: 0,
-          stagger: 0.15,
-          duration: 0.8,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: containerRef.current,
-            start: "top 75%",
-          },
+      gsap.from(".quality-card", {
+        y: 40,
+        opacity: 0,
+        duration: 0.8,
+        stagger: 0.15,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: ".quality-grid",
+          start: "top 85%",
         },
-      );
+      });
     },
-    { scope: containerRef },
+    { scope: sectionRef },
   );
-
-  // Valores de fallback baseados na estrutura real dos seus dados
-  const processText =
-    (qualityTests as any).process ||
-    "Nossos processos seguem rigorosos padrões de formulação e testes laboratoriais em cada lote.";
-  const resultText =
-    (qualityTests as any).result ||
-    "Garantimos a máxima pureza, eficácia e segurança para aplicação em escala industrial.";
 
   return (
     <section
+      ref={sectionRef}
       id="qualidade"
-      className="relative py-24 md:py-8 bg-white overflow-hidden border-t border-slate-100"
-      style={{ isolation: "isolate" }}
+      className="py-16 md:py-24 bg-white relative overflow-hidden"
     >
       <SectionGeometry />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-6">
-        {/* HEADER PADRONIZADO (Igual ao About e Products) */}
-        <header className="mb-20 md:mb-28 flex flex-col md:flex-row md:items-end justify-between gap-10">
-          <div className="max-w-2xl text-center md:text-left">
-            <div className="flex items-center justify-center md:justify-start gap-3 text-blue-900 mb-4">
-              <ShieldCheck className="w-5 h-5 animate-pulse" />
-              <span className="text-[10px] font-black uppercase tracking-[0.4em]">
-                Laboratório e Conformidade
-              </span>
-            </div>
-            <h2 className="text-5xl md:text-6xl font-black text-slate-950 tracking-tighter uppercase italic leading-[0.85]">
-              Padrão <br /> <span className="text-cyan-600">Kuality.</span>
-            </h2>
+      <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
+        <header className="mb-12 md:mb-20">
+          <div className="flex items-center gap-3 text-cyan-600 mb-4">
+            <ShieldCheck className="w-5 h-5 md:w-6 md:h-6" />
+            <span className="text-[10px] md:text-xs font-black uppercase tracking-[0.3em]">
+              Garantia de Performance
+            </span>
           </div>
-
-          <div className="flex items-center gap-4 bg-white p-5 rounded-2xl border-2 border-[#450a0a] shadow-xl self-center md:self-end">
-            <Award className="w-8 h-8 text-[#450a0a]" />
-            <div className="flex flex-col">
-              <p className="text-[#cc0000] font-black italic text-[11px] leading-tight uppercase">
-                Certificação de Lote
-              </p>
-              <p className="text-slate-500 font-bold text-[9px] uppercase tracking-widest">
-                Controle 100% Nacional
-              </p>
-            </div>
-          </div>
+          <h2 className="text-3xl md:text-5xl lg:text-6xl font-black text-slate-900 tracking-tighter uppercase italic leading-[0.9]">
+            Controle de <br />{" "}
+            <span className="text-cyan-600">Qualidade Superior.</span>
+          </h2>
         </header>
 
-        <div
-          ref={containerRef}
-          className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-stretch"
-        >
-          {/* COLUNA ESQUERDA: PROCESSOS REAIS E RESULTADOS (CONTEÚDO DO DATA.TS) */}
-          <div className="lg:col-span-7 flex flex-col gap-10">
-            {/* Bloco 1: O Processo (Dark Mode) */}
-            <div className="quality-card bg-slate-950 rounded-[2.5rem] p-10 md:p-14 shadow-2xl relative overflow-hidden flex-1">
-              <div className="absolute top-0 right-0 w-64 h-64 bg-cyan-500/10 blur-[80px] pointer-events-none" />
+        <div className="quality-grid grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-12">
+          <div className="lg:col-span-5 space-y-6">
+            <div className="quality-card bg-slate-950 p-8 md:p-10 rounded-[2.5rem] text-white shadow-2xl relative overflow-hidden">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-cyan-500/10 blur-3xl rounded-full" />
 
-              <div className="flex items-center gap-4 mb-8 relative z-10">
-                <div className="w-14 h-14 rounded-xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center">
-                  <FlaskConical className="w-6 h-6 text-cyan-400" />
-                </div>
-                <div>
-                  <h3 className="text-white text-2xl font-black uppercase italic tracking-tighter">
-                    Nosso Processo
-                  </h3>
-                  <span className="text-cyan-500 text-[10px] font-bold uppercase tracking-[0.2em]">
-                    Engenharia Química Aplicada
+              <div className="relative z-10">
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-10 h-10 bg-cyan-500/20 rounded-xl flex items-center justify-center">
+                    <FlaskConical className="w-5 h-5 text-cyan-400" />
+                  </div>
+                  <span className="text-[10px] font-black uppercase tracking-widest text-cyan-400">
+                    Engenharia Aplicada
                   </span>
                 </div>
-              </div>
 
-              <p className="text-slate-300 text-lg md:text-xl leading-relaxed font-medium relative z-10">
-                {processText}
-              </p>
+                <h3 className="text-2xl md:text-3xl font-black uppercase italic tracking-tighter mb-6 leading-tight">
+                  Nosso Processo <br /> de Validação
+                </h3>
+
+                <div className="space-y-6">
+                  <p className="text-slate-400 text-sm md:text-base leading-relaxed font-medium">
+                    {qualityContent.process}
+                  </p>
+
+                  <div className="bg-white/5 border border-white/10 rounded-2xl p-5 border-l-4 border-l-cyan-500">
+                    <p className="text-[10px] font-black uppercase tracking-widest text-cyan-500 mb-2">
+                      Resultado Final
+                    </p>
+                    <p className="text-xs md:text-sm text-slate-200 font-bold leading-snug">
+                      {qualityContent.result}
+                    </p>
+                  </div>
+                </div>
+              </div>
             </div>
 
-            {/* Bloco 2: O Resultado (Light Mode / Trust) */}
-            <div className="quality-card bg-white border-2 border-slate-900 rounded-[2.5rem] p-10 md:p-14 shadow-lg flex-1 group hover:border-cyan-500 transition-colors duration-500">
-              <div className="flex items-center gap-4 mb-8">
-                <div className="w-14 h-14 rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-center group-hover:bg-cyan-50 transition-colors">
-                  <CheckCircle2 className="w-6 h-6 text-slate-950 group-hover:text-cyan-600 transition-colors" />
-                </div>
-                <div>
-                  <h3 className="text-slate-950 text-2xl font-black uppercase italic tracking-tighter">
-                    O Resultado
-                  </h3>
-                  <span className="text-slate-500 text-[10px] font-bold uppercase tracking-[0.2em]">
-                    Entrega Homologada
-                  </span>
-                </div>
+            <div className="quality-card flex items-center gap-6 p-6 bg-slate-50 rounded-3xl border border-slate-100 shadow-sm">
+              <div className="w-14 h-14 rounded-full bg-white shadow-md flex items-center justify-center flex-shrink-0">
+                <Award className="w-7 h-7 text-cyan-600" />
               </div>
-
-              <p className="text-slate-600 text-lg md:text-xl leading-relaxed font-medium">
-                {resultText}
-              </p>
+              <div>
+                <h4 className="text-sm font-black text-slate-900 uppercase italic">
+                  Conformidade ANVISA
+                </h4>
+                <p className="text-[10px] text-slate-500 font-medium">
+                  Operação sob rígidos padrões regulatórios.
+                </p>
+              </div>
             </div>
           </div>
 
-          {/* COLUNA DIREITA: BENTO GRID DE CERTIFICAÇÕES REAIS */}
-          <div className="lg:col-span-5 flex flex-col gap-6">
-            {/* Card Principal de Autoridade */}
-            <div className="quality-card bg-white p-10 rounded-[2.5rem] border-2 border-blue-900 shadow-xl relative overflow-hidden flex-1 group">
-              <div className="absolute -right-10 -bottom-10 opacity-[0.03] group-hover:scale-110 transition-transform duration-700">
-                <Microscope size={250} className="text-blue-900" />
+          <div className="lg:col-span-7 space-y-6">
+            <div className="quality-card bg-white border border-slate-100 rounded-[2.5rem] p-6 md:p-10 shadow-xl">
+              <div className="flex items-center gap-4 mb-8">
+                <Microscope className="w-6 h-6 text-cyan-600" />
+                <h3 className="text-lg md:text-xl font-black text-slate-900 uppercase italic tracking-tighter">
+                  Protocolos de Laboratório
+                </h3>
               </div>
 
-              <div className="relative z-10">
-                <h4 className="text-slate-950 font-black uppercase italic tracking-tighter text-3xl mb-10 border-l-4 border-cyan-600 pl-6">
-                  Normas & <br />{" "}
-                  <span className="text-cyan-600">Conformidades.</span>
-                </h4>
-
-                <div className="space-y-4">
-                  {[
-                    {
-                      nome: "Normas da ANVISA",
-                      desc: "Aprovação sanitária rigorosa",
-                    },
-                    {
-                      nome: "Padrão ABNT NBR 17088",
-                      desc: "Qualidade de produto garantida",
-                    },
-                    {
-                      nome: "Certificação ISO 9001:2015",
-                      desc: "Gestão da qualidade verificada",
-                    },
-                    {
-                      nome: "Responsabilidade Ambiental",
-                      desc: "Processos eco-sustentáveis",
-                    },
-                  ].map((cert, i) => (
-                    <div
-                      key={i}
-                      className="flex items-start gap-4 p-5 bg-slate-50 rounded-2xl border border-slate-100 hover:border-blue-900 transition-all"
-                    >
-                      <BadgeCheck className="w-5 h-5 text-blue-900 flex-shrink-0 mt-0.5" />
-                      <div className="flex flex-col">
-                        <span className="text-slate-950 font-black uppercase italic text-sm tracking-wide">
-                          {cert.nome}
-                        </span>
-                        <span className="text-slate-500 font-medium text-xs mt-1">
-                          {cert.desc}
-                        </span>
-                      </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {/* MUDANÇA: Agora mapeia o array qualityTestsList */}
+                {(qualityTestsList || []).map((test, index) => (
+                  <div
+                    key={index}
+                    className="flex items-start gap-3 p-4 rounded-2xl bg-slate-50 hover:bg-cyan-50 transition-colors group"
+                  >
+                    <CheckCircle2 className="w-5 h-5 text-cyan-600 mt-0.5 flex-shrink-0" />
+                    <div>
+                      <p className="text-xs font-black text-slate-950 uppercase tracking-wide">
+                        {test.nome}
+                      </p>
+                      <p className="text-[11px] text-slate-500 font-medium mt-1 leading-tight">
+                        {test.desc}
+                      </p>
                     </div>
-                  ))}
-                </div>
+                  </div>
+                ))}
               </div>
             </div>
 
-            {/* Destaque Técnico Inferior */}
-            <div className="quality-card bg-slate-100 p-8 rounded-[2rem] border border-slate-900 flex items-center justify-between group hover:bg-slate-200 transition-colors">
+            <div className="quality-card bg-slate-900 p-6 md:p-8 rounded-3xl border border-white/5 flex items-center justify-between group hover:bg-slate-800 transition-all shadow-lg">
               <div className="flex flex-col">
-                <span className="text-slate-950 font-black uppercase italic text-lg tracking-tighter">
-                  Laudo Técnico
+                <span className="text-white font-black uppercase italic text-sm md:text-base tracking-tighter">
+                  Laudo Técnico Oficial
                 </span>
-                <span className="text-slate-500 font-bold text-[10px] uppercase tracking-widest mt-1">
-                  Disponível sob requisição
+                <span className="text-cyan-500/70 font-bold text-[9px] uppercase tracking-[0.2em] mt-1">
+                  Garantia de Procedência
                 </span>
               </div>
-              <div className="w-12 h-12 rounded-full bg-white shadow-sm flex items-center justify-center group-hover:-translate-y-1 transition-transform">
-                <FileText className="w-5 h-5 text-blue-900" />
+              <div className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center group-hover:bg-cyan-600 transition-all">
+                <FileText className="w-5 h-5 text-white" />
               </div>
             </div>
           </div>
