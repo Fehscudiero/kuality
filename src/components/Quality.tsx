@@ -50,7 +50,7 @@ function SectionGeometry() {
     >
       <div
         ref={shapeRef}
-        className="absolute top-[-10%] left-0 w-[150%] h-[150%] bg-cyan-50 shadow-2xl"
+        className="absolute top-[-10%] left-0 w-[150%] h-[150%] bg-cyan-100 shadow-2xl"
         style={{
           clipPath: "polygon(0 0, 70% 0, 30% 100%, 0% 100%)",
           transform: "rotate(-3deg)",
