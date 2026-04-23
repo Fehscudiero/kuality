@@ -78,7 +78,7 @@ function SectionGeometry() {
 
 export default function Contact() {
   const sectionRef = useRef<HTMLElement>(null);
-  
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -86,7 +86,7 @@ export default function Contact() {
     company: "",
     message: "",
   });
-  
+
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<"idle" | "success">("idle");
@@ -107,11 +107,12 @@ export default function Contact() {
   const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     let val = e.target.value.replace(/\D/g, "");
     if (val.length > 11) val = val.slice(0, 11);
-    
+
     let formatted = val;
     if (val.length > 2) formatted = `(${val.slice(0, 2)}) ${val.slice(2)}`;
-    if (val.length > 7) formatted = `(${val.slice(0, 2)}) ${val.slice(2, 7)}-${val.slice(7)}`;
-    
+    if (val.length > 7)
+      formatted = `(${val.slice(0, 2)}) ${val.slice(2, 7)}-${val.slice(7)}`;
+
     setFormData({ ...formData, phone: formatted });
     if (errors.phone) setErrors((prev) => ({ ...prev, phone: "" }));
   };
@@ -141,16 +142,16 @@ export default function Contact() {
     if (!validateForm()) return;
 
     setIsSubmitting(true);
-    
+
     const now = new Date();
-    const day = String(now.getDate()).padStart(2, '0');
-    const month = String(now.getMonth() + 1).padStart(2, '0');
-    const hours = String(now.getHours()).padStart(2, '0');
-    const minutes = String(now.getMinutes()).padStart(2, '0');
+    const day = String(now.getDate()).padStart(2, "0");
+    const month = String(now.getMonth() + 1).padStart(2, "0");
+    const hours = String(now.getHours()).padStart(2, "0");
+    const minutes = String(now.getMinutes()).padStart(2, "0");
     const generatedProtocol = `${day}/${month} - ${hours}:${minutes} - 2026`;
-    
-    await new Promise((resolve) => setTimeout(resolve, 2500)); 
-    
+
+    await new Promise((resolve) => setTimeout(resolve, 2500));
+
     setProtocolNumber(generatedProtocol);
     setIsSubmitting(false);
     setSubmitStatus("success");
@@ -217,18 +218,18 @@ export default function Contact() {
           <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-cyan-600 via-cyan-400 to-slate-900 z-10"></div>
 
           <div className="grid grid-cols-1 lg:grid-cols-12 relative">
-            
             {/* PAINEL DO FORMULÁRIO */}
             <div className="lg:col-span-7 p-6 md:p-10 border-r border-slate-100 flex flex-col relative">
-              
               {/* MODAL / VIEW DE SUCESSO PREMIUM */}
               {submitStatus === "success" && (
                 <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 lg:absolute lg:inset-0 lg:z-50 lg:bg-white/60 lg:backdrop-blur-md animate-in fade-in duration-500">
-                  <div className="absolute inset-0 bg-slate-950/70 backdrop-blur-md lg:hidden" onClick={handleReset} />
-                  
+                  <div
+                    className="absolute inset-0 bg-slate-950/70 backdrop-blur-md lg:hidden"
+                    onClick={handleReset}
+                  />
+
                   <div className="border-glow-modern w-full max-w-md p-8 md:p-10 text-center space-y-6 shadow-[0_30px_80px_rgba(6,182,212,0.2)] animate-in zoom-in-95 duration-500 z-10">
-                    
-                    <button 
+                    <button
                       onClick={handleReset}
                       className="absolute top-5 right-5 p-2 text-slate-500 hover:text-white hover:rotate-90 transition-all duration-300 z-20"
                       aria-label="Fechar"
@@ -245,10 +246,16 @@ export default function Contact() {
 
                     <div className="space-y-3">
                       <h3 className="text-3xl font-black text-white uppercase italic tracking-tighter leading-none">
-                        Demanda <br /> <span className="text-cyan-400 drop-shadow-sm">Protocolada.</span>
+                        Demanda <br />{" "}
+                        <span className="text-cyan-400 drop-shadow-sm">
+                          Protocolada.
+                        </span>
                       </h3>
                       <p className="text-slate-400 text-[9px] font-black tracking-widest uppercase">
-                        Fila de processamento: <span className="text-cyan-400 bg-cyan-950/50 px-2 py-1 rounded-md ml-1 border border-cyan-900/50">Prioritária</span>
+                        Fila de processamento:{" "}
+                        <span className="text-cyan-400 bg-cyan-950/50 px-2 py-1 rounded-md ml-1 border border-cyan-900/50">
+                          Prioritária
+                        </span>
                       </p>
                     </div>
 
@@ -256,14 +263,21 @@ export default function Contact() {
                       <div className="flex justify-between items-center border-b border-slate-800 pb-3">
                         <div className="flex items-center gap-2">
                           <FileSearch className="w-4 h-4 text-cyan-400" />
-                          <span className="text-[9px] font-black text-slate-400 uppercase tracking-widest">Data / Hora</span>
+                          <span className="text-[9px] font-black text-slate-400 uppercase tracking-widest">
+                            Data / Hora
+                          </span>
                         </div>
                         <span className="text-[10px] font-black text-white font-mono tracking-tighter bg-slate-800 px-2 py-1 rounded border border-slate-700 shadow-sm">
                           {protocolNumber}
                         </span>
                       </div>
                       <p className="text-[11px] text-slate-400 leading-relaxed font-medium">
-                        Obrigado pelo contato. Um Engenheiro de Performance da <span className="text-cyan-400 font-bold">Kuality Química</span> analisará suas especificações técnicas e retornará em até 24h úteis.
+                        Obrigado pelo contato. Um Engenheiro de Performance da{" "}
+                        <span className="text-cyan-400 font-bold">
+                          Kuality Química
+                        </span>{" "}
+                        analisará suas especificações técnicas e retornará em
+                        até 24h úteis.
                       </p>
                     </div>
 
@@ -308,14 +322,19 @@ export default function Contact() {
                       value={formData.name}
                       onChange={(e) => {
                         setFormData({ ...formData, name: e.target.value });
-                        if (errors.name) setErrors((prev) => ({ ...prev, name: "" }));
+                        if (errors.name)
+                          setErrors((prev) => ({ ...prev, name: "" }));
                       }}
                       className={`w-full h-14 px-0 bg-transparent border-b-2 ${errors.name ? "border-red-400" : "border-slate-100"} focus:border-cyan-600 text-slate-900 font-bold transition-all outline-none text-base`}
                       placeholder="Nome Completo"
                     />
-                    {errors.name && <p className="text-[10px] text-red-500 font-bold uppercase tracking-wider">{errors.name}</p>}
+                    {errors.name && (
+                      <p className="text-[10px] text-red-500 font-bold uppercase tracking-wider">
+                        {errors.name}
+                      </p>
+                    )}
                   </div>
-                  
+
                   <div className="group space-y-2">
                     <label className="text-[11px] font-black text-slate-700 uppercase tracking-widest ml-1 group-focus-within:text-cyan-600 transition-colors">
                       E-mail Corporativo *
@@ -325,12 +344,17 @@ export default function Contact() {
                       value={formData.email}
                       onChange={(e) => {
                         setFormData({ ...formData, email: e.target.value });
-                        if (errors.email) setErrors((prev) => ({ ...prev, email: "" }));
+                        if (errors.email)
+                          setErrors((prev) => ({ ...prev, email: "" }));
                       }}
                       className={`w-full h-14 px-0 bg-transparent border-b-2 ${errors.email ? "border-red-400" : "border-slate-100"} focus:border-cyan-600 text-slate-900 font-bold transition-all outline-none text-base`}
                       placeholder="email@corporativo.com.br"
                     />
-                    {errors.email && <p className="text-[10px] text-red-500 font-bold uppercase tracking-wider">{errors.email}</p>}
+                    {errors.email && (
+                      <p className="text-[10px] text-red-500 font-bold uppercase tracking-wider">
+                        {errors.email}
+                      </p>
+                    )}
                   </div>
                 </div>
 
@@ -346,9 +370,13 @@ export default function Contact() {
                       className={`w-full h-14 px-0 bg-transparent border-b-2 ${errors.phone ? "border-red-400" : "border-slate-100"} focus:border-cyan-600 text-slate-900 font-bold transition-all outline-none text-base`}
                       placeholder="(00) 00000-0000"
                     />
-                    {errors.phone && <p className="text-[10px] text-red-500 font-bold uppercase tracking-wider">{errors.phone}</p>}
+                    {errors.phone && (
+                      <p className="text-[10px] text-red-500 font-bold uppercase tracking-wider">
+                        {errors.phone}
+                      </p>
+                    )}
                   </div>
-                  
+
                   <div className="group space-y-2">
                     <label className="text-[11px] font-black text-slate-700 uppercase tracking-widest ml-1 group-focus-within:text-cyan-600 transition-colors">
                       Empresa (Opcional)
@@ -356,7 +384,9 @@ export default function Contact() {
                     <input
                       type="text"
                       value={formData.company}
-                      onChange={(e) => setFormData({ ...formData, company: e.target.value })}
+                      onChange={(e) =>
+                        setFormData({ ...formData, company: e.target.value })
+                      }
                       className="w-full h-14 px-0 bg-transparent border-b-2 border-slate-100 focus:border-cyan-600 text-slate-900 font-bold transition-all outline-none text-base"
                       placeholder="Razão Social ou Fantasia"
                     />
@@ -373,21 +403,26 @@ export default function Contact() {
                     value={formData.message}
                     onChange={(e) => {
                       setFormData({ ...formData, message: e.target.value });
-                      if (errors.message) setErrors((prev) => ({ ...prev, message: "" }));
+                      if (errors.message)
+                        setErrors((prev) => ({ ...prev, message: "" }));
                     }}
                     className={`w-full p-5 rounded-xl bg-slate-50 border-2 ${errors.message ? "border-red-400" : "border-transparent"} focus:border-cyan-600 focus:bg-white text-slate-900 font-medium transition-all outline-none resize-none text-base`}
                     placeholder="Descreva a demanda química ou necessidades de sua linha..."
                   />
-                  {errors.message && <p className="text-[10px] text-red-500 font-bold uppercase tracking-wider pl-1">{errors.message}</p>}
+                  {errors.message && (
+                    <p className="text-[10px] text-red-500 font-bold uppercase tracking-wider pl-1">
+                      {errors.message}
+                    </p>
+                  )}
                 </div>
-                
+
                 <div className="flex justify-center w-full pt-4">
                   <button
                     type="submit"
                     disabled={isSubmitting}
                     className={`relative overflow-hidden w-full md:w-max px-14 h-16 rounded-xl text-white font-black italic uppercase text-sm tracking-[0.2em] transition-all duration-300 flex items-center justify-center gap-3 group ${
-                      isSubmitting 
-                        ? "bg-slate-950 pointer-events-none shadow-inner shadow-cyan-900/50" 
+                      isSubmitting
+                        ? "bg-slate-950 pointer-events-none shadow-inner shadow-cyan-900/50"
                         : "bg-slate-900 hover:bg-cyan-600 active:scale-95 shadow-[0_10px_20px_-10px_rgba(0,0,0,0.5)]"
                     }`}
                   >
@@ -397,13 +432,15 @@ export default function Contact() {
                           <div className="absolute inset-y-0 left-0 w-1/2 bg-gradient-to-r from-transparent via-cyan-500/40 to-transparent blur-sm animate-shimmer-fast"></div>
                         </div>
                         <FlaskConical className="w-5 h-5 text-cyan-400 relative z-10 animate-bounce drop-shadow-[0_0_8px_rgba(6,182,212,0.8)]" />
-                        <span className="relative z-10 text-cyan-400 drop-shadow-sm">Sintetizando...</span>
+                        <span className="relative z-10 text-cyan-400 drop-shadow-sm">
+                          Sintetizando...
+                        </span>
                       </>
                     )}
-                    
+
                     {!isSubmitting && (
                       <>
-                        <Send className="w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" /> 
+                        <Send className="w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
                         Enviar Mensagem
                       </>
                     )}
@@ -412,17 +449,20 @@ export default function Contact() {
               </form>
             </div>
 
-{/* NOVO INFO SIDEBAR - HORÁRIO, RESPOSTA, CERTIFICAÇÕES, EXPERIÊNCIA */}
+            {/* NOVO INFO SIDEBAR - HORÁRIO, RESPOSTA, CERTIFICAÇÕES, EXPERIÊNCIA */}
             <div className="lg:col-span-5 bg-slate-900 p-8 md:p-12 text-white flex flex-col justify-between relative">
               <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(0,240,255,0.08),transparent_70%)]"></div>
-              
+
               <div className="relative z-10 space-y-10">
                 <div>
                   <h3 className="text-2xl font-black uppercase tracking-tighter italic">
                     Kuality <span className="text-cyan-400">Forms</span>
                   </h3>
                   <p className="text-slate-400 text-sm mt-3 leading-relaxed">
-                    Garantimos sigilo absoluto do seu projeto. Nosso laboratório utilizará essas especificações técnicas para sintetizar uma solução de alta pureza, feita sob medida para a sua linha de produção.
+                    Garantimos sigilo absoluto do seu projeto. Nosso laboratório
+                    utilizará essas especificações técnicas para sintetizar uma
+                    solução de alta pureza, feita sob medida para a sua linha de
+                    produção.
                   </p>
                 </div>
 
@@ -430,7 +470,13 @@ export default function Contact() {
                   {/* HORÁRIO DE ATENDIMENTO */}
                   <div className="flex items-center gap-5 group">
                     <div className="flex-shrink-0 w-12 h-12 bg-cyan-500/10 rounded-xl flex items-center justify-center border border-cyan-500/20">
-                      <svg className="w-6 h-6 text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                      <svg
+                        className="w-6 h-6 text-cyan-400"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        strokeWidth={1.5}
+                      >
                         <circle cx="12" cy="12" r="10" />
                         <path d="M12 6v6l4 2" />
                       </svg>
@@ -439,7 +485,9 @@ export default function Contact() {
                       <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">
                         Atendimento
                       </p>
-                      <p className="text-base font-semibold text-white">Seg-Sex: 8h-18h (GMT-3)</p>
+                      <p className="text-base font-semibold text-white">
+                        Seg-Sex: 8h-18h (GMT-3)
+                      </p>
                     </div>
                   </div>
 
@@ -452,14 +500,22 @@ export default function Contact() {
                       <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">
                         Tempo de Resposta
                       </p>
-                      <p className="text-base font-semibold text-white">Primeiro contato em até 24h úteis</p>
+                      <p className="text-base font-semibold text-white">
+                        Primeiro contato em até 24h úteis
+                      </p>
                     </div>
                   </div>
 
                   {/* ANOS DE EXPERIÊNCIA */}
                   <div className="flex items-center gap-5 group">
                     <div className="flex-shrink-0 w-12 h-12 bg-cyan-500/10 rounded-xl flex items-center justify-center border border-cyan-500/20">
-                      <svg className="w-6 h-6 text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                      <svg
+                        className="w-6 h-6 text-cyan-400"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        strokeWidth={1.5}
+                      >
                         <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
                       </svg>
                     </div>
@@ -467,7 +523,9 @@ export default function Contact() {
                       <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">
                         Experiência
                       </p>
-                      <p className="text-base font-semibold text-white">35+ anos de mercado</p>
+                      <p className="text-base font-semibold text-white">
+                        35+ anos de mercado
+                      </p>
                     </div>
                   </div>
 
@@ -480,7 +538,9 @@ export default function Contact() {
                       <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">
                         Formulações
                       </p>
-                      <p className="text-base font-semibold text-white">500+ desenvolvidas</p>
+                      <p className="text-base font-semibold text-white">
+                        500+ desenvolvidas
+                      </p>
                     </div>
                   </div>
 
@@ -490,17 +550,23 @@ export default function Contact() {
                       Certificações Oficiais
                     </p>
                     <div className="flex items-start gap-8">
-                      <div className="flex flex-col items-center gap-3" title="ANVISA">
-                        <img 
-                          src="/assets/anvisa.webp" 
-                          alt="ANVISA" 
+                      <div
+                        className="flex flex-col items-center gap-3"
+                        title="ANVISA"
+                      >
+                        <img
+                          src="/assets/anvisa.webp"
+                          alt="ANVISA"
                           className="w-14 h-14 object-contain"
                         />
                       </div>
-                      <div className="flex flex-col items-center gap-3" title="ISO 9001">
-                        <img 
-                          src="/assets/iso.webp" 
-                          alt="ISO 9001" 
+                      <div
+                        className="flex flex-col items-center gap-3"
+                        title="ISO 9001"
+                      >
+                        <img
+                          src="/assets/iso.webp"
+                          alt="ISO 9001"
                           className="w-14 h-14 object-contain"
                         />
                       </div>
@@ -526,7 +592,7 @@ export default function Contact() {
                       {companyInfo.salesEmail}
                     </p>
                   </div>
-</a>
+                </a>
               </div>
             </div>
           </div>

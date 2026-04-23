@@ -21,14 +21,13 @@ export default function Footer({ scrollToSection }: FooterProps) {
     return () => observer.disconnect();
   }, []);
 
-  // Gera a URL do Google Maps dinamicamente baseada no endereço
+  // URL dinâmica para o Google Maps
   const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
     `${companyInfo.address.street}, ${companyInfo.address.neighborhood}, ${companyInfo.address.city}`,
   )}`;
 
   return (
     <footer className="relative bg-slate-950 pt-16 pb-8 overflow-hidden">
-      {/* CSS Senior: Isola o hover para Desktop e define o feedback tátil para Mobile */}
       <style>{`
         @media (hover: hover) {
           .social-icon:hover {
@@ -36,15 +35,13 @@ export default function Footer({ scrollToSection }: FooterProps) {
             filter: brightness(1.2);
           }
           .back-to-top:hover {
-             color: #ef4444 !important;
+             color: #06b6d4 !important;
           }
           .back-to-top:hover .icon-circle {
-             background-color: rgba(239, 68, 68, 0.1);
-             border-color: #ef4444;
+             background-color: rgba(6, 182, 212, 0.1);
+             border-color: #06b6d4;
           }
         }
-        
-        /* Efeito de clique rápido para mobile (Feedback Tátil) */
         .tap-feedback:active {
           transform: scale(0.95);
           opacity: 0.8;
@@ -52,7 +49,6 @@ export default function Footer({ scrollToSection }: FooterProps) {
         }
       `}</style>
 
-      {/* Linha de luz superior técnica */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[1px] bg-gradient-to-r from-transparent via-cyan-500/40 to-transparent" />
 
       <div className="max-w-7xl mx-auto px-6 lg:px-8 flex flex-col gap-12">
@@ -68,7 +64,7 @@ export default function Footer({ scrollToSection }: FooterProps) {
                 Inicie o seu Projeto
               </h3>
               <p className="text-slate-400 text-xs md:text-sm">
-                Nossos engenheiros estão prontos para analisar sua demanda
+                Consulte nossa engenharia técnica agora mesmo para sua demanda
                 industrial.
               </p>
             </div>
@@ -87,15 +83,15 @@ export default function Footer({ scrollToSection }: FooterProps) {
             <h4 className="text-white font-black text-lg uppercase italic tracking-tighter">
               Kuality Química
             </h4>
-            <p className="text-slate-400 text-xs md:text-sm leading-relaxed max-w-xs mx-auto sm:mx-0">
-              Alta tecnologia molecular para soluções de máxima performance
-              industrial. Pureza garantida e 35 anos de know-how.
+            <p className="text-slate-400 text-xs md:text-sm leading-relaxed max-w-xs mx-auto sm:mx-0 font-medium">
+              Tecnologia molecular de alta performance e 35 anos de excelência
+              no setor químico industrial.
             </p>
           </div>
 
           <div className="space-y-4 text-center sm:text-left">
             <h4 className="text-white font-black text-[10px] uppercase tracking-[0.3em] mb-4 text-cyan-500">
-              Contato Direto
+              Atendimento
             </h4>
             <div className="flex flex-col gap-3">
               <a
@@ -117,10 +113,9 @@ export default function Footer({ scrollToSection }: FooterProps) {
             </div>
           </div>
 
-          {/* ENDEREÇO COM LINK PARA GOOGLE MAPS */}
           <div className="space-y-4 text-center sm:text-left">
             <h4 className="text-white font-black text-[10px] uppercase tracking-[0.3em] mb-4 text-cyan-500">
-              Localização
+              Unidade Fabril
             </h4>
             <a
               href={googleMapsUrl}
@@ -128,7 +123,7 @@ export default function Footer({ scrollToSection }: FooterProps) {
               rel="noopener noreferrer"
               className="tap-feedback flex items-start justify-center sm:justify-start gap-3 text-slate-400 group/addr transition-all"
             >
-              <MapPin className="w-4 h-4 mt-0.5 text-cyan-600 flex-shrink-0 group-active/addr:scale-110 transition-transform" />
+              <MapPin className="w-4 h-4 mt-0.5 text-cyan-600 flex-shrink-0 transition-transform" />
               <span className="text-xs md:text-sm leading-relaxed font-medium text-left">
                 {companyInfo.address.street}
                 <br />
@@ -139,14 +134,14 @@ export default function Footer({ scrollToSection }: FooterProps) {
 
           <div className="space-y-6 text-center sm:text-left">
             <h4 className="text-white font-black text-[10px] uppercase tracking-[0.3em] mb-4 text-cyan-500">
-              Redes Oficiais
+              Mídias
             </h4>
             <div className="flex items-center justify-center sm:justify-start gap-4">
               <a
                 href="https://www.linkedin.com/company/kuality-quimica-ltda/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="social-icon tap-feedback w-10 h-10 flex items-center justify-center bg-[#0A66C2] rounded-xl transition-all shadow-lg shadow-blue-900/20"
+                className="social-icon tap-feedback w-10 h-10 flex items-center justify-center bg-[#0A66C2] rounded-xl shadow-lg transition-all"
               >
                 <svg viewBox="0 0 24 24" fill="white" className="w-5 h-5">
                   <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
@@ -156,26 +151,23 @@ export default function Footer({ scrollToSection }: FooterProps) {
                 href="https://www.instagram.com/kualityquimica/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="social-icon tap-feedback w-10 h-10 flex items-center justify-center rounded-xl transition-all shadow-lg"
+                className="social-icon tap-feedback w-10 h-10 flex items-center justify-center rounded-xl shadow-lg transition-all"
               >
                 <svg viewBox="0 0 24 24" className="w-10 h-10">
                   <defs>
                     <linearGradient
-                      id="ig-grad-mob"
+                      id="ig-grad-new"
                       x1="0%"
                       y1="100%"
                       x2="100%"
                       y2="0%"
                     >
                       <stop offset="0%" stopColor="#f09433" />
-                      <stop offset="25%" stopColor="#e6683c" />
-                      <stop offset="50%" stopColor="#dc2743" />
-                      <stop offset="75%" stopColor="#cc2366" />
                       <stop offset="100%" stopColor="#bc1888" />
                     </linearGradient>
                   </defs>
                   <rect
-                    fill="url(#ig-grad-mob)"
+                    fill="url(#ig-grad-new)"
                     width="24"
                     height="24"
                     rx="6"
@@ -203,16 +195,6 @@ export default function Footer({ scrollToSection }: FooterProps) {
                   <circle fill="#FFF" cx="16.5" cy="7.5" r="1" />
                 </svg>
               </a>
-              <a
-                href="https://www.facebook.com/KualityQuimica/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="social-icon tap-feedback w-10 h-10 flex items-center justify-center bg-[#1877F2] rounded-xl transition-all shadow-lg shadow-blue-900/20"
-              >
-                <svg viewBox="0 0 24 24" fill="white" className="w-5 h-5">
-                  <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
-                </svg>
-              </a>
             </div>
           </div>
         </div>
@@ -236,10 +218,10 @@ export default function Footer({ scrollToSection }: FooterProps) {
 
           <button
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-            className="back-to-top tap-feedback group flex items-center gap-4 text-red-500/80 text-[9px] font-black uppercase tracking-widest transition-all duration-200"
+            className="back-to-top tap-feedback group flex items-center gap-4 text-slate-500 text-[9px] font-black uppercase tracking-widest transition-all duration-200"
           >
             Voltar ao Topo
-            <div className="icon-circle w-10 h-10 rounded-full border border-red-500/30 flex items-center justify-center transition-all">
+            <div className="icon-circle w-10 h-10 rounded-full border border-white/10 flex items-center justify-center transition-all">
               <ChevronUp className="w-4 h-4" />
             </div>
           </button>
