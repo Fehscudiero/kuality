@@ -223,12 +223,12 @@ export default function Footer({ scrollToSection }: FooterProps) {
             <p className="text-cyan-500 text-[10px] font-black uppercase tracking-[0.2em]">
               © {new Date().getFullYear()} Kuality Química
             </p>
-            <p className="text-slate-500 text-[9px] font-black uppercase tracking-[0.2em]">
+            <p className="text-slate-100 text-[9px] font-black uppercase tracking-[0.2em]">
               CNPJ:67.287.409/0001-01
             </p>
             <div className="flex items-center gap-2 px-3 py-1 bg-white/5 rounded-full border border-white/10">
               <Globe className="w-3 h-3 text-cyan-500" />
-              <span className="text-[8px] text-slate-500 font-bold uppercase tracking-widest">
+              <span className="text-[8px] text-slate-300 font-bold uppercase tracking-widest">
                 Operação Nacional
               </span>
             </div>
@@ -236,7 +236,7 @@ export default function Footer({ scrollToSection }: FooterProps) {
 
           <button
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-            className="back-to-top tap-feedback group flex items-center gap-4 text-slate-500 text-[9px] font-black uppercase tracking-widest transition-all duration-200"
+            className="back-to-top tap-feedback group flex items-center gap-4 text-slate-200 text-[9px] font-black uppercase tracking-widest transition-all duration-200"
           >
             Voltar ao Topo
             <div className="icon-circle w-10 h-10 rounded-full border border-white/10 flex items-center justify-center transition-all">
