@@ -322,11 +322,11 @@ function CertList() {
   );
 
   return (
-    <div ref={wrap} className="lg:col-span-5 space-y-4">
-      <div className="flex items-center gap-2 mb-5" style={{ color: R[600] }}>
+    <div ref={wrap} className="lg:col-span-5 space-y-4 mb-20px">
+      <div className="flex items-center pt-20 gap-2 mb-2" style={{ color: R[600] }}>
         <Award className="w-4 h-4" />
-        <span className="text-[10px] font-black uppercase tracking-[0.3em]">
-          Nossas Certificações
+        <span className="text-[10px] text-slate-900 font-black uppercase tracking-[0.3em]">
+          Nossas Certificações5
         </span>
       </div>
       {CERTS.map((cert, i) => (
@@ -358,7 +358,7 @@ function CertList() {
             <p className="text-[10px] font-black uppercase italic text-slate-900">
               {cert.subtitle}
             </p>
-            <p className="text-[9px] font-medium mt-1 text-slate-500 leading-relaxed">
+            <p className="text-[9px] font-medium mt-1 text-slate-800 leading-relaxed">
               {cert.body}
             </p>
           </div>
@@ -382,7 +382,7 @@ function CertList() {
 
 const STATS = [
   {
-    value: 20,
+    value: 35,
     suffix: "+",
     label: "Anos de Excelência",
     sublabel: "Trajetória no setor químico, Salto/SP",
@@ -598,7 +598,7 @@ export default function Quality() {
                   className="text-7xl md:text-8xl font-black tracking-tighter text-red-50/50"
                   style={{ WebkitTextStroke: `2px ${R[200]}` }}
                 >
-                  30+
+                  35+
                 </span>
                 <div>
                   <h3 className="text-xl md:text-4xl font-black uppercase italic tracking-tighter text-slate-900 leading-tight">
@@ -606,7 +606,7 @@ export default function Quality() {
                     <br />
                     <span className="text-red-600">Zero Concessões.</span>
                   </h3>
-                  <p className="text-xs md:text-sm font-medium mt-2 max-w-sm text-slate-500">
+                  <p className="text-xs md:text-sm font-medium mt-2 max-w-sm text-slate-800">
                     Compromisso inabalável com a qualidade que o seu processo
                     merece.
                   </p>
@@ -617,7 +617,7 @@ export default function Quality() {
                   <StatCard key={i} {...s} triggerRef={statsRef} />
                 ))}
               </div>
-              <div className="flex flex-wrap gap-2 pt-1">
+              <div className="flex flex-wrap gap-2 pt-1 justify-center">
                 {[
                   "Salto / SP",
                   "Mercado Industrial",
@@ -626,7 +626,7 @@ export default function Quality() {
                 ].map((t) => (
                   <span
                     key={t}
-                    className="px-3 py-1.5 rounded-full text-[9px] font-black uppercase tracking-widest bg-red-50 text-red-700 border border-red-100 flex items-center gap-1.5"
+                    className="px-3 py-1.5 rounded-full text-[9px] font-black uppercase tracking-widest bg-white text-black-700 border border-red-100 flex items-center gap-1.5"
                   >
                     <span className="w-1 h-1 rounded-full bg-red-500" />
                     {t}
